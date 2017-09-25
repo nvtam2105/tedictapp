@@ -1,6 +1,10 @@
-import axios from 'axios';
+const INITIAL_STATE = {};
 
-export default () => {
-    return axios.get('http://localhost:3000/talks')
-        .then(response => response.data);
+export default (state = INITIAL_STATE, action) => {
+  switch (action.type) {
+    case 'TALKS_FETCH':
+      return action.payload;
+    default:
+      return state;
+  }
 };
