@@ -35,12 +35,11 @@ class TalkList extends Component {
 
     render() {
         return (
-            <ListView 
-                enableEmptySections
-                dataSource={this.dataSource}
-                renderRow={this.renderRow}
-            />
-           
+                <ListView 
+                    enableEmptySections
+                    dataSource={this.dataSource}
+                    renderRow={this.renderRow}
+                /> 
         );
     }
 }

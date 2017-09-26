@@ -5,7 +5,7 @@ import TalkList from './components/TalkList';
 
 const RouterComponent = () => {
   return (
-    <Router sceneStyle={{ paddingTop: 65 }}>
+    <Router sceneStyle={{ }}>
       <Scene key="main">
         <Scene
           key="talkList"
