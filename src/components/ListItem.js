@@ -12,7 +12,6 @@ class ListItem extends Component {
             </CardSection>
         );
     }
-
 }
 
 
