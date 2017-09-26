@@ -5,14 +5,21 @@ import { CardSection } from './common';
 class ListItem extends Component {
 
     render() {
-        console.log(this.props);
         return (
             <CardSection>
-                <Text>{this.props.talk.name}</Text>
+                <Text style={styles.titleStyle}>
+                    {this.props.talk.id}  {this.props.talk.name}
+                </Text>
             </CardSection>
         );
     }
 }
 
+const styles = {
+    titleStyle: {
+      fontSize: 18,
+      paddingLeft: 15
+    }
+};
 
 export default ListItem;

@@ -10,7 +10,7 @@ class TalkList extends Component {
     
     componentWillMount() {
         this.props.talksFetch();
-        console.log(this.props);
+        //console.log(this.props);
         this.createDataSource(this.props);
         
     }
@@ -45,10 +45,11 @@ class TalkList extends Component {
     }
 }
 
-
 const mapStateToProps = state => {
     return { talks: state.talks };
 };
   
-export default connect(mapStateToProps, { talksFetch })(TalkList);
+const mapDispatchToProps = { talksFetch };
+
+export default connect(mapStateToProps, mapDispatchToProps)(TalkList);
   
