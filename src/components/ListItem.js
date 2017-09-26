@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { Text } from 'react-native';
-import { CardSection } from './common';
+import { CardSection, Thumbnail } from './common';
 
 class ListItem extends Component {
 
     render() {
         return (
             <CardSection>
+                <Thumbnail source={this.props.talk.image_16x9}/>
                 <Text style={styles.titleStyle}>
                     {this.props.talk.id}  {this.props.talk.name}
                 </Text>
