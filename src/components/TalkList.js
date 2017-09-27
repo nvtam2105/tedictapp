@@ -1,45 +1,116 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
-import { ListView } from 'react-native';
-import { connect } from 'react-redux';
+//import { ListView } from 'react-native';
+import { View, Text, FlatList, ActivityIndicator } from "react-native";
+import { List, ListItem, SearchBar } from "react-native-elements";
 
+import { connect } from 'react-redux';
 import { talksFetch } from '../actions';
-import ListItem from './ListItem';
+//import ListItem from './ListItem';
 
 class TalkList extends Component {
-    
+
+    constructor(props) {
+        super(props);   
+        this.state = {
+          loading: false,
+          talks: [],
+          limit: 10,
+          offset: 0,
+          refreshing: false
+        };
+    }
+
+
     componentWillMount() {
-        this.props.talksFetch();
-        //console.log(this.props);
-        this.createDataSource(this.props);
+        const { limit, offset } = this.state;
+        console.log(this.state);
+        this.props.talksFetch({limit, offset});
+        console.log(this.props);
         
     }
+
     
-    componentWillReceiveProps(nextProps) {
-        // nextProps are the next set of props that this component
-        // will be rendered with
-        // this.props is still the old set of props
-        this.createDataSource(nextProps)
-    }
+    talksFetchRefresh = () => {
+        this.setState({ offset: 0, refreshing: true },
+            () => {
+                const { limit, offset } = this.state;
+                this.props.talksFetch({limit, offset});
+            }
+        );
+    };
 
-    createDataSource({ talks }) {
-        const ds = new ListView.DataSource({
-            rowHasChanged: (r1, r2) => r1 !== r2
-        });
-        this.dataSource = ds.cloneWithRows(talks);
-    }
+    talksFetchMore = () => {
+        if (!this.onEndReachedCalledDuringMomentum) {
+            this.setState(
+                { offset: this.state.offset + 1,
+                  loading: true,
+                  refreshing: false
+                },
+                () => {
+                    const { limit, offset } = this.state;
+                    this.props.talksFetch({limit, offset});
+                    this.state.loading = false;
+                }
+            );
+            this.onEndReachedCalledDuringMomentum = true;
+        }
+    };
 
-    renderRow(talk) {
-        return <ListItem talk={talk} />;
-    }
+    renderSeparator = () => {
+        return (
+          <View
+            style={{
+              height: 1,
+              width: "86%",
+              backgroundColor: "#CED0CE",
+              marginLeft: "14%"
+            }}
+          />
+        );
+    };
+
+    renderFooter = () => {
+        if (!this.state.loading) return null;
+    
+        return (
+          <View
+            style={{
+              paddingVertical: 20,
+              borderTopWidth: 1,
+              borderColor: "#CED0CE"
+            }}
+          >
+            <ActivityIndicator animating size="large" />
+          </View>
+        );
+      };
 
     render() {
         return (
-                <ListView 
-                    enableEmptySections
-                    dataSource={this.dataSource}
-                    renderRow={this.renderRow}
-                /> 
+            <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0 }}>
+                <FlatList
+                    data={this.props.talks}
+                    renderItem={({ item }) => (
+                    <ListItem
+                        
+                        title={`${item.name}`}
+                        subtitle={item.description}
+                        avatar={{ uri: item.image_16x9 }}
+                        containerStyle={{ borderBottomWidth: 0 }}
+                    />
+                    )}
+                keyExtractor={item => item.id}
+                   ItemSeparatorComponent={this.renderSeparator}
+                   ListFooterComponent={this.renderFooter}
+                   onRefresh={this.talksFetchRefresh}
+                   refreshing={this.state.refreshing}
+                   onEndReached={this.talksFetchMore}
+                   onEndReachedThreshold={0.5}
+                   onMomentumScrollBegin={() => { this.onEndReachedCalledDuringMomentum = false; }}
+                
+                />
+            </List>
         );
     }
 }

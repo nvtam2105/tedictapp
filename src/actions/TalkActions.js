@@ -6,9 +6,11 @@ import {
 
 import axios from 'axios';
 
-export const talksFetch = () => {
+export const talksFetch = ({ limit, offset }) => {
     return (dispatch) => {
-        return axios.get('http://localhost:3000/talks')
+        let url = `http://localhost:3000/talks/${limit}/${offset}`;
+        console.log('url=' + url);
+        return axios.get(url)
             .then(response => {
                 dispatch({type: TALKS_FETCH_SUCCESS, payload: response.data });
             })

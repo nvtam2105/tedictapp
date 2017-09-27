@@ -11,11 +11,11 @@ class App extends Component {
       const logger = (store) => (next) => (action) => {
         let previous = JSON.stringify(store.getState())
         next(action)
-        console.log(
-            'action: ' + JSON.stringify(action) +
-            '\n\tprevious: ' + previous +
-            '\n\tcurrent: ' + JSON.stringify(store.getState())
-        )
+        // console.log(
+        //     'action: ' + JSON.stringify(action) +
+        //     '\n\tprevious: ' + previous +
+        //     '\n\tcurrent: ' + JSON.stringify(store.getState())
+        // )
       }
 
       const store = createStore(reducers, {}, applyMiddleware(thunk, logger));   
