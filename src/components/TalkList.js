@@ -2,11 +2,11 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 //import { ListView } from 'react-native';
 import { View, Text, FlatList, ActivityIndicator } from "react-native";
-import { List, ListItem, SearchBar } from "react-native-elements";
+// import { List, ListItem, SearchBar } from "react-native-elements";
 
 import { connect } from 'react-redux';
 import { talksFetch } from '../actions';
-//import ListItem from './ListItem';
+import ListItem from './ListItem';
 
 class TalkList extends Component {
 
@@ -15,32 +15,34 @@ class TalkList extends Component {
         this.state = {
           loading: false,
           talks: [],
-          limit: 10,
+          limit: 15,
           offset: 0,
-          refreshing: false
+          refreshing: false,
+          onEndReachedCalledDuringMomentum: true
         };
     }
 
 
     componentWillMount() {
         const { limit, offset } = this.state;
-        console.log(this.state);
         this.props.talksFetch({limit, offset});
-        console.log(this.props);
-        
     }
 
+    componentWillReceiveProps(nextProps) {
+    }
     
-    talksFetchRefresh = () => {
+    onRefresh = () => {
         this.setState({ offset: 0, refreshing: true },
             () => {
                 const { limit, offset } = this.state;
+                this.props.talks = [];
                 this.props.talksFetch({limit, offset});
+                this.state.loading = false;
             }
         );
     };
 
-    talksFetchMore = () => {
+    onEndReached = () => {
         if (!this.onEndReachedCalledDuringMomentum) {
             this.setState(
                 { offset: this.state.offset + 1,
@@ -51,6 +53,7 @@ class TalkList extends Component {
                     const { limit, offset } = this.state;
                     this.props.talksFetch({limit, offset});
                     this.state.loading = false;
+                    
                 }
             );
             this.onEndReachedCalledDuringMomentum = true;
@@ -87,39 +90,31 @@ class TalkList extends Component {
       };
 
     render() {
-        return (
-            <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0 }}>
-                <FlatList
-                    data={this.props.talks}
-                    renderItem={({ item }) => (
-                    <ListItem
-                        
-                        title={`${item.name}`}
-                        subtitle={item.description}
-                        avatar={{ uri: item.image_16x9 }}
-                        containerStyle={{ borderBottomWidth: 0 }}
-                    />
-                    )}
+        return (      
+            <FlatList
+                data={this.props.talks}
+                //extraData={this.state.talks}
+                renderItem={({ item }) => (<ListItem talk={item} />)}                     
                 keyExtractor={item => item.id}
-                   ItemSeparatorComponent={this.renderSeparator}
-                   ListFooterComponent={this.renderFooter}
-                   onRefresh={this.talksFetchRefresh}
-                   refreshing={this.state.refreshing}
-                   onEndReached={this.talksFetchMore}
-                   onEndReachedThreshold={0.5}
-                   onMomentumScrollBegin={() => { this.onEndReachedCalledDuringMomentum = false; }}
-                
-                />
-            </List>
+                ItemSeparatorComponent={this.renderSeparator}
+                ListFooterComponent={this.renderFooter}
+                onRefresh={this.onRefresh}
+                refreshing={this.state.refreshing}
+                onEndReached={this.onEndReached}
+                bounces={false}
+                onEndReachedThreshold={0.5}
+                onMomentumScrollBegin={() => { this.onEndReachedCalledDuringMomentum = false; }}
+            
+            />
         );
     }
 }
 
 const mapStateToProps = state => {
-    return { talks: state.talks };
+    return state.talks.length > 0 ?  { talks: state.talks } : {};
 };
   
-const mapDispatchToProps = { talksFetch };
+const mapDispatchToProps = {talksFetch};
 
 export default connect(mapStateToProps, mapDispatchToProps)(TalkList);
   

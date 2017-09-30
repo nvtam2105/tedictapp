@@ -7,7 +7,7 @@ class ListItem extends Component {
     render() {
         return (
             <CardSection>
-                <Thumbnail source={this.props.talk.image_16x9}/>
+                <Thumbnail source={this.props.talk.images[0].url}/>
                 <Text style={styles.titleStyle}>
                     {this.props.talk.id}  {this.props.talk.name}
                 </Text>
