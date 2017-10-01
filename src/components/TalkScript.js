@@ -10,7 +10,6 @@ class TalkScript extends Component {
 
     componentWillMount() {
         console.log(this.props.talk);
-        
         this.props.scriptFetch(this.props.talk.id);
         
     }
@@ -32,7 +31,13 @@ class TalkScript extends Component {
         return (
             <FlatList style={{flex:1}}
                 data={this.props.script.sens}
-                renderItem={({ item, index }) => (<Text>{index+1} - {item.content}</Text>)}
+                renderItem={({ item, index }) => (
+                    <View style={{flex:1}}>
+                        <Text>{index+1}</Text>
+                        <Text>{item.content}</Text>
+                    </View>
+                    )}
+                keyExtractor={item => item._id}
                 ItemSeparatorComponent={this.renderSeparator}                          
         />
         );

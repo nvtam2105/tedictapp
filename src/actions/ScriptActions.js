@@ -10,7 +10,9 @@ import axios from 'axios';
 
 export const scriptFetch = (talkId) => {
 
-    let url = Config.SCRIPT_BASE_URL + `${talkId}`;
+    //let url = Config.SCRIPT_BASE_URL + `${talkId}`;
+
+    let url = `http://localhost:3000/scripts/${talkId}`;
     console.log(url);
     return (dispatch) => {       
         return axios.get(url)

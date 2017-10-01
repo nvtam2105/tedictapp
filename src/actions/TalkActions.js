@@ -10,7 +10,8 @@ import axios from 'axios';
 
 export const talksFetch = ({ limit, offset }) => {
 
-    let url = Config.TALK_BASE_URL + `${limit}/${offset}`;
+    //let url = Config.TALK_BASE_URL + `${limit}/${offset}`;
+    let url = `http://localhost:3000/talks/${limit}/${offset}`;
     console.log(url);
     return (dispatch) => {       
         return axios.get(url)

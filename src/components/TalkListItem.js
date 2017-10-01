@@ -12,7 +12,7 @@ class TalkListItem extends Component {
     render() {
         return (
         <TouchableWithoutFeedback onPress={this.onRowPress.bind(this)}>
-            <View>
+            <View style={{flex:1}}>
                 <CardSection>
                     <Thumbnail source={this.props.talk.images[0].url}/>
                     <Text style={styles.titleStyle}>
@@ -27,6 +27,7 @@ class TalkListItem extends Component {
 
 const styles = {
     titleStyle: {
+      flex: 1,
       fontSize: 18,
       paddingLeft: 15
     }
