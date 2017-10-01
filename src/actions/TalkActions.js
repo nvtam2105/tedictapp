@@ -1,4 +1,6 @@
 import { Actions } from 'react-native-router-flux';
+import Config from 'react-native-config';
+
 import { 
     TALKS_FETCH_SUCCESS ,
     TALKS_FETCH_ERR
@@ -7,7 +9,8 @@ import {
 import axios from 'axios';
 
 export const talksFetch = ({ limit, offset }) => {
-    let url = `http://192.168.1.104:3000/talks/${limit}/${offset}`;
+
+    let url = Config.TALK_BASE_URL + `${limit}/${offset}`;
     console.log(url);
     return (dispatch) => {       
         return axios.get(url)

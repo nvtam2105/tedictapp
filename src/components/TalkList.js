@@ -1,12 +1,10 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
-//import { ListView } from 'react-native';
 import { View, Text, FlatList, ActivityIndicator } from "react-native";
-// import { List, ListItem, SearchBar } from "react-native-elements";
 
 import { connect } from 'react-redux';
 import { talksFetch } from '../actions';
-import ListItem from './ListItem';
+import TalkListItem from './TalkListItem';
 
 class TalkList extends Component {
 
@@ -15,13 +13,12 @@ class TalkList extends Component {
         this.state = {
           loading: false,
           talks: [],
-          limit: 15,
+          limit: 10,
           offset: 0,
           refreshing: false,
           onEndReachedCalledDuringMomentum: true
         };
     }
-
 
     componentWillMount() {
         const { limit, offset } = this.state;
@@ -53,10 +50,10 @@ class TalkList extends Component {
                     const { limit, offset } = this.state;
                     this.props.talksFetch({limit, offset});
                     this.state.loading = false;
-                    
+                    this.onEndReachedCalledDuringMomentum = true;   
                 }
             );
-            this.onEndReachedCalledDuringMomentum = true;
+            
         }
     };
 
@@ -87,25 +84,24 @@ class TalkList extends Component {
             <ActivityIndicator animating size="large" />
           </View>
         );
-      };
+    };
 
     render() {
         return (      
-            <FlatList
-                data={this.props.talks}
-                //extraData={this.state.talks}
-                renderItem={({ item }) => (<ListItem talk={item} />)}                     
-                keyExtractor={item => item.id}
-                ItemSeparatorComponent={this.renderSeparator}
-                ListFooterComponent={this.renderFooter}
-                onRefresh={this.onRefresh}
-                refreshing={this.state.refreshing}
-                onEndReached={this.onEndReached}
-                bounces={false}
-                onEndReachedThreshold={0.5}
-                onMomentumScrollBegin={() => { this.onEndReachedCalledDuringMomentum = false; }}
-            
-            />
+        <FlatList style={{flex:1}}
+            data={this.props.talks}
+            renderItem={({ item }) => (<TalkListItem talk={item} />)}                     
+            keyExtractor={item => item.id}
+            ItemSeparatorComponent={this.renderSeparator}
+            ListFooterComponent={this.renderFooter}
+            onRefresh={this.onRefresh}
+            refreshing={this.state.refreshing}
+            onEndReached={this.onEndReached}
+            bounces={false}
+            onEndReachedThreshold={0.5}
+            onMomentumScrollBegin={() => { this.onEndReachedCalledDuringMomentum = false; }}
+        
+        />
         );
     }
 }
