@@ -2,11 +2,9 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { View, Text, Image, ImageBackground, Button, TouchableWithoutFeedback,ActivityIndicator } from "react-native";
 import { Actions } from 'react-native-router-flux';
-
 import VideoPlayer from 'react-native-video-controls';
-
 import RNFetchBlob from 'react-native-fetch-blob';
-
+import ProgressBar from 'react-native-progress/Bar';
 
 class TalkDetail extends Component {
 
@@ -14,42 +12,32 @@ class TalkDetail extends Component {
         super(props);   
         this.state = {
             loading: false
+            //progress: 0
         }
     }
     
-
-    onPressPraticeFull() {
-        //Actions.talkVideo({ talk: this.props.talk });
-        this.setState({
-            loading: true
-        })
-        //this.state.loading = true;
-        RNFetchBlob
-        .config({
-          // add this option that makes response data to be stored as a file,
-          // this is much more performant.
+    onPressPratice() {
+        this.setState({ loading: true })
+        RNFetchBlob.config({
           fileCache : true,
-        })
-        .fetch('GET', this.props.talk.medias[0].url, {
-          //some headers ..
+        }).fetch('GET', this.props.talk.medias[0].url, {
           name: this.props.talk.id + '.mp4',
           filename: this.props.talk.id + 'mp4',
           type: 'video/mp4',
-        })
-        .then((res) => {
-          // the temp file path
-          this.setState({
-            loading: false
-        })
+        }).progress((received, total) => {
+            //console.log('progress', received / total);
+            this.setState({ progress: received / total});
+        }).then((res) => {
+          this.setState({ loading: false })
           console.log('The file saved to ', res.path());
-        })
-      
+        }).catch((err) => {
+         console.log(err);
+        });
     }
     
     onPressFillGap() {
         Actions.talkVideo({ talk: this.props.talk });
     }
-
 
     onPressPlay() {
         Actions.talkVideo({ talk: this.props.talk });
@@ -58,7 +46,6 @@ class TalkDetail extends Component {
     onPressScript() {
         Actions.talkScript({ talk: this.props.talk });
     }
-
 
     componentWillMount() {
     }
@@ -71,21 +58,30 @@ class TalkDetail extends Component {
                     <TouchableWithoutFeedback onPress={this.onPressPlay.bind(this)}>
                         <Image style={stretch} source={require('../../assets/images/play_bt.png')} />
                     </TouchableWithoutFeedback>
-                    
                 </ImageBackground>
                 
-               
                 <Text>{this.props.talk.description}</Text>
                 
-                <Button
-                    onPress={this.onPressPraticeFull.bind(this)}
-                    title="PRACTICE HARD"
-                    accessibilityLabel="Learn more about this purple button"
-                />
-                <ActivityIndicator 
-                        animating={this.state.loading}
-                        size="small" />
-
+                {   !this.state.loading && (
+                        <Button
+                        onPress={this.onPressPratice.bind(this)}
+                        title="PRACTICE HARD"
+                        accessibilityLabel="Learn more about this purple button"
+                        />
+                        )
+                }
+                {   this.state.loading && (
+                        <View>
+                            <ProgressBar
+                                width={150} 
+                                progress={this.state.progress}
+                            />
+                            <ActivityIndicator style={{flex:1}}
+                                    animating={this.state.loading}
+                                    size="small" />
+                        </View>)
+                }    
+                    
                 <Button
                     onPress={this.onPressFillGap.bind(this)}
                     title="FILL GAP"
