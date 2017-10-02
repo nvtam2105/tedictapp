@@ -26,7 +26,6 @@ class TalkDetail extends Component {
           filename: this.props.talk.id + 'mp4',
           type: 'video/mp4',
         }).progress((received, total) => {
-            //console.log('progress', received / total);
             this.setState({ progress: received / total});
         }).then((res) => {
           this.setState({ loading: false })

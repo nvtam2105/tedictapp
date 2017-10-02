@@ -1,7 +1,11 @@
-import * as realm from './TodoStore'
+import * as todoStore from './TodoStore'
+import * as talkStore from './TalkStore'
+import * as scriptStore from './ScriptStore'
 import * as asyncStorage from './asyncStorage'
 
 export default {
-  ...realm,
+  ...todoStore,
+  ...talkStore,
+  ...scriptStore,
   ...asyncStorage
 }
