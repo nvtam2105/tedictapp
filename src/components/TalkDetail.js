@@ -6,13 +6,14 @@ import VideoPlayer from 'react-native-video-controls';
 import RNFetchBlob from 'react-native-fetch-blob';
 import ProgressBar from 'react-native-progress/Bar';
 
+import store from '../stores';
+
 class TalkDetail extends Component {
 
     constructor(props) {
         super(props);   
         this.state = {
             loading: false
-            //progress: 0
         }
     }
     
@@ -36,7 +37,14 @@ class TalkDetail extends Component {
     }
     
     onPressFillGap() {
-        Actions.talkVideo({ talk: this.props.talk });
+        //Actions.talkVideo({ talk: this.props.talk });
+        console.log(store);
+        console.log(store.createTodoItem(this.props.talk.name));
+        var results = store.getTodoItems();
+        console.log(results);
+        for (var i in results) {
+            console.log(results[i]);
+        }
     }
 
     onPressPlay() {
