@@ -10,8 +10,13 @@ class TalkScript extends Component {
 
     componentWillMount() {
         console.log(this.props.talk);
+        // Check exist in local storage??
         this.props.scriptFetch(this.props.talk.id);
         
+    }
+
+    componentDidMount() {
+        Actions.refresh({title: this.props.talk.name});
     }
 
     renderSeparator = () => {

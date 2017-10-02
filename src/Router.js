@@ -18,9 +18,9 @@ const RouterComponent = () => {
             title="TED Talks"
             initial
           />
-          <Scene key="talkDetail" component={TalkDetail} title="Talks Detail" />
-          <Scene key="talkVideo" component={TalkVideo} title="Talks Video" />
-          <Scene key="talkScript" component={TalkScript} title="Talks Video" />
+          <Scene key="talkDetail" component={TalkDetail} backTitle=" " hideNavBar={false}/>
+          <Scene key="talkVideo" component={TalkVideo} backTitle=" "/>
+          <Scene key="talkScript" component={TalkScript} backTitle=" "/>
       </Scene>
     </Router>
   );

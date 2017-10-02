@@ -19,6 +19,8 @@ class TalkDetail extends Component {
     
     onPressPratice() {
         this.setState({ loading: true })
+
+        // Download Video
         RNFetchBlob.config({
           fileCache : true,
         }).fetch('GET', this.props.talk.medias[0].url, {
@@ -31,19 +33,20 @@ class TalkDetail extends Component {
           this.setState({ loading: false })
           console.log('The file saved to ', res.path());
         }).catch((err) => {
-         console.log(err);
+          console.log(err);
         });
     }
     
     onPressFillGap() {
         //Actions.talkVideo({ talk: this.props.talk });
+
         console.log(store);
-        console.log(store.createTodoItem(this.props.talk.name));
-        var results = store.getTodoItems();
-        console.log(results);
-        for (var i in results) {
-            console.log(results[i]);
-        }
+        // console.log(store.createTodoItem(this.props.talk.name));
+        // var results = store.getTodoItems();
+        // console.log(results);
+        // for (var i in results) {
+        //     console.log(results[i]);
+        // }
     }
 
     onPressPlay() {
@@ -55,6 +58,10 @@ class TalkDetail extends Component {
     }
 
     componentWillMount() {
+    }
+
+    componentDidMount() {
+        Actions.refresh({title: this.props.talk.name});
     }
 
     render() {

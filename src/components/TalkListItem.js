@@ -9,6 +9,7 @@ class TalkListItem extends Component {
         Actions.talkDetail({ talk: this.props.talk });
     }
 
+
     render() {
         return (
         <TouchableWithoutFeedback onPress={this.onRowPress.bind(this)}>
