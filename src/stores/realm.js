@@ -48,9 +48,6 @@ class Sen {
   }
 };
 
-
-
-
 const realm = new Realm({schema: [Talk, Script, Sen, StringObjectSchema]});
 
 
