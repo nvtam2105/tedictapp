@@ -45,9 +45,9 @@ class TalkDetail extends Component {
         
         //console.log(store);
         //store.saveTalk(this.props.talk, this.props.script);
-        // var script = store.saveScript(this.props.script);
+        //var script = store.saveScript(this.props.script);
 
-        let talkData =store.getTalkById(parseInt(this.props.talk.id));
+        let talkData =store.getTalkById(this.props.talk.id);
         //console.log(talk.toString());
         console.log(talkData);
         //console.log(talkData.script);
@@ -67,11 +67,12 @@ class TalkDetail extends Component {
     }
 
     componentWillMount() {
-        this.props.scriptFetch(this.props.talk.id);
+        
     }
 
     componentDidMount() {
         Actions.refresh({title: this.props.talk.name});
+        this.props.scriptFetch(this.props.talk.id);
     }
 
     render() {
@@ -80,7 +81,7 @@ class TalkDetail extends Component {
             <View style={{flex:1}}>
                 <ImageBackground style={stretch} source={{uri: this.props.talk.images[2].url}} >
                     <TouchableWithoutFeedback onPress={this.onPressPlay.bind(this)}>
-                        <Image style={stretch} source={require('../../assets/images/play_bt.png')} />
+                        <Image style={stretch} source={require('../../assets/img/play_bt.png')} />
                     </TouchableWithoutFeedback>
                 </ImageBackground>
                 

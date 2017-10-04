@@ -78,11 +78,8 @@ export const saveScript = (scriptData) => {
  })
 }
 
-
 export const getTalkById = (talkId) => {
-  let talkIdN = parseInt(talkId);
-  console.log(talkIdN);
-  let talks=  Array.from(Talk.get().filtered(`script.talk_id= ${talkIdN}`));
+  let talks=  Talk.get().filtered(`script.talk_id= ${talkId}`);
   return talks[0];
 }
 
@@ -98,7 +95,6 @@ export const getScripts = () => {
 }
 
 const realm = new Realm({schema: [Talk, Script, Sen, StringObjectSchema]});
-
 
 
 
