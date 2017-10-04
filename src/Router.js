@@ -1,5 +1,5 @@
 import React from 'react';
-import { Scene, Router, Actions, Drawer, Stack } from 'react-native-router-flux';
+import { Scene, Router, Drawer } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import TalkList from './components/TalkList';

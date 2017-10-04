@@ -5,6 +5,9 @@ import { Actions } from 'react-native-router-flux';
 import VideoPlayer from 'react-native-video-controls';
 import RNFetchBlob from 'react-native-fetch-blob';
 import ProgressBar from 'react-native-progress/Bar';
+import { connect } from 'react-redux';
+
+import { scriptFetch } from '../actions';
 
 import store from '../stores';
 
@@ -39,14 +42,20 @@ class TalkDetail extends Component {
     
     onPressFillGap() {
         //Actions.talkVideo({ talk: this.props.talk });
+        
+        //console.log(store);
+        //store.saveTalk(this.props.talk, this.props.script);
+        // var script = store.saveScript(this.props.script);
 
-        console.log(store);
-        // console.log(store.createTodoItem(this.props.talk.name));
-        // var results = store.getTodoItems();
-        // console.log(results);
-        // for (var i in results) {
-        //     console.log(results[i]);
-        // }
+        let talkData =store.getTalkById(parseInt(this.props.talk.id));
+        //console.log(talk.toString());
+        console.log(talkData);
+        //console.log(talkData.script);
+        for (var i in talkData.script.sens) {
+            var sen = talkData.script.sens[i];
+            console.log(sen);
+        }
+
     }
 
     onPressPlay() {
@@ -58,6 +67,7 @@ class TalkDetail extends Component {
     }
 
     componentWillMount() {
+        this.props.scriptFetch(this.props.talk.id);
     }
 
     componentDidMount() {
@@ -125,5 +135,13 @@ const styles = {
     }
 };
 
-export default TalkDetail;
+
+const mapStateToProps = state => {
+    console.log(state);
+    return { script: state.script };
+};
+  
+const mapDispatchToProps = {scriptFetch};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TalkDetail);
 
