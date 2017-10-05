@@ -8,6 +8,8 @@ import TalkList from './components/TalkList';
 import TalkDetail from './components/TalkDetail';
 import TalkVideo from './components/TalkVideo';
 import TalkScript from './components/TalkScript';
+import TalkDictList from './components/TalkDictList';
+import TalkDictItem from './components/TalkDictItem';
 
 import DrawerContent from './components/DrawerContent';
 import TabView from './components/TabView';
@@ -52,10 +54,11 @@ const RouterComponent = () => {
                         </Tabs>
                     </Scene>
                 </Drawer>
-
                 <Scene key="talkDetail" component={TalkDetail} backTitle=" " leftButtonImage={backImage} />
                 <Scene key="talkVideo" component={TalkVideo} backTitle=" " leftButtonImage={backImage} />
                 <Scene key="talkScript" component={TalkScript} backTitle=" " leftButtonImage={backImage} />
+                <Scene key="talkDictList" component={TalkDictList} backTitle=" " leftButtonImage={backImage} />
+                <Scene key="talkDictItem" component={TalkDictItem} leftButtonImage={backImage} />
             </Scene>
         </Router>
     );

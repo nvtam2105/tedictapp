@@ -47,14 +47,15 @@ class TalkDetail extends Component {
         //store.saveTalk(this.props.talk, this.props.script);
         //var script = store.saveScript(this.props.script);
 
-        let talkData =store.getTalkById(this.props.talk.id);
-        //console.log(talk.toString());
-        console.log(talkData);
-        //console.log(talkData.script);
-        for (var i in talkData.script.sens) {
-            var sen = talkData.script.sens[i];
-            console.log(sen);
-        }
+         let talkData = store.getTalkById(this.props.talk.id);
+        // console.log(talk.toString());
+        // console.log(talkData);
+        // console.log(talkData.script);
+        // for (var i in talkData.script.sens) {
+        //     var sen = talkData.script.sens[i];
+        //     console.log(sen);
+        // }
+        Actions.talkDictList({ talk: talkData });
 
     }
 
