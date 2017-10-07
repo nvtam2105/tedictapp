@@ -25,7 +25,7 @@ class TalkDictList extends Component {
                                 sen: item,
                                 index: index,
                                 total: this.props.talk.script.sens.length,
-                                media: 'https://pc.tedcdn.com/talk/stream/2017X/None/TheoEJWilson_2017X-64k.mp4'
+                                media: this.props.talk.media
                              })} />
                         </CardSection>
                     </View>)}

@@ -2,18 +2,12 @@ import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
 import { View, Text, TextInput, Button, Alert } from "react-native";
 
-import { CardSection, Thumbnail } from './common';
-
-import VideoPlayer from 'react-native-video-controls';
+import { CardSection, Thumbnail, VideoPlayer } from './common';
 
 class TalkDictItem extends Component {
 
     constructor(props) {
         super(props);
-        // this.state = {
-        //     player: false,
-
-        // };
     }
 
     componentWillMount() {
@@ -27,26 +21,23 @@ class TalkDictItem extends Component {
 
     onPressPlay(obj) {
         console.log('onPressPlay' + obj);
-
-        //this.player.setState({ paused: false });
-        console.log(this.player);
-        this.player.setState({
-            //seek: this.props.sen.startTime / 1000,
-            paused: false
-
-        });
-        // this.player.setStatesetSeekerPosition(this.props.sen.startTime/1000);
+        
+        
     }
 
 
-    _loadStart(obj) {
+    onLoad(obj) {
         console.log('_loadStart'  + obj);
         console.log(obj);
+        console.log(this.player);
+        this.player.seek(this.props.sen.startTime/1000);
+        
     }
 
     _setTime(obj) {
         console.log('_setTime = ' + obj);
         console.log(obj);
+        console.log(this.player);
     }
 
     _onValueChange(obj) {
@@ -76,18 +67,9 @@ class TalkDictItem extends Component {
                         ref={(ref) => {
                             this.player = ref
                         }}
-                        //currentTime={this.props.sen.startTime / 1000}
-                        //duration={(this.props.sen.startTime + this.props.sen.duration)/1000}
-                        //onLoad={this.onLoad}
-                        //onProgress={this.onProgress}
-                        //onEnd={this.onEnd}
-                        onLoadStart={this._loadStart.bind(this)} // Callback when video starts to load
-                        onLoad={this._onLoad.bind(this)}    // Callback when video loads
-                        onProgress={this._setTime.bind(this)}    // Callback every ~250ms with currentTi
-
-                        paused={true}
-                        source={{ uri: this.props.media }}
-                        navigator={this.props.navigator}
+                        autoplay
+                        onLoad={this.onLoad.bind(this)}
+                        video={{ uri: this.props.media }}
                         rate={1.0}
                     />
                 </View>

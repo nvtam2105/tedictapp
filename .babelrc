@@ -1,12 +1,3 @@
 {
-  "presets": [
-    "react-native"
-  ],
-  "env": {
-    "development": {
-      "plugins": [
-         ["babel-plugin-react-native-config", { "envfile": ".env" }]
-      ]
-    }
-  }  
+  "presets": ["react-native"]
 }

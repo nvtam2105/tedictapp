@@ -2,10 +2,11 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { View, Text, Image, ImageBackground, Button, TouchableWithoutFeedback,ActivityIndicator } from "react-native";
 import { Actions } from 'react-native-router-flux';
-import VideoPlayer from 'react-native-video-controls';
 import RNFetchBlob from 'react-native-fetch-blob';
 import ProgressBar from 'react-native-progress/Bar';
 import { connect } from 'react-redux';
+
+import { CardSection, Thumbnail, VideoPlayer } from './common';
 
 import { scriptFetch } from '../actions';
 
@@ -44,10 +45,10 @@ class TalkDetail extends Component {
         //Actions.talkVideo({ talk: this.props.talk });
         
         //console.log(store);
-        //store.saveTalk(this.props.talk, this.props.script);
+        store.saveTalk(this.props.talk, this.props.script);
         //var script = store.saveScript(this.props.script);
 
-         let talkData = store.getTalkById(this.props.talk.id);
+        let talkData = store.getTalkById(this.props.talk.id);
         // console.log(talk.toString());
         // console.log(talkData);
         // console.log(talkData.script);

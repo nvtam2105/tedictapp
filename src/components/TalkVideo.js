@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
 
-import VideoPlayer from 'react-native-video-controls';
+import { CardSection, Thumbnail, VideoPlayer } from './common';
 
 class TalkVideo extends Component {
 
@@ -12,10 +12,8 @@ class TalkVideo extends Component {
     render() {
         return (
             <VideoPlayer
-            paused={false}
-            source={{ uri: this.props.talk.medias[3].url }}
-            navigator={ this.props.navigator }
-            rate={1.0}
+            video={{ uri: this.props.talk.medias[0].url }}
+            autoplay
             />
         );
     }

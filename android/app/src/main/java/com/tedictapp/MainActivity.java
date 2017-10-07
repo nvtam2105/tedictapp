@@ -2,7 +2,10 @@ package com.tedictapp;
 
 import com.facebook.react.ReactActivity;
 import io.realm.react.RealmReactPackage;
+import com.brentvatne.react.ReactVideoPackage;
+import com.oblador.vectoricons.VectorIconsPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
+import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
 
 public class MainActivity extends ReactActivity {
 

@@ -13,6 +13,7 @@ class Talk {
       description: 'string',
       published_at: { type: 'date', optional: true},
       updated_at: { type: 'date', optional: true},
+      media: 'string',
       script: {type : 'Script'},
     }
   }
@@ -62,6 +63,7 @@ export const saveTalk = (talkData, scriptData) => {
           talk_id: talkData.id,
           sens: scriptData.sens,
         },
+        media: talkData.medias[0].url,
         //published_at: talk.published_at,
         //updated_at: talk.updated_at
 
