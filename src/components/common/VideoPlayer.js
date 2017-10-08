@@ -270,6 +270,12 @@ class VideoPlayer extends Component {
 
 
   seek(time) {
+    const progress = time / this.state.duration;
+    
+    this.setState({
+          progress,
+    });
+    
     this.player.seek(time);
   };
 
@@ -459,7 +465,7 @@ class VideoPlayer extends Component {
             { marginTop: -this.getSizeStyles().height },
           ]}
         >
-          <TouchableOpacity
+          {/* <TouchableOpacity
             style={styles.overlayButton}
             onPress={() => {
               this.showControls();
@@ -470,10 +476,10 @@ class VideoPlayer extends Component {
               if (fullScreenOnLongPress && Platform.OS !== 'android')
                 this.onToggleFullScreen();
             }}
-          />
+          /> */}
         </View>
-        {((!this.state.isPlaying) || this.state.isControlsVisible)
-          ? this.renderControls() : this.renderSeekBar(true)}
+        {/* {((!this.state.isPlaying) || this.state.isControlsVisible)
+          ? this.renderControls() : this.renderSeekBar(true)} */}
       </View>
     );
   }

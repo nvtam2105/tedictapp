@@ -22,8 +22,7 @@
     "react-redux": "^5.0.6",
     "realm": "^1.12.0",
     "redux": "^3.7.2",
-    "redux-thunk": "^2.2.0",
-    "undefined": "^0.1.0"
+    "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
     "babel-jest": "21.0.2",

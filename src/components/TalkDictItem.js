@@ -21,33 +21,42 @@ class TalkDictItem extends Component {
 
     onPressPlay(obj) {
         console.log('onPressPlay' + obj);
-        
-        
+        this.player.seek(12.776);
+        this.player.setState({
+            isPlaying: !this.player.state.isPlaying,
+        });
+
+
     }
 
 
     onLoad(obj) {
-        console.log('_loadStart'  + obj);
+        console.log('_loadStart' + obj);
         console.log(obj);
-        console.log(this.player);
-        this.player.seek(this.props.sen.startTime/1000);
-        
+        // console.log(this.player);
+        console.log(this.props.sen.startTime / 1000);
+        this.player.seek(12.776);
+        // this.player.setState({
+        //     isPlaying: !this.player.state.isPlaying,
+        // });
+
     }
 
-    _setTime(obj) {
-        console.log('_setTime = ' + obj);
+    onProgress(obj) {
+        console.log('onProgress' + obj);
         console.log(obj);
-        console.log(this.player);
-    }
-
-    _onValueChange(obj) {
-        console.log('_onValueChange' + obj);
-        console.log(obj);
-    }
-
-    _onLoad(obj) {
-        console.log('_onLoad' + obj);
-        console.log(obj);
+        //console.log(this.player);
+        // if ((obj.currentTime - this.props.sen.startTime/1000) >= this.props.sen.duration/1000) {
+        //     this.player.setState({
+        //         isPlaying: !this.player.state.isPlaying,
+        //     });
+        // }
+        if (obj.currentTime >= 20.328) {
+            this.player.setState({
+                isPlaying: !this.player.state.isPlaying,
+            });
+            
+        }
     }
 
     render() {
@@ -68,7 +77,9 @@ class TalkDictItem extends Component {
                             this.player = ref
                         }}
                         autoplay
+                        onShowControls={false}
                         onLoad={this.onLoad.bind(this)}
+                        onProgress={this.onProgress.bind(this)}
                         video={{ uri: this.props.media }}
                         rate={1.0}
                     />
