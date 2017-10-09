@@ -36,6 +36,10 @@ class TalkDetail extends Component {
         }).then((res) => {
           this.setState({ loading: false })
           console.log('The file saved to ', res.path());
+          
+          this.props.talk.video=res.path() + this.props.talk.id + '.mp4';
+
+          store.saveTalk(this.props.talk, this.props.script);
         }).catch((err) => {
           console.log(err);
         });
@@ -45,7 +49,7 @@ class TalkDetail extends Component {
         //Actions.talkVideo({ talk: this.props.talk });
         
         //console.log(store);
-        store.saveTalk(this.props.talk, this.props.script);
+        //store.saveTalk(this.props.talk, this.props.script);
         //var script = store.saveScript(this.props.script);
 
         let talkData = store.getTalkById(this.props.talk.id);

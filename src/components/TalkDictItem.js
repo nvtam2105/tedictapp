@@ -21,7 +21,7 @@ class TalkDictItem extends Component {
 
     onPressPlay(obj) {
         console.log('onPressPlay' + obj);
-        this.player.seek(12.776);
+        this.player.seek(this.props.sen.start / 1000);
         this.player.setState({
             isPlaying: !this.player.state.isPlaying,
         });
@@ -31,11 +31,11 @@ class TalkDictItem extends Component {
 
 
     onLoad(obj) {
-        console.log('_loadStart' + obj);
-        console.log(obj);
+        //console.log('_loadStart' + obj);
+        //console.log(obj);
         // console.log(this.player);
-        console.log(this.props.sen.startTime / 1000);
-        this.player.seek(12.776);
+        //console.log(this.props.sen.start / 1000);
+        this.player.seek(this.props.sen.start / 1000);
         // this.player.setState({
         //     isPlaying: !this.player.state.isPlaying,
         // });
@@ -43,15 +43,15 @@ class TalkDictItem extends Component {
     }
 
     onProgress(obj) {
-        console.log('onProgress' + obj);
-        console.log(obj);
+        //console.log('onProgress' + obj);
+        //console.log(obj);
         //console.log(this.player);
         // if ((obj.currentTime - this.props.sen.startTime/1000) >= this.props.sen.duration/1000) {
         //     this.player.setState({
         //         isPlaying: !this.player.state.isPlaying,
         //     });
         // }
-        if (obj.currentTime >= 20.328) {
+        if (obj.currentTime >= this.props.sen.end / 1000) {
             this.player.setState({
                 isPlaying: !this.player.state.isPlaying,
             });
@@ -77,10 +77,9 @@ class TalkDictItem extends Component {
                             this.player = ref
                         }}
                         autoplay
-                        onShowControls={false}
                         onLoad={this.onLoad.bind(this)}
                         onProgress={this.onProgress.bind(this)}
-                        video={{ uri: this.props.media }}
+                        video={{ uri: 'file://' + this.props.media + '.mp4'}}
                         rate={1.0}
                     />
                 </View>

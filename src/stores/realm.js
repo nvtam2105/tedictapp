@@ -43,8 +43,8 @@ class Sen {
     primaryKey: '_id',
     properties: {
       _id: 'string',
-      startTime: 'int',
-      duration: 'int',
+      start: 'int',
+      end: 'int',
       content: 'string',
       words : {type: 'list',  objectType:'StringObject'},
     }
@@ -63,7 +63,7 @@ export const saveTalk = (talkData, scriptData) => {
           talk_id: talkData.id,
           sens: scriptData.sens,
         },
-        media: talkData.medias[0].url,
+        media: talkData.video,
         //published_at: talk.published_at,
         //updated_at: talk.updated_at
 
