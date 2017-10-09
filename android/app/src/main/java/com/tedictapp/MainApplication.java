@@ -9,6 +9,12 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 
+import com.RNFetchBlob.RNFetchBlobPackage;
+import com.brentvatne.react.ReactVideoPackage;
+import io.realm.react.RealmReactPackage;
+import com.oblador.vectoricons.VectorIconsPackage;
+import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -24,7 +30,12 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new RNFSPackage()
+            new RNFSPackage(),
+            new ReactVideoPackage(),
+            new RNFetchBlobPackage(),
+            new RealmReactPackage(),
+            new VectorIconsPackage(),
+            new ReactNativeConfigPackage()
       );
     }
   };

@@ -73,6 +73,7 @@ import com.android.build.OutputFile
  */
 
 apply from: "../../node_modules/react-native/react.gradle"
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 
 /**
  * Set this to true to create two separate APKs instead of one:
@@ -133,10 +134,10 @@ android {
 }
 
 dependencies {
-    compile project(':react-native-fs')
     compile project(':realm')
     compile project(':react-native-video')
     compile project(':react-native-vector-icons')
+    compile project(':react-native-fs')
     compile project(':react-native-fetch-blob')
     compile project(':react-native-config')
     compile fileTree(dir: "libs", include: ["*.jar"])

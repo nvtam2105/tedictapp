@@ -40,6 +40,7 @@ const RouterComponent = () => {
                 <Drawer hideNavBar key="drawer" contentComponent={DrawerContent} drawerIcon={menuIcon}>
                     <Scene hideNavBar>
                         <Tabs
+                            tabBarPosition="bottom" 
                             key="tabbar"
                             swipeEnabled
                             showLabel={false}

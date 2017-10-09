@@ -96,6 +96,7 @@ class VideoPlayer extends Component {
       isControlsVisible: !props.hideControlsOnStart,
       duration: 0,
       isSeeking: false,
+                // [iOS] Interval to fire onProgress (default to ~250ms)      
     };
 
     this.seekBarWidth = 200;
@@ -529,6 +530,7 @@ VideoPlayer.propTypes = {
   disableSeek: PropTypes.bool,
   pauseOnPress: PropTypes.bool,
   fullScreenOnLongPress: PropTypes.bool,
+  progressUpdateInterval: PropTypes.number,
   customStyles: PropTypes.shape({
     wrapper: ViewPropTypes.style,
     video: Video.propTypes.style,
@@ -567,6 +569,7 @@ VideoPlayer.defaultProps = {
   disableSeek: false,
   pauseOnPress: false,
   fullScreenOnLongPress: false,
+  progressUpdateInterval: 50.0,
   customStyles: {},
 };
 
