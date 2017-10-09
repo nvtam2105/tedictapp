@@ -8,6 +8,8 @@ import { connect } from 'react-redux';
 
 import { CardSection, Thumbnail, VideoPlayer } from './common';
 
+import RNFS  from 'react-native-fs';
+
 import { scriptFetch } from '../actions';
 
 import store from '../stores';
@@ -28,16 +30,17 @@ class TalkDetail extends Component {
         RNFetchBlob.config({
           fileCache : true,
         }).fetch('GET', this.props.talk.medias[0].url, {
-          name: this.props.talk.id + '.mp4',
-          filename: this.props.talk.id + 'mp4',
-          type: 'video/mp4',
+          //name: this.props.talk.id,
+          filename: this.props.talk.id + '.mp4',
+          //mime: 'video/mp4',
         }).progress((received, total) => {
             this.setState({ progress: received / total});
         }).then((res) => {
           this.setState({ loading: false })
           console.log('The file saved to ', res.path());
           
-          this.props.talk.video=res.path() + this.props.talk.id + '.mp4';
+          //this.props.talk.video=res.path() + this.props.talk.id + '.mp4';
+          this.props.talk.video = `${RNFS.DocumentDirectoryPath}/${this.props.talk.id}.mp4`
 
           store.saveTalk(this.props.talk, this.props.script);
         }).catch((err) => {
