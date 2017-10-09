@@ -11,8 +11,8 @@ class TalkDictItem extends Component {
     }
 
     componentWillMount() {
-        console.log('componentWillMount=' + this.props.sen);
-        console.log(this.props.sen);
+        console.log('componentWillMount=' + this.props);
+        console.log(this.props);
     }
 
     componentDidMount() {
@@ -55,7 +55,7 @@ class TalkDictItem extends Component {
             this.player.setState({
                 isPlaying: !this.player.state.isPlaying,
             });
-            
+
         }
     }
 
@@ -79,7 +79,7 @@ class TalkDictItem extends Component {
                         autoplay
                         onLoad={this.onLoad.bind(this)}
                         onProgress={this.onProgress.bind(this)}
-                        video={{ uri: 'file://' + this.props.media + '.mp4'}}
+                        video={{ uri: 'file://' + this.props.media}}
                         rate={1.0}
                     />
                 </View>

@@ -17,40 +17,41 @@ import store from '../stores';
 class TalkDetail extends Component {
 
     constructor(props) {
-        super(props);   
+        super(props);
         this.state = {
             loading: false
         }
     }
-    
+
     onPressPratice() {
         this.setState({ loading: true })
 
         // Download Video
         RNFetchBlob.config({
           fileCache : true,
+          appendExt : 'mp4'
         }).fetch('GET', this.props.talk.medias[0].url, {
           //name: this.props.talk.id,
-          filename: this.props.talk.id + '.mp4',
+          //filename: this.props.talk.id + '.mp4',
           //mime: 'video/mp4',
         }).progress((received, total) => {
             this.setState({ progress: received / total});
         }).then((res) => {
           this.setState({ loading: false })
           console.log('The file saved to ', res.path());
-          
-          //this.props.talk.video=res.path() + this.props.talk.id + '.mp4';
-          this.props.talk.video = `${RNFS.DocumentDirectoryPath}/${this.props.talk.id}.mp4`
+
+          this.props.talk.video=res.path();
+          //this.props.talk.video = `${RNFS.DocumentDirectoryPath}/${this.props.talk.id}.mp4`
 
           store.saveTalk(this.props.talk, this.props.script);
         }).catch((err) => {
           console.log(err);
         });
     }
-    
+
     onPressFillGap() {
         //Actions.talkVideo({ talk: this.props.talk });
-        
+
         //console.log(store);
         //store.saveTalk(this.props.talk, this.props.script);
         //var script = store.saveScript(this.props.script);
@@ -76,7 +77,7 @@ class TalkDetail extends Component {
     }
 
     componentWillMount() {
-        
+
     }
 
     componentDidMount() {
@@ -93,9 +94,9 @@ class TalkDetail extends Component {
                         <Image style={stretch} source={require('../../assets/img/play_bt.png')} />
                     </TouchableWithoutFeedback>
                 </ImageBackground>
-                
+
                 <Text>{this.props.talk.description}</Text>
-                
+
                 {   !this.state.loading && (
                         <Button
                         onPress={this.onPressPratice.bind(this)}
@@ -107,15 +108,15 @@ class TalkDetail extends Component {
                 {   this.state.loading && (
                         <View>
                             <ProgressBar
-                                width={150} 
+                                width={150}
                                 progress={this.state.progress}
                             />
                             <ActivityIndicator style={{flex:1}}
                                     animating={this.state.loading}
                                     size="small" />
                         </View>)
-                }    
-                    
+                }
+
                 <Button
                     onPress={this.onPressFillGap.bind(this)}
                     title="FILL GAP"
@@ -150,8 +151,7 @@ const mapStateToProps = state => {
     console.log(state);
     return { script: state.script };
 };
-  
+
 const mapDispatchToProps = {scriptFetch};
 
 export default connect(mapStateToProps, mapDispatchToProps)(TalkDetail);
-
