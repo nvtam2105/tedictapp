@@ -91,6 +91,7 @@ class TalkList extends Component {
         return (
             <FlatList style={{ flex: 1 }}
                 data={this.props.talks}
+                extraData={this.state}
                 renderItem={({ item }) => (<TalkListItem talk={item} />)}
                 keyExtractor={item => item.id}
                 ItemSeparatorComponent={this.renderSeparator}
