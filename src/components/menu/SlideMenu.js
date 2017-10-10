@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   },
 });
 
-class DrawerContent extends Component {
+class SlideMenu extends Component {
   static propTypes = {
     name: PropTypes.string,
     sceneStyle: ViewPropTypes.style,
@@ -34,4 +34,4 @@ class DrawerContent extends Component {
   }
 }
 
-export default DrawerContent;
+export default SlideMenu;

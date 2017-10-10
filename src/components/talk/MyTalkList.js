@@ -20,18 +20,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'transparent',
-    borderWidth: 2,
-    borderColor: 'red',
+    //borderWidth: 2,
+    //borderColor: 'red',
   },
 });
 
-class TabView extends React.Component {
+class MyTalkList extends React.Component {
   render() {
     return (
       <View style={[styles.container, this.props.sceneStyle]}>
         <Text>Tab title:{this.props.title} name:{this.props.name}</Text>
         <Text>Tab data:{this.props.data}</Text>
-        {this.props.name === 'tab_1_1' &&
+        {/* {this.props.name === 'tab_1_1' &&
           <Button onPress={() => Actions.tab_1_2()}>next screen for tab1_1</Button>
         }
         {this.props.name === 'tab_2_1' &&
@@ -43,12 +43,12 @@ class TabView extends React.Component {
         <Button onPress={() => { Actions.tab_3(); }}>Switch to tab3</Button>
         <Button onPress={() => { Actions.tab_4(); }}>Switch to tab4</Button>
         <Button onPress={() => { Actions.tab_5({ data: 'test!' }); }}>Switch to tab5 with data</Button>
-        <Button onPress={() => { Actions.echo(); }}>push clone scene (EchoView)</Button>
+        <Button onPress={() => { Actions.echo(); }}>push clone scene (EchoView)</Button> */}
       </View>
     );
   }
 }
-TabView.contextTypes = contextTypes;
-TabView.propTypes = propTypes;
+MyTalkList.contextTypes = contextTypes;
+MyTalkList.propTypes = propTypes;
 
-export default TabView;
+export default MyTalkList;

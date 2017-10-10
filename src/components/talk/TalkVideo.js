@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
 
-import { CardSection, Thumbnail, VideoPlayer } from './common';
+import { CardSection, Thumbnail, VideoPlayer } from '../common';
 
 class TalkVideo extends Component {
 
@@ -12,8 +12,8 @@ class TalkVideo extends Component {
     render() {
         return (
             <VideoPlayer
-            video={{ uri: this.props.talk.medias[0].url }}
-            autoplay
+                video={{ uri: this.props.talk.medias[0].url }}
+                autoplay
             />
         );
     }

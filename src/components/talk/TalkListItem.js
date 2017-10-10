@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, Alert, TouchableWithoutFeedback } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import { CardSection, Thumbnail } from './common';
+import { CardSection, Thumbnail } from '../common';
 
 class TalkListItem extends Component {
 

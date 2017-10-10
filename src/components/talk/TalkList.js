@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { View, Text, FlatList, ActivityIndicator } from "react-native";
 
 import { connect } from 'react-redux';
-import { talksFetch } from '../actions';
+import { talksFetch } from '../../actions';
 import TalkListItem from './TalkListItem';
 
 class TalkList extends Component {
@@ -63,7 +63,7 @@ class TalkList extends Component {
             <View
                 style={{
                     height: 1,
-                    width: "86%",
+                    width: "70%",
                     backgroundColor: "#CED0CE",
                     marginLeft: "14%"
                 }}
@@ -93,12 +93,12 @@ class TalkList extends Component {
                 data={this.props.talks}
                 renderItem={({ item }) => (<TalkListItem talk={item} />)}
                 keyExtractor={item => item.id}
-                ItemSeparatorComponent={this.renderSeparator}
+                //ItemSeparatorComponent={this.renderSeparator}
                 ListFooterComponent={this.renderFooter}
                 onRefresh={this.onRefresh}
                 refreshing={this.state.refreshing}
                 onEndReached={this.onEndReached}
-                bounces={false}
+                //bounces={false}
                 onEndReachedThreshold={0.5}
                 onMomentumScrollBegin={() => { this.onEndReachedCalledDuringMomentum = false; }}
 

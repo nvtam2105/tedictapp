@@ -1,18 +1,18 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
-import { View, Text, Image, ImageBackground, Button, TouchableWithoutFeedback,ActivityIndicator } from "react-native";
+import { View, Text, Image, ImageBackground, Button, TouchableWithoutFeedback, ActivityIndicator } from "react-native";
 import { Actions } from 'react-native-router-flux';
 import RNFetchBlob from 'react-native-fetch-blob';
 import ProgressBar from 'react-native-progress/Bar';
 import { connect } from 'react-redux';
 
-import { CardSection, Thumbnail, VideoPlayer } from './common';
+import { CardSection, Thumbnail, VideoPlayer } from '../common';
 
-import RNFS  from 'react-native-fs';
+import RNFS from 'react-native-fs';
 
-import { scriptFetch } from '../actions';
+import { scriptFetch } from '../../actions';
 
-import store from '../stores';
+import store from '../../stores';
 
 class TalkDetail extends Component {
 
@@ -28,24 +28,24 @@ class TalkDetail extends Component {
 
         // Download Video
         RNFetchBlob.config({
-          fileCache : true,
-          appendExt : 'mp4'
+            fileCache: true,
+            appendExt: 'mp4'
         }).fetch('GET', this.props.talk.medias[0].url, {
-          //name: this.props.talk.id,
-          //filename: this.props.talk.id + '.mp4',
-          //mime: 'video/mp4',
+            //name: this.props.talk.id,
+            //filename: this.props.talk.id + '.mp4',
+            //mime: 'video/mp4',
         }).progress((received, total) => {
-            this.setState({ progress: received / total});
+            this.setState({ progress: received / total });
         }).then((res) => {
-          this.setState({ loading: false })
-          console.log('The file saved to ', res.path());
+            this.setState({ loading: false })
+            console.log('The file saved to ', res.path());
 
-          this.props.talk.video=res.path();
-          //this.props.talk.video = `${RNFS.DocumentDirectoryPath}/${this.props.talk.id}.mp4`
+            this.props.talk.video = res.path();
+            //this.props.talk.video = `${RNFS.DocumentDirectoryPath}/${this.props.talk.id}.mp4`
 
-          store.saveTalk(this.props.talk, this.props.script);
+            store.saveTalk(this.props.talk, this.props.script);
         }).catch((err) => {
-          console.log(err);
+            console.log(err);
         });
     }
 
@@ -81,40 +81,40 @@ class TalkDetail extends Component {
     }
 
     componentDidMount() {
-        Actions.refresh({title: this.props.talk.name});
+        Actions.refresh({ title: this.props.talk.name });
         this.props.scriptFetch(this.props.talk.id);
     }
 
     render() {
         const { stretch } = styles;
         return (
-            <View style={{flex:1}}>
-                <ImageBackground style={stretch} source={{uri: this.props.talk.images[2].url}} >
+            <View style={{ flex: 1 }}>
+                <ImageBackground style={stretch} source={{ uri: this.props.talk.images[2].url }} >
                     <TouchableWithoutFeedback onPress={this.onPressPlay.bind(this)}>
-                        <Image style={stretch} source={require('../../assets/img/play_bt.png')} />
+                        <Image style={stretch} source={require('../../../assets/img/play_bt.png')} />
                     </TouchableWithoutFeedback>
                 </ImageBackground>
 
                 <Text>{this.props.talk.description}</Text>
 
-                {   !this.state.loading && (
-                        <Button
+                {!this.state.loading && (
+                    <Button
                         onPress={this.onPressPratice.bind(this)}
                         title="PRACTICE HARD"
                         accessibilityLabel="Learn more about this purple button"
-                        />
-                        )
+                    />
+                )
                 }
-                {   this.state.loading && (
-                        <View>
-                            <ProgressBar
-                                width={150}
-                                progress={this.state.progress}
-                            />
-                            <ActivityIndicator style={{flex:1}}
-                                    animating={this.state.loading}
-                                    size="small" />
-                        </View>)
+                {this.state.loading && (
+                    <View>
+                        <ProgressBar
+                            width={150}
+                            progress={this.state.progress}
+                        />
+                        <ActivityIndicator style={{ flex: 1 }}
+                            animating={this.state.loading}
+                            size="small" />
+                    </View>)
                 }
 
                 <Button
@@ -141,8 +141,8 @@ class TalkDetail extends Component {
 
 const styles = {
     stretch: {
-      width: 100,
-      height: 100
+        width: 100,
+        height: 100
     }
 };
 
@@ -152,6 +152,6 @@ const mapStateToProps = state => {
     return { script: state.script };
 };
 
-const mapDispatchToProps = {scriptFetch};
+const mapDispatchToProps = { scriptFetch };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TalkDetail);

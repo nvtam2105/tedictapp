@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
 import { View, Text, TextInput, Button, Alert } from "react-native";
 
-import { CardSection, Thumbnail, VideoPlayer } from './common';
+import { CardSection, Thumbnail, VideoPlayer } from '../common';
 
 class TalkDictItem extends Component {
 
@@ -24,11 +24,11 @@ class TalkDictItem extends Component {
 
     onPressPlay(obj) {
         console.log('onPressPlay' + obj);
-        this.setState ({
+        this.setState({
             playing: true,
         });
-        
-        
+
+
         // this.player.setState({
         //     isPlaying: !this.player.state.isPlaying,
         // });
@@ -43,9 +43,9 @@ class TalkDictItem extends Component {
         //console.log(obj);
         // console.log(this.player);
         //console.log(this.props.sen.start / 1000);
-        
+
         this.player.seek(this.props.sen.start / 1000);
-      
+
         // this.player.setState({
         //     isPlaying: !this.player.state.isPlaying,
         // });
@@ -65,7 +65,7 @@ class TalkDictItem extends Component {
             this.player.setState({
                 isPlaying: !this.player.state.isPlaying,
             });
-            this.setState ({
+            this.setState({
                 playing: false
             });
 
