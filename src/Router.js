@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, StyleSheet } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 import { Scene, Router, Drawer, Tabs, Stack } from 'react-native-router-flux';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -28,15 +28,24 @@ const backImage = (props) => {
 }
 
 const newestIcon = (props) => {
-    return (<FontAwesome name="newspaper-o" size={30} />);
+    return (<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', }}>
+        <FontAwesome name="newspaper-o" size={30} />
+        <Text>All talks</Text>
+    </View>);
 };
 
 const myListIcon = (props) => {
-    return (<FontAwesome name="play" size={30} />);
+    return (<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', }}>
+        <FontAwesome name="play-circle-o" size={30} />
+        <Text>My list</Text>
+    </View>);
 };
 
 const searchIcon = (props) => {
-    return (<EvilIcons name="search" size={30} />);
+    return (<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', }}>
+        <EvilIcons name="search" size={30} />
+        <Text>Search</Text>
+    </View>);
 };
 
 
@@ -59,32 +68,29 @@ const RouterComponent = () => {
         <Router>
             <Scene key="root">
                 <Drawer hideNavBar key="drawer" contentComponent={SlideMenu} drawerIcon={menuIcon}>
-                    <Scene key="home">
+                    {/* <Scene key="home">
                         <Scene key="homePage" component={HomePage} initial />
 
+                    </Scene> */}
+
+
+                    <Scene hideNavBar>
+                        <Tabs
+                            tabBarPosition="bottom"
+                            key="tabbar"
+                            swipeEnabled
+                            showLabel={false}
+                            //tabBarStyle={styles.tabBarStyle}
+                            //inactiveBackgroundColor="rgba(255, 0, 0, 0.5)"
+                            activeBackgroundColor="white">
+                            <Scene key="myTalkList" title="My Dictation List" component={MyTalkList} icon={myListIcon} />
+                            <Scene key="talkList" title=" Newest" component={TalkList} icon={newestIcon} />
+                            <Scene key="searchTalk" title="Search" component={SearchTalk} icon={searchIcon} />
+                        </Tabs>
                     </Scene>
                 </Drawer>
 
-                <Scene hideNavBar>
-                    <Tabs
-                        tabBarPosition="bottom"
-                        key="tabbar"
-                        swipeEnabled
-                        showLabel={false}
-                        //tabBarStyle={styles.tabBarStyle}
-                        activeBackgroundColor="white"
-                    //inactiveBackgroundColor="rgba(255, 0, 0, 0.5)"
-                    >
-                        <Scene key="myTalkList" title="My Dictation List" component={MyTalkList} icon={myListIcon}
 
-                            rightTitle="Search" onRight={() => { }} />
-                        <Scene key="talkList" title=" Newest" component={TalkList} icon={newestIcon}
-                            rightTitle="Search" onRight={() => { }} />
-                    </Tabs>
-                </Scene>
-
-
-                <Scene key="searchTalk" title="Search" component={SearchTalk} rightTitle="Right3" onRight={() => { }} />
                 <Scene key="talkDetail" component={TalkDetail} backTitle=" " leftButtonImage={backImage} />
                 <Scene key="talkVideo" component={TalkVideo} backTitle=" " leftButtonImage={backImage} />
                 <Scene key="talkScript" component={TalkScript} backTitle=" " leftButtonImage={backImage} />
