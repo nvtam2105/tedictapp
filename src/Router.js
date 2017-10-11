@@ -28,25 +28,30 @@ const backImage = (props) => {
 }
 
 const newestIcon = (props) => {
-    return (<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', }}>
-        <FontAwesome name="newspaper-o" size={30} />
-        <Text>All talks</Text>
+    return (<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center',  padding: 5}}>
+        <FontAwesome name="newspaper-o" size={25} color={props.focused ? '#900' : 'black'}/>
+        <Text style={{ fontSize: 12, color: props.focused ? '#900' : 'black'}}>All Talks</Text>
     </View>);
 };
 
 const myListIcon = (props) => {
-    return (<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', }}>
-        <FontAwesome name="play-circle-o" size={30} />
-        <Text>My list</Text>
+    console.log(props);
+    return (<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 5}}>
+        <FontAwesome name="play-circle" size={25} color={props.focused ? '#900' : 'black'}/>
+        <Text style={{ fontSize: 12, color: props.focused ? '#900' : 'black'}}>My List</Text>
     </View>);
 };
 
 const searchIcon = (props) => {
-    return (<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', }}>
-        <EvilIcons name="search" size={30} />
-        <Text>Search</Text>
+    return (<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 5}}>
+        <EvilIcons name="search" size={30} color={props.focused ? '#900' : 'black'} />
+        <Text style={{ fontSize: 12, color: props.focused ? '#900' : 'black'}}>Search</Text>
     </View>);
 };
+
+const TabIcon = ({ selected, title }) => (
+    myListIcon
+);
 
 
 
@@ -81,8 +86,10 @@ const RouterComponent = () => {
                             swipeEnabled
                             showLabel={false}
                             //tabBarStyle={styles.tabBarStyle}
+                            
                             //inactiveBackgroundColor="rgba(255, 0, 0, 0.5)"
-                            activeBackgroundColor="white">
+                            //activeBackgroundColor="white"
+                            >
                             <Scene key="myTalkList" title="My Dictation List" component={MyTalkList} icon={myListIcon} />
                             <Scene key="talkList" title=" Newest" component={TalkList} icon={newestIcon} />
                             <Scene key="searchTalk" title="Search" component={SearchTalk} icon={searchIcon} />

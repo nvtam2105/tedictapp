@@ -25,16 +25,8 @@ class TalkDictItem extends Component {
     onPressPlay(obj) {
         console.log('onPressPlay' + obj);
         this.setState({
-            playing: true,
+            playing: !this.state.playing,
         });
-
-
-        // this.player.setState({
-        //     isPlaying: !this.player.state.isPlaying,
-        // });
-        // this.player.seek(this.props.sen.start / 1000);
-
-
     }
 
 
