@@ -92,7 +92,7 @@ const RouterComponent = () => {
                             >
                             <Scene key="myTalkList" title="My Dictation List" component={MyTalkList} icon={myListIcon} />
                             <Scene key="talkList" title=" Newest" component={TalkList} icon={newestIcon} />
-                            <Scene key="searchTalk" title="Search" component={SearchTalk} icon={searchIcon} />
+                            <Scene key="searchTalk" hideNavBar title="Search" component={SearchTalk} icon={searchIcon} />
                         </Tabs>
                     </Scene>
                 </Drawer>

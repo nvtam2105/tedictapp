@@ -1,22 +1,12 @@
 import React, { Component } from 'react';
 import { Text, View, FlatList, ActivityIndicator } from "react-native";
 import { Actions } from 'react-native-router-flux';
-
-
 import { connect } from 'react-redux';
 import { talksFetch } from '../../actions';
 import TalkListItem from './TalkListItem';
 
+import { Search } from '../common';
 
-import { SearchBar } from '../common';
-//import SearchHeaderComponent from 'react-native-search-header';
-
-
-//import SearchBar from 'react-native-searchbar';
-//import { SearchBar } from "react-native-elements";
-//import SearchBar from 'react-native-material-design-searchbar';
-//import SearchHeaderComponent from 'react-native-search-header';
-//const SearchHeader = SearchHeaderComponent();
 
 class SearchTalk extends Component {
 
@@ -30,22 +20,21 @@ class SearchTalk extends Component {
       refreshing: false,
       onEndReachedCalledDuringMomentum: true
     };
-    this.onSubmitEditing = this.onSubmitEditing.bind(this);
+    this.onSearch = this.onSearch.bind(this);
   }
 
 
   componentWillMount() {
     const { limit, offset } = this.state;
-    //this.props.talksFetch({ limit, offset` });
-    //this.searchHeader.show();
+    this.props.talksFetch({ limit, offset });
   }
 
   componentDidMount() {
     //this.searchHeader.show();
   }
 
-  onSubmitEditing() {
-    console.log(this.searchBar);
+  onSearch() {
+    //console.log(this.searchBar);
     const { limit, offset } = this.state;
     this.props.talksFetch({ limit, offset });
   }
@@ -95,12 +84,13 @@ class SearchTalk extends Component {
 
   renderHeader = () => {
     return (
-      <SearchBar
-        
-      />
+      <View style={{ flex: 1, marginTop: 25 }}>
+        <Search
+          onSearch={this.onSearch}
+        />
+      </View >
     )
   };
-
 
   renderFooter = () => {
     if (!this.state.loading) return null;
@@ -120,16 +110,6 @@ class SearchTalk extends Component {
 
   render() {
     return (
-      // <View style={{ flex: 1 }}>
-      //   <SearchBar
-      //     ref={(ref) => this.searchBar = ref}
-      //     hideBack
-
-      //     //data={items}
-      //     //handleResults={this._handleResults}
-      //     showOnLoad
-      // />
-      // </View>
       <FlatList
         data={this.props.talksSearch}
         extraData={this.state}
