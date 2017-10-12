@@ -8,15 +8,15 @@ import { talksFetch } from '../../actions';
 import TalkListItem from './TalkListItem';
 
 
-//import { SearchBar } from '../common';
+import { SearchBar } from '../common';
 //import SearchHeaderComponent from 'react-native-search-header';
 
 
 //import SearchBar from 'react-native-searchbar';
 //import { SearchBar } from "react-native-elements";
 //import SearchBar from 'react-native-material-design-searchbar';
-import SearchHeaderComponent from 'react-native-search-header';
-const SearchHeader = SearchHeaderComponent();
+//import SearchHeaderComponent from 'react-native-search-header';
+//const SearchHeader = SearchHeaderComponent();
 
 class SearchTalk extends Component {
 
@@ -41,7 +41,7 @@ class SearchTalk extends Component {
   }
 
   componentDidMount() {
-    this.searchHeader.show();
+    //this.searchHeader.show();
   }
 
   onSubmitEditing() {
@@ -95,11 +95,8 @@ class SearchTalk extends Component {
 
   renderHeader = () => {
     return (
-      <SearchHeader
-        ref={(searchHeader) => {
-          this.searchHeader = searchHeader;
-        }}
-        statusHeightOffet={21}
+      <SearchBar
+        
       />
     )
   };
