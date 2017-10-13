@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, FlatList, ActivityIndicator } from "react-native";
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import { talksFetch } from '../../actions';
+import { talksSearch } from '../../actions';
 import TalkListItem from './TalkListItem';
 
 import { SearchBar } from '../common';
@@ -14,37 +14,53 @@ class SearchTalk extends Component {
     super(props);
     this.state = {
       loading: false,
-      talksSearch: [],
+      talks: [],
       limit: 10,
       offset: 0,
+      search: '',
       refreshing: false,
       onEndReachedCalledDuringMomentum: true
     };
-    this.onSearch = this.onSearch.bind(this);
+    this.onChangeText = this.onChangeText.bind(this);
   }
 
 
   componentWillMount() {
     const { limit, offset } = this.state;
-    this.props.talksFetch({ limit, offset });
+    console.log(this.props);
+    
+    //this.props.talksFetch({ limit, offset });
   }
 
   componentDidMount() {
-    //this.searchHeader.show();
   }
 
-  onSearch() {
-    //console.log(this.searchBar);
-    const { limit, offset } = this.state;
-    this.props.talksFetch({ limit, offset });
+  onChangeText(keyword) {
+    
+    this.setState({
+      limit: 10,
+      offset: 0,
+      search: keyword,
+    });
+
+    const { search, limit, offset } = this.state;
+    if (this.state.search) {
+      this.props.talksSearch({ search, limit, offset });
+    }
   }
 
   onRefresh = () => {
     this.setState({ offset: 0, refreshing: true },
       () => {
-        const { limit, offset } = this.state;
+        this.setState({
+          limit: 10,
+          offset: 0,
+        });
+        const { search, limit, offset } = this.state;
         this.props.talks = [];
-        this.props.talksFetch({ limit, offset });
+        if (this.state.search) {
+          this.props.talksSearch({ search, limit, offset });
+        }
         this.state.loading = false;
       }
     );
@@ -59,8 +75,10 @@ class SearchTalk extends Component {
           refreshing: false
         },
         () => {
-          const { limit, offset } = this.state;
-          this.props.talksFetch({ limit, offset });
+          const { search, limit, offset } = this.state;
+          if (this.state.search) {
+            this.props.talksSearch({ search, limit, offset });
+          }
           this.state.loading = false;
           this.onEndReachedCalledDuringMomentum = true;
         }
@@ -86,7 +104,11 @@ class SearchTalk extends Component {
     return (
       <View style={{ flex: 1, marginTop: 25 }}>
         <SearchBar
-          onSearch={this.onSearch}
+          ref={(ref) => {
+            this.searchBar = ref
+          }}
+          onChangeText={this.onChangeText}
+
           cancelButtonWidth={80}
         />
       </View >
@@ -112,8 +134,8 @@ class SearchTalk extends Component {
   render() {
     return (
       <FlatList
-        data={this.props.talksSearch}
-        extraData={this.state}
+        data={this.props.talks}
+        //extraData={this.state}
         renderItem={({ item }) => (<TalkListItem talk={item} />)}
         keyExtractor={item => item.id}
         ListHeaderComponent={this.renderHeader}
@@ -129,9 +151,9 @@ class SearchTalk extends Component {
 }
 
 const mapStateToProps = state => {
-  return state.talks.length > 0 ? { talksSearch: state.talks } : {};
+  return state.talksSearch.length > 0 ? { talks: state.talksSearch } : {};
 };
 
-const mapDispatchToProps = { talksFetch };
+const mapDispatchToProps = { talksSearch };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchTalk);
