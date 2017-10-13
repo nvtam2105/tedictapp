@@ -46,6 +46,7 @@ class SearchTalk extends Component {
     const { search, limit, offset } = this.state;
     if (this.state.search) {
       this.props.talksSearch({ search, limit, offset });
+      console.log(search);
     }
   }
 
@@ -77,6 +78,7 @@ class SearchTalk extends Component {
         () => {
           const { search, limit, offset } = this.state;
           if (this.state.search) {
+            console.log(search);
             this.props.talksSearch({ search, limit, offset });
           }
           this.state.loading = false;
@@ -107,9 +109,11 @@ class SearchTalk extends Component {
           ref={(ref) => {
             this.searchBar = ref
           }}
+          //returnKeyType="done"
+          blurOnSubmit={true}
           onChangeText={this.onChangeText}
-
-          cancelButtonWidth={80}
+          autoCapitalize="none"
+          //cancelButtonWidth={80}
         />
       </View >
     )

@@ -283,7 +283,7 @@ class SearchBar extends Component {
               shadowRadius: this.props.shadowRadius
             }
           ]}
-          onEndEditing={this.onCancel}
+          //onEndEditing={this.onCancel}
           editable={this.props.editable}
           value={this.state.keyword}
           onChangeText={this.onChangeText}

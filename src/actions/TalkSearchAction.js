@@ -9,7 +9,7 @@ import {
 import axios from 'axios';
 
 export const talksSearch = ({ search, limit, offset }) => {
-    let url = Config.TALK_BASE_URL + `${search}/${limit}/${offset}`;
+    let url = Config.TALK_BASE_URL + `${encodeURIComponent(search)}/${limit}/${offset}`;
     return (dispatch) => {
         return axios.get(url)
             .then((response) => { dispatch({ type: TALKS_SEARCH_SUCCESS, payload: response.data }); })
