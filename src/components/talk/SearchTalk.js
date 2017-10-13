@@ -17,53 +17,54 @@ class SearchTalk extends Component {
       talks: [],
       limit: 10,
       offset: 0,
+      preSearch: '',
       search: '',
       refreshing: false,
       onEndReachedCalledDuringMomentum: true
     };
-    this.onChangeText = this.onChangeText.bind(this);
+    this.onSearch = this.onSearch.bind(this);
   }
 
 
   componentWillMount() {
-    const { limit, offset } = this.state;
-    console.log(this.props);
-    
-    //this.props.talksFetch({ limit, offset });
   }
 
   componentDidMount() {
   }
 
-  onChangeText(keyword) {
-    
+  onSearch(keyword) {
     this.setState({
+      loading: true,
       limit: 10,
       offset: 0,
-      search: keyword,
+      preSearch: this.state.search,
+      search: keyword
+    }, () => {
+      const { preSearch, search, limit, offset } = this.state;
+      if (search) {
+        this.props.talksSearch({ preSearch, search, limit, offset });
+        this.setState({
+          loading: false,
+        })
+      }
     });
-
-    const { search, limit, offset } = this.state;
-    if (this.state.search) {
-      this.props.talksSearch({ search, limit, offset });
-      console.log(search);
-    }
   }
 
   onRefresh = () => {
-    this.setState({ offset: 0, refreshing: true },
-      () => {
-        this.setState({
-          limit: 10,
-          offset: 0,
-        });
-        const { search, limit, offset } = this.state;
-        this.props.talks = [];
-        if (this.state.search) {
-          this.props.talksSearch({ search, limit, offset });
-        }
-        this.state.loading = false;
+    this.setState({
+      offset: 0,
+      limit: 10,
+      preSearch: '',
+      refreshing: true
+    }, () => {
+      const { preSearch, search, limit, offset } = this.state;
+      if (search) {
+        this.props.talksSearch({ preSearch, search, limit, offset });
       }
+      this.setState({
+        loading: false,
+      })
+    }
     );
   };
 
@@ -73,16 +74,17 @@ class SearchTalk extends Component {
         {
           offset: this.state.offset + 1,
           loading: true,
-          refreshing: false
-        },
-        () => {
-          const { search, limit, offset } = this.state;
-          if (this.state.search) {
-            console.log(search);
-            this.props.talksSearch({ search, limit, offset });
+          refreshing: false,
+          preSearch: this.state.search,
+        }, () => {
+          const { preSearch, search, limit, offset } = this.state;
+          if (search) {
+            this.props.talksSearch({ preSearch, search, limit, offset });
           }
-          this.state.loading = false;
-          this.onEndReachedCalledDuringMomentum = true;
+          this.setState({
+            loading: false,
+            onEndReachedCalledDuringMomentum: true,
+          })
         }
       );
 
@@ -110,10 +112,10 @@ class SearchTalk extends Component {
             this.searchBar = ref
           }}
           //returnKeyType="done"
-          blurOnSubmit={true}
-          onChangeText={this.onChangeText}
+          //blurOnSubmit={true}
+          onSearch={this.onSearch}
           autoCapitalize="none"
-          //cancelButtonWidth={80}
+        //cancelButtonWidth={80}
         />
       </View >
     )
@@ -139,7 +141,6 @@ class SearchTalk extends Component {
     return (
       <FlatList
         data={this.props.talks}
-        //extraData={this.state}
         renderItem={({ item }) => (<TalkListItem talk={item} />)}
         keyExtractor={item => item.id}
         ListHeaderComponent={this.renderHeader}

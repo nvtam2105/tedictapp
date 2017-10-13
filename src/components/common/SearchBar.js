@@ -8,7 +8,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
 const containerHeight = 40;
 
-const deleteIcon = (<EvilIcons name="delete" size={30} />);
+//const deleteIcon = (<EvilIcons name="delete" size={30} />);
 
 
 class SearchBar extends Component {
