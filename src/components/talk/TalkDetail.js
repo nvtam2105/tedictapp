@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 
 import { CardSection, Thumbnail, VideoPlayer } from '../common';
 
-import RNFS from 'react-native-fs';
+//import RNFS from 'react-native-fs';
 
 import { scriptFetch } from '../../actions';
 

@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Text, TouchableWithoutFeedback, TouchableOpacity, TextInput, Animated, Dimensions, Keyboard, Image, View } from 'react-native';
+import EvilIcons from 'react-native-vector-icons/EvilIcons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+
 
 const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
 const containerHeight = 40;
 
-class Search extends Component {
+const deleteIcon = (<EvilIcons name="delete" size={30} />);
+
+
+class SearchBar extends Component {
   constructor(props) {
     super(props);
 
@@ -380,7 +386,7 @@ const getStyles = (inputHeight) => {
 
   return {
     container: {
-      backgroundColor: 'grey',
+      backgroundColor: 'transparent',
       height: containerHeight,
       flexDirection: 'row',
       justifyContent: 'flex-start',
@@ -426,8 +432,8 @@ const getStyles = (inputHeight) => {
       height: 50
     },
     cancelButtonText: {
-      fontSize: 14,
-      color: '#fff'
+      fontSize: 16,
+      //color: '#fff'
     }
   };
 }
@@ -435,7 +441,7 @@ const getStyles = (inputHeight) => {
 /**
  * Props
  */
-Search.propTypes = {
+SearchBar.propTypes = {
   /**
      * onFocus
      * return a Promise
@@ -536,14 +542,14 @@ Search.propTypes = {
   shadowVisible: PropTypes.bool
 };
 
-Search.defaultProps = {
+SearchBar.defaultProps = {
   editable: true,
   blurOnSubmit: true,
   keyboardShouldPersist: false,
   searchIconCollapsedMargin: 25,
   searchIconExpandedMargin: 10,
-  placeholderCollapsedMargin: 15,
-  placeholderExpandedMargin: 20,
+  placeholderCollapsedMargin: 10,
+  placeholderExpandedMargin: 25,
   shadowOffsetWidth: 0,
   shadowOffsetHeightCollapsed: 2,
   shadowOffsetHeightExpanded: 4,
@@ -555,4 +561,4 @@ Search.defaultProps = {
   useClearButton: true,
 };
 
-export { Search };
+export { SearchBar };

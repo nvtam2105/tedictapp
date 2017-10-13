@@ -6,4 +6,4 @@ export * from './Input';
 export * from './Spinner';
 export * from './Thumbnail';
 export * from './VideoPlayer';
-export * from './Search';
+export * from './SearchBar';

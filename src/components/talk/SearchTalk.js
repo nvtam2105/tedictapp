@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { talksFetch } from '../../actions';
 import TalkListItem from './TalkListItem';
 
-import { Search } from '../common';
+import { SearchBar } from '../common';
 
 
 class SearchTalk extends Component {
@@ -85,8 +85,9 @@ class SearchTalk extends Component {
   renderHeader = () => {
     return (
       <View style={{ flex: 1, marginTop: 25 }}>
-        <Search
+        <SearchBar
           onSearch={this.onSearch}
+          cancelButtonWidth={80}
         />
       </View >
     )
