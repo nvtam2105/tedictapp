@@ -72,7 +72,8 @@ const RouterComponent = () => {
     return (
         <Router>
             <Scene key="root">
-                <Drawer hideNavBar key="drawer" contentComponent={SlideMenu} drawerIcon={menuIcon}>
+                <Drawer hideNavBar key="drawer" contentComponent={SlideMenu} drawerIcon={menuIcon}
+                openDrawerOffset={10}>
                     {/* <Scene key="home">
                         <Scene key="homePage" component={HomePage} initial />
 

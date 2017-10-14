@@ -134,6 +134,9 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-photo-view')
+    compile project(':react-native-share')
+    compile project(':react-native-linear-gradient')
     compile project(':realm')
     compile project(':react-native-video')
     compile project(':react-native-vector-icons')

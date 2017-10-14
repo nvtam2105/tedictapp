@@ -86,7 +86,7 @@ export const getTalkById = (talkId) => {
 }
 
 export const getTalks = () => {
-  const talks = Talk.get();//.sorted('-published_at', true)
+  const talks = Talk.get().sorted('published_at', 0);
   return talks;
 }
 

@@ -22,7 +22,7 @@ class TalkList extends Component {
 
     componentWillMount() {
         const { limit, offset } = this.state;
-        this.props.talksFetch({ limit, offset });
+        //this.props.talksFetch({ limit, offset });
     }
 
     componentWillReceiveProps(nextProps) {
@@ -72,19 +72,15 @@ class TalkList extends Component {
     };
 
     renderFooter = () => {
-        if (!this.state.loading) return null;
-
         return (
-            <View
-                style={{
-                    paddingVertical: 20,
-                    borderTopWidth: 1,
-                    borderColor: "#CED0CE"
-                }}
-            >
-                <ActivityIndicator animating size="large" />
-            </View>
-        );
+            <View style={{
+                paddingVertical: 20,
+                borderTopWidth: 1,
+                borderColor: "#CED0CE"}}>
+                { this.state.loading && 
+                    (<ActivityIndicator animating size="large" />)
+                }
+            </View >)
     };
 
     render() {

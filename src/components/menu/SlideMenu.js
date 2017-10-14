@@ -1,35 +1,56 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { StyleSheet, Text, View, ViewPropTypes } from 'react-native';
-import Button from 'react-native-button';
+//import { Text, View, Button, SectionList } from 'react-native';
+import { Image, Button, Text, ListView, Tile, Title, Subtitle, TouchableOpacity, Screen, Divider } from '@shoutem/ui';
+
 import { Actions } from 'react-native-router-flux';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'transparent',
-  },
-});
-
 class SlideMenu extends Component {
-  static propTypes = {
-    name: PropTypes.string,
-    sceneStyle: ViewPropTypes.style,
-    title: PropTypes.string,
+
+  renderItem = (row) => {
+    return (
+      <Tile>
+        <Title styleName="md-gutter-bottom">{row.key}</Title>
+        <Subtitle styleName="sm-gutter-horizontal">{row.key}</Subtitle>
+      </Tile>
+
+    );
   }
 
-  static contextTypes = {
-    drawer: React.PropTypes.object,
+  renderSectionHeader = (row) => {
+    return (
+      <Text>{"header " + row.section.key}</Text>
+    );
+  }
+
+  renderSectionFooter = (row) => {
+    return (
+      <Text>{"footer " + row.section.key}</Text>
+    );
   }
 
   render() {
+    const sectionListData = [
+      { data: [{ key: "item1" }, { key: "item2" }], key: "section1" },
+      { data: [{ key: "item3" }], key: "section2" },
+      { data: [], key: "section3" },
+      { data: [{ key: "item4" }, { key: "item5" }], key: "section4" },
+    ];
     return (
-      <View style={styles.container}>
-        <Text>Drawer Content</Text>
-        <Button onPress={Actions.talkList}>Back</Button>
-      </View >
+      // <SectionList
+      //   sections={sectionListData}
+      //   renderItem={this.renderItem}
+      //   renderSectionHeader={this.renderSectionHeader}
+      //   renderSectionFooter={this.renderSectionFooter}
+      // />
+
+      <ListView
+        data={sectionListData}
+        renderRow={this.renderItem}
+      />
+      // <Button>
+      //   <Text>CHECK IN HERE</Text>
+      // </Button>
+
     );
   }
 }

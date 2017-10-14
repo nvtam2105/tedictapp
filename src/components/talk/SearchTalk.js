@@ -113,6 +113,7 @@ class SearchTalk extends Component {
           }}
           //returnKeyType="done"
           //blurOnSubmit={true}
+          //positionRightDelete={0}
           onSearch={this.onSearch}
           autoCapitalize="none"
         //cancelButtonWidth={80}
@@ -122,19 +123,16 @@ class SearchTalk extends Component {
   };
 
   renderFooter = () => {
-    if (!this.state.loading) return null;
-
     return (
-      <View
-        style={{
-          paddingVertical: 20,
-          borderTopWidth: 1,
-          borderColor: "#CED0CE"
-        }}
-      >
-        <ActivityIndicator animating size="large" />
-      </View>
-    );
+      <View style={{
+        paddingVertical: 20,
+        borderTopWidth: 1,
+        borderColor: "#CED0CE"
+      }}>
+        {this.state.loading &&
+          (<ActivityIndicator animating size="large" />)
+        }
+      </View >)
   };
 
   render() {

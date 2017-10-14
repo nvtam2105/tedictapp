@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, Alert, TouchableWithoutFeedback } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { CardSection, Thumbnail } from '../common';
+import { Card } from '@shoutem/ui';
 
 class TalkListItem extends Component {
 
@@ -13,14 +14,16 @@ class TalkListItem extends Component {
     render() {
         return (
             <TouchableWithoutFeedback onPress={this.onRowPress.bind(this)}>
+                <Card>
                 <View style={{ flex: 1 }}>
-                    <CardSection>
-                        <Thumbnail source={this.props.talk.images[0].url} />
+                    
+                        <Thumbnail source={this.props.talk.image_16x9 || this.props.talk.images[0].url} />
                         <Text style={styles.titleStyle}>
                             {this.props.talk.name}
                         </Text>
-                    </CardSection>
+                    
                 </View>
+                </Card>
             </TouchableWithoutFeedback>
         );
     }
