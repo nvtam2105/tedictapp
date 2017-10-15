@@ -1,18 +1,21 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
-import { View, Text, Image, ImageBackground, Button, TouchableWithoutFeedback, ActivityIndicator } from "react-native";
+import { Image, ImageBackground, TouchableWithoutFeedback, ActivityIndicator } from "react-native";
 import { Actions } from 'react-native-router-flux';
 import RNFetchBlob from 'react-native-fetch-blob';
 import ProgressBar from 'react-native-progress/Bar';
 import { connect } from 'react-redux';
 
+
 import { CardSection, Thumbnail, VideoPlayer } from '../common';
 
-//import RNFS from 'react-native-fs';
+
 
 import { scriptFetch } from '../../actions';
 
 import store from '../../stores';
+
+import { View, Row, Caption, Text, Subtitle, Tile, Title, Overlay, Icon, Button } from '@shoutem/ui';
 
 class TalkDetail extends Component {
 
@@ -98,11 +101,11 @@ class TalkDetail extends Component {
                 <Text>{this.props.talk.description}</Text>
 
                 {!this.state.loading && (
-                    <Button
+                    <Button styleName="dark"
                         onPress={this.onPressPratice.bind(this)}
-                        title="PRACTICE HARD"
-                        accessibilityLabel="Learn more about this purple button"
-                    />
+                        accessibilityLabel="Learn more about this purple button">   
+                        <Text>PRACTICE</Text>
+                    </Button>
                 )
                 }
                 {this.state.loading && (
@@ -117,23 +120,29 @@ class TalkDetail extends Component {
                     </View>)
                 }
 
-                <Button
+                <Button styleName="dark"
                     onPress={this.onPressFillGap.bind(this)}
                     title="FILL GAP"
                     accessibilityLabel="Learn more about this purple button"
-                />
+                >
+                <Text>onPressFillGap</Text>
+                </Button>
 
-                <Button
+                <Button styleName="dark"
                     onPress={this.onPressPlay.bind(this)}
-                    title="PLAY VIDEO"
+                    //title="PLAY VIDEO"
                     accessibilityLabel="Learn more about this purple button"
-                />
+                >
+                <Text>onPressPlay</Text>
+                </Button>
 
-                <Button
+                <Button styleName="dark"
                     onPress={this.onPressScript.bind(this)}
-                    title="Script"
+                    //title="Script"
                     accessibilityLabel="Learn more about this purple button"
-                />
+                >
+                <Text>onPressPlay</Text>
+                </Button>
             </View>
         );
     }

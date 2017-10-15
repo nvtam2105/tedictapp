@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Text, View, Alert, TouchableWithoutFeedback } from 'react-native';
+import { TouchableWithoutFeedback } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { CardSection, Thumbnail } from '../common';
-import { Card } from '@shoutem/ui';
+import { View, Row, Caption, Image, Text, Subtitle, Tile, Title, Overlay, Icon } from '@shoutem/ui';
 
 class TalkListItem extends Component {
 
@@ -14,16 +14,18 @@ class TalkListItem extends Component {
     render() {
         return (
             <TouchableWithoutFeedback onPress={this.onRowPress.bind(this)}>
-                <Card>
-                <View style={{ flex: 1 }}>
-                    
-                        <Thumbnail source={this.props.talk.image_16x9 || this.props.talk.images[0].url} />
-                        <Text style={styles.titleStyle}>
-                            {this.props.talk.name}
-                        </Text>
-                    
-                </View>
-                </Card>
+                <Row>
+                    {/* <Image
+                        styleName="medium rounded-corners"
+                        source={{ uri: this.props.talk.images[0].url }}
+                    /> */}
+                    <View styleName="vertical stretch space-between">
+                        <Subtitle>{this.props.talk.name}</Subtitle>
+                        <View styleName="horizontal space-between">
+                            <Caption>3 days ago</Caption>
+                        </View>
+                    </View>
+                </Row>
             </TouchableWithoutFeedback>
         );
     }

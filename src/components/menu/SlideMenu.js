@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
-//import { Text, View, Button, SectionList } from 'react-native';
-import { Image, Button, Text, ListView, Tile, Title, Subtitle, TouchableOpacity, Screen, Divider } from '@shoutem/ui';
+import { SectionList } from 'react-native';
+import {
+  Image, Button, Text,
+  ListView, Tile, Title, Subtitle,
+  TouchableOpacity, Screen, Divider,
+  Caption, Row, View
+} from '@shoutem/ui';
 
 import { Actions } from 'react-native-router-flux';
 
@@ -8,49 +13,43 @@ class SlideMenu extends Component {
 
   renderItem = (row) => {
     return (
-      <Tile>
-        <Title styleName="md-gutter-bottom">{row.key}</Title>
-        <Subtitle styleName="sm-gutter-horizontal">{row.key}</Subtitle>
-      </Tile>
-
+      <View>
+        <Row>
+          <Text styleName="md-gutter-bottom">{row.item.key}</Text>
+        </Row>
+        <Divider styleName="line" />
+      </View>
     );
   }
 
   renderSectionHeader = (row) => {
     return (
-      <Text>{"header " + row.section.key}</Text>
+      <Divider styleName="section-header">
+        <Caption>{row.section.key}</Caption>
+      </Divider>
     );
   }
 
-  renderSectionFooter = (row) => {
-    return (
-      <Text>{"footer " + row.section.key}</Text>
-    );
-  }
+  // renderSectionFooter = (row) => {
+  //   return (
+  //     <Divider styleName="line" />
+  //   );
+  // }
 
   render() {
     const sectionListData = [
-      { data: [{ key: "item1" }, { key: "item2" }], key: "section1" },
-      { data: [{ key: "item3" }], key: "section2" },
-      { data: [], key: "section3" },
-      { data: [{ key: "item4" }, { key: "item5" }], key: "section4" },
+      { data: [{ key: "My Dictation" }, { key: "My Bookmarks" }], key: "" },
+      { data: [{ key: "Discover" }], key: "" },
+      { data: [{ key: "Help" }, { key: "About" }], key: "" }
     ];
     return (
-      // <SectionList
-      //   sections={sectionListData}
-      //   renderItem={this.renderItem}
-      //   renderSectionHeader={this.renderSectionHeader}
-      //   renderSectionFooter={this.renderSectionFooter}
-      // />
-
-      <ListView
-        data={sectionListData}
-        renderRow={this.renderItem}
+      <SectionList
+        style={{ marginTop: 50 }}
+        sections={sectionListData}
+        renderItem={this.renderItem}
+        renderSectionHeader={this.renderSectionHeader}
+      //renderSectionFooter={this.renderSectionFooter}
       />
-      // <Button>
-      //   <Text>CHECK IN HERE</Text>
-      // </Button>
-
     );
   }
 }

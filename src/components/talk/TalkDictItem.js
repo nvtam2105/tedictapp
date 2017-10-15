@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
-import { View, Text, TextInput, Button, Alert } from "react-native";
+import {  Keyboard, Alert } from "react-native";
 
+import { View, Row, Caption, Text, TextInput, Subtitle, Tile, Title, Overlay, Icon, Button } from '@shoutem/ui';
 import { CardSection, Thumbnail, VideoPlayer } from '../common';
 
 class TalkDictItem extends Component {
@@ -9,13 +10,21 @@ class TalkDictItem extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            playing: true
+            playing: true,
+            content: this.props.sen.content,
+            hiddenContent: this.props.sen.content.replace(/[a-zA-Z]/g, '*')            
         }
+        //Alert.alert(this.state.hiddenContent);
+
+        this.onChangeText = this.onChangeText.bind(this);
     }
 
     componentWillMount() {
         console.log('componentWillMount=' + this.props);
         console.log(this.props);
+      
+
+
     }
 
     componentDidMount() {
@@ -64,17 +73,24 @@ class TalkDictItem extends Component {
         }
     }
 
+    onChangeText(text) {
+        Alert.alert(text);
+    }
+    
+
     render() {
         return (
             <View style={{ flex: 1 }}>
                 {/* <Text>{this.props.sen.content}</Text> */}
                 <TextInput
-                    value={this.props.sen.content}
+                    value={this.state.hiddenContent}
                     //editable={false}
                     multiline={true}
-                    numberOfLines={10}
+                    autoFocus
+                    //numberOfLines={10}
+                    textAlign="left"
                     style={{ height: 100, borderColor: 'gray', borderWidth: 1 }}
-                //onChangeText={ (text) => { Alert.alert(text)} }
+                    onChangeText={ (text) => {this.onChangeText(text)} }
                 />
                 {this.state.playing && (
                     <View style={{ flex: 0.5 }}>
@@ -92,9 +108,9 @@ class TalkDictItem extends Component {
                 )}
                 <Button
                     onPress={this.onPressPlay.bind(this)}
-                    title="PLAY VIDEO"
-                    accessibilityLabel="Learn more about this purple button"
-                />
+                >
+                         <Text>PLAY VIDEO</Text>
+                </Button>
             </View>
         );
     }

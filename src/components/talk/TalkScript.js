@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
-import { View, Text, FlatList } from "react-native";
+import { FlatList } from "react-native";
+import { View, Row, Caption, Text, Subtitle, Tile, Title, Overlay, Icon, Button } from '@shoutem/ui';
 import { connect } from 'react-redux';
 
 import { scriptFetch } from '../../actions';
@@ -37,10 +38,18 @@ class TalkScript extends Component {
             <FlatList style={{ flex: 1 }}
                 data={this.props.script.sens}
                 renderItem={({ item, index }) => (
-                    <View style={{ flex: 1 }}>
-                        <Text>{index + 1}</Text>
-                        <Text>{item.content}</Text>
-                    </View>
+                    <Row>
+
+                        <View styleName="vertical">
+                            <View styleName="horizontal space-between">
+                                <Text>{index + 1}</Text>
+                            </View>
+                            <Text styleName="multiline">{item.content}</Text>
+                        </View>
+                        <Icon styleName="disclosure" name="right-arrow" />
+                    </Row>
+
+
                 )}
                 keyExtractor={item => item._id}
                 ItemSeparatorComponent={this.renderSeparator}
