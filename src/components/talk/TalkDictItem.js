@@ -12,12 +12,11 @@ class TalkDictItem extends Component {
         this.state = {
             playing: true,
             content: this.props.sen.content,
-            hiddenContent: this.props.sen.content.replace(/[a-zA-Z]/g, '*')
+            hiddenContent: this.props.sen.content.replace(/[a-zA-Z]/g, '*'),
+            rate: 1.0
         }
-        //Alert.alert(this.state.hiddenContent);
 
-        this.handleKeyDown = this.handleKeyDown.bind(this);
-        //this.onEndEditing = this.onEndEditing.bind(this);
+        this.onKeyPress = this.onKeyPress.bind(this);
     }
 
     componentWillMount() {
@@ -42,21 +41,10 @@ class TalkDictItem extends Component {
 
 
     onLoad(obj) {
-        console.log('_loadStart' + obj);
-        //console.log(obj);
-        // console.log(this.player);
-        //console.log(this.props.sen.start / 1000);
-
         this.player.seek(this.props.sen.start / 1000);
-
-        // this.player.setState({
-        //     isPlaying: !this.player.state.isPlaying,
-        // });
-
     }
 
     onProgress(obj) {
-        //console.log(obj);
         if (obj.currentTime >= this.props.sen.end / 1000) {
             this.player.setState({
                 isPlaying: !this.player.state.isPlaying,
@@ -68,50 +56,34 @@ class TalkDictItem extends Component {
         }
     }
 
-    // onChangeText(text) {
-    //     //Alert.alert(text);
-    //     this.setState({
-    //         hiddenContent: text
-    //     });
-
-    // }
-
-    handleKeyDown(e) {
-        console.log(e.nativeEvent.key);
+    onKeyPress(e) {
         const { content, hiddenContent, currentIndex } = this.state;
-        if (e.nativeEvent.key.toLowerCase() === content[currentIndex].toLowerCase()) {
+        if (typeof content[currentIndex] !== 'undefined'
+            && e.nativeEvent.key.toLowerCase() === content[currentIndex].toLowerCase()) {
             this.setState({
                 hiddenContent: hiddenContent.substr(0, currentIndex) + content[currentIndex]
-                                + hiddenContent.substr(currentIndex + content[currentIndex].length),
-                }, () => {
-                    this.setState({
-                        currentIndex: this.state.hiddenContent.indexOf("*"),
-                    });
+                + hiddenContent.substr(currentIndex + content[currentIndex].length),
+            }, () => {
+                this.setState({
+                    currentIndex: this.state.hiddenContent.indexOf("*"),
                 });
+            });
         }
     }
 
     render() {
+        const { currentIndex, rate, playing } = this.state;
         return (
-            <View style={{ flex: 1 }}>
-                {/* <Text>{this.props.sen.content}</Text> */}
+            <View>
                 <TextInput
                     value={this.state.hiddenContent}
-                    
-                    //editable={false}
                     multiline={true}
                     autoFocus
-                    //selectionColor={'transparent'}
-                    selection={{start: this.state.currentIndex, end: this.state.currentIndex}}
-                    //numberOfLines={10}
-                    //textAlign="left"
-                    //style={{ height: 100, borderColor: 'gray', borderWidth: 1 }}
-                    //onChangeText={(text) => { this.onChangeText(text) }}
-                    onKeyPress={this.handleKeyDown}
-                //onEndEditing={ (text) => {this.onEndEditing(text)} }
+                    selection={{ start: currentIndex, end: currentIndex }}
+                    onKeyPress={this.onKeyPress}
                 />
-                {this.state.playing && (
-                    <View style={{ flex: 0.5 }}>
+                {playing && (
+                    <View style={{ flex: 1}}>
                         <VideoPlayer
                             ref={(ref) => {
                                 this.player = ref
@@ -120,13 +92,10 @@ class TalkDictItem extends Component {
                             onLoad={this.onLoad.bind(this)}
                             onProgress={this.onProgress.bind(this)}
                             video={{ uri: 'file://' + this.props.media }}
-                            rate={1.0}
-                        />
+                            rate={rate} />
                     </View>
                 )}
-                <Button
-                    onPress={this.onPressPlay.bind(this)}
-                >
+                <Button onPress={this.onPressPlay.bind(this)}>
                     <Text>PLAY VIDEO</Text>
                 </Button>
             </View>

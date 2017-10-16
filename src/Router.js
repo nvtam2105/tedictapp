@@ -110,7 +110,8 @@ const RouterComponent = () => {
                         //activeBackgroundColor="white"
                         >
                         <Scene key="talkList" title=" Newest" component={TalkList} icon={newestIcon}
-                                renderRightButton={rightButton} />
+                                //renderRightButton={rightButton} 
+                                />
                             <Scene key="myTalkList" title="My Dictation List" component={MyTalkList} icon={myListIcon}
                                 //onRight={() => Actions.searchTalk()}
                                 //rightTitle="right"
