@@ -30,7 +30,7 @@ class TalkDictList extends Component {
                         </CardSection>
                     </View>)}
                 keyExtractor={item => item._id}
-                numColumns={4}
+                numColumns={3}
             />
         );
     }

@@ -10,6 +10,7 @@ import axios from 'axios';
 
 export const talksFetch = ({ limit, offset }) => {
     let url = Config.TALK_BASE_URL + `${limit}/${offset}`;
+    console.log(url);
     return (dispatch) => {
         return axios.get(url)
             .then((response) => { dispatch({ type: TALKS_FETCH_SUCCESS, payload: response.data }); })

@@ -2,18 +2,23 @@ import Realm from 'realm';
 
 class Talk {
   static get () { return realm.objects(Talk.schema.name) }
+
   static schema = {
     name: 'Talk',
     primaryKey: 'id',
     properties: {
       id: 'int',
-      event: 'string',
-      image_16x9:  'string',
+      event: 'string',   
       name: 'string',
       description: 'string',
-      published_at: { type: 'date', optional: true},
-      updated_at: { type: 'date', optional: true},
+      slug: 'string',
+      tag: 'string',
+      native_language_code: 'string',
       media: 'string',
+      image:  'string',
+      speaker: 'string',
+      published_at: { type: 'date', optional: true},
+      viewed_count: 'int',
       script: {type : 'Script'},
     }
   }
@@ -26,6 +31,7 @@ class Script {
     primaryKey: 'talk_id',
     properties: {
       talk_id:  'int',
+      lang: { type: 'string', optional: true},
       sens: {type: 'list', objectType: 'Sen'},
     }
   }
@@ -47,35 +53,42 @@ class Sen {
       end: 'int',
       content: 'string',
       words : {type: 'list',  objectType:'StringObject'},
+      completed: { type: 'bool', optional: true},
+      completed_date: { type: 'date', optional: true},
     }
   }
 };
 
-export const saveTalk = (talkData, scriptData) => {
+export const saveTalk = (talk, script) => {
    realm.write(() => {
     return realm.create(Talk.schema.name, {
-        id:  talkData.id,
-        event: talkData.event,
-        image_16x9: talkData.image_16x9,
-        name: talkData.name,
-        description: talkData.description,
+        id:  talk.id,
+        event: talk.event,
+        name: talk.name,
+        description: talk.description,
+        slug: talk.slug,
+        tag: talk.tag,
+        native_language_code: talk.native_language_code,
+        media: talk.media,
+        image: talk.image,
+        speaker: talk.speaker,
+        published_at: talk.published_at,
+        viewed_count: talk.viewed_count,
         script: {
-          talk_id: talkData.id,
-          sens: scriptData.sens,
+          talk_id: script.talk_id,
+          lang: script.lang,
+          sens: script.sens,
         },
-        media: talkData.video,
-        //published_at: talk.published_at,
-        //updated_at: talk.updated_at
-
     },true)
   })
 }
 
-export const saveScript = (scriptData) => {
+export const saveScript = (script) => {
   realm.write(() => {
    return realm.create(Script.schema.name, {
-         talk_id: scriptData.talk_id,
-         sens: scriptData.sens
+         talk_id: script.talk_id,
+         lang: script.lang,
+         sens: script.sens
    },true)
  })
 }

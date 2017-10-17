@@ -22,7 +22,7 @@ class TalkList extends Component {
 
     componentWillMount() {
         const { limit, offset } = this.state;
-        //this.props.talksFetch({ limit, offset });
+        this.props.talksFetch({ limit, offset });
     }
 
     componentWillReceiveProps(nextProps) {

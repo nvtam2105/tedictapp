@@ -33,18 +33,15 @@ class TalkDetail extends Component {
         RNFetchBlob.config({
             fileCache: true,
             appendExt: 'mp4'
-        }).fetch('GET', this.props.talk.medias[0].url, {
-            //name: this.props.talk.id,
-            //filename: this.props.talk.id + '.mp4',
-            //mime: 'video/mp4',
+        }).fetch('GET', this.props.talk.media, {
+            
         }).progress((received, total) => {
             this.setState({ progress: received / total });
         }).then((res) => {
             this.setState({ loading: false })
             console.log('The file saved to ', res.path());
 
-            this.props.talk.video = res.path();
-            //this.props.talk.video = `${RNFS.DocumentDirectoryPath}/${this.props.talk.id}.mp4`
+            this.props.talk.media = res.path();
 
             store.saveTalk(this.props.talk, this.props.script);
         }).catch((err) => {
@@ -59,7 +56,7 @@ class TalkDetail extends Component {
         //store.saveTalk(this.props.talk, this.props.script);
         //var script = store.saveScript(this.props.script);
 
-        let talkData = store.getTalkById(this.props.talk.id);
+        let talk = store.getTalkById(this.props.talk.id);
         // console.log(talk.toString());
         // console.log(talkData);
         // console.log(talkData.script);
@@ -67,7 +64,7 @@ class TalkDetail extends Component {
         //     var sen = talkData.script.sens[i];
         //     console.log(sen);
         // }
-        Actions.talkDictList({ talk: talkData });
+        Actions.talkDictList({ talk: talk });
 
     }
 
@@ -90,20 +87,21 @@ class TalkDetail extends Component {
 
     render() {
         const { stretch } = styles;
+        const { talk } = this.props;
         return (
             <View style={{ flex: 1 }}>
-                <ImageBackground style={stretch} source={{ uri: this.props.talk.images[2].url }} >
+                <ImageBackground style={stretch} source={{ uri: talk.image }} >
                     <TouchableWithoutFeedback onPress={this.onPressPlay.bind(this)}>
                         <Image style={stretch} source={require('../../../assets/img/play_bt.png')} />
                     </TouchableWithoutFeedback>
                 </ImageBackground>
 
-                <Text>{this.props.talk.description}</Text>
+                <Text>{talk.description}</Text>
 
                 {!this.state.loading && (
                     <Button styleName="dark"
                         onPress={this.onPressPratice.bind(this)}
-                        accessibilityLabel="Learn more about this purple button">   
+                        accessibilityLabel="Learn more about this purple button">
                         <Text>PRACTICE</Text>
                     </Button>
                 )
@@ -121,27 +119,18 @@ class TalkDetail extends Component {
                 }
 
                 <Button styleName="dark"
-                    onPress={this.onPressFillGap.bind(this)}
-                    title="FILL GAP"
-                    accessibilityLabel="Learn more about this purple button"
-                >
-                <Text>onPressFillGap</Text>
+                    onPress={this.onPressFillGap.bind(this)}>
+                    <Text>FILL GAP</Text>
                 </Button>
 
                 <Button styleName="dark"
-                    onPress={this.onPressPlay.bind(this)}
-                    //title="PLAY VIDEO"
-                    accessibilityLabel="Learn more about this purple button"
-                >
-                <Text>onPressPlay</Text>
+                    onPress={this.onPressPlay.bind(this)}>
+                    <Text>PLAY</Text>
                 </Button>
 
                 <Button styleName="dark"
-                    onPress={this.onPressScript.bind(this)}
-                    //title="Script"
-                    accessibilityLabel="Learn more about this purple button"
-                >
-                <Text>onPressPlay</Text>
+                    onPress={this.onPressScript.bind(this)}>
+                    <Text>SCRIPT</Text>
                 </Button>
             </View>
         );
@@ -157,7 +146,6 @@ const styles = {
 
 
 const mapStateToProps = state => {
-    console.log(state);
     return { script: state.script };
 };
 

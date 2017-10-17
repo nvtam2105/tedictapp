@@ -53,7 +53,7 @@ const newestIcon = (props) => {
 };
 
 const myListIcon = (props) => {
-    console.log(props);
+    //console.log(props);
     return (<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 8 }}>
         <Icon name="play" color={props.focused ? '#900' : 'black'} />
         <Text style={{ fontSize: 12, color: props.focused ? '#900' : 'black' }}>My List</Text>
@@ -109,14 +109,18 @@ const RouterComponent = () => {
                         //inactiveBackgroundColor="rgba(255, 0, 0, 0.5)"
                         //activeBackgroundColor="white"
                         >
-                        <Scene key="talkList" title=" Newest" component={TalkList} icon={newestIcon}
+                            
+                            <Scene key="talkList" title=" Newest" component={TalkList} icon={newestIcon}
                                 //renderRightButton={rightButton} 
                                 />
+
                             <Scene key="myTalkList" title="My Dictation List" component={MyTalkList} icon={myListIcon}
                                 //onRight={() => Actions.searchTalk()}
                                 //rightTitle="right"
                                 //renderRightButton={rightButton}
                             />
+
+                          
                            
                             <Scene key="searchTalk" hideNavBar title="Search" component={SearchTalk} icon={searchIcon}
                                 renderRightButton={rightButton} />

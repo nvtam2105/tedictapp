@@ -12,7 +12,7 @@ class TalkVideo extends Component {
     render() {
         return (
             <VideoPlayer
-                video={{ uri: this.props.talk.medias[0].url }}
+                video={{ uri: this.props.talk.media }}
                 autoplay
             />
         );

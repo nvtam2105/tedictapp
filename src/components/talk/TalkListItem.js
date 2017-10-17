@@ -12,17 +12,20 @@ class TalkListItem extends Component {
 
 
     render() {
+        const { talk } = this.props;
         return (
             <TouchableWithoutFeedback onPress={this.onRowPress.bind(this)}>
                 <Row>
-                    {/* <Image
+                    <Image
                         styleName="medium rounded-corners"
-                        source={{ uri: this.props.talk.images[0].url }}
-                    /> */}
+                        source={{ uri: talk.image }} />
                     <View styleName="vertical stretch space-between">
-                        <Subtitle>{this.props.talk.name}</Subtitle>
+                        <Subtitle>{talk.name}</Subtitle>
                         <View styleName="horizontal space-between">
-                            <Caption>3 days ago</Caption>
+                            <Caption>{talk.published_at}</Caption>
+                            <Caption>{talk.speaker}</Caption>
+                            <Caption>{talk.tag}</Caption>
+                            <Caption>{talk.viewed_count}</Caption>
                         </View>
                     </View>
                 </Row>
