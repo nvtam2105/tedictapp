@@ -3,11 +3,13 @@ import { TouchableWithoutFeedback } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { CardSection, Thumbnail } from '../common';
 import { View, Row, Caption, Image, Text, Subtitle, Tile, Title, Overlay, Icon } from '@shoutem/ui';
+import moment from 'moment';
 
 class TalkListItem extends Component {
 
     onRowPress() {
         Actions.talkDetail({ talk: this.props.talk });
+        console.log(this.props.talk);
     }
 
 
@@ -22,10 +24,10 @@ class TalkListItem extends Component {
                     <View styleName="vertical stretch space-between">
                         <Subtitle>{talk.name}</Subtitle>
                         <View styleName="horizontal space-between">
-                            <Caption>{talk.published_at}</Caption>
+                            <Caption>{moment(talk.published_at).fromNow()}</Caption>
                             <Caption>{talk.speaker}</Caption>
                             <Caption>{talk.tag}</Caption>
-                            <Caption>{talk.viewed_count}</Caption>
+                            <Caption>{talk.viewed_count/1000}K</Caption>
                         </View>
                     </View>
                 </Row>
