@@ -72,7 +72,7 @@ export const saveTalk = (talk, script) => {
         media: talk.media,
         image: talk.image,
         speaker: talk.speaker,
-        published_at: talk.published_at,
+        published_at: new Date(talk.published_at),
         viewed_count: talk.viewed_count,
         script: {
           talk_id: script.talk_id,
