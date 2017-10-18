@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
 import { View, Text, FlatList, ActivityIndicator, Button, Alert } from "react-native";
 
-import { CardSection, Thumbnail } from '../common';
+import { CardSection, Thumbnail } from '../../common';
 
 class TalkDictList extends Component {
 

@@ -3,7 +3,7 @@ import { Actions } from 'react-native-router-flux';
 import { Keyboard, Alert } from "react-native";
 
 import { View, Row, Caption, Text, TextInput, Subtitle, Tile, Title, Overlay, Icon, Button } from '@shoutem/ui';
-import { CardSection, Thumbnail, VideoPlayer } from '../common';
+import { CardSection, Thumbnail, VideoPlayer } from '../../common';
 
 class TalkDictItem extends Component {
 

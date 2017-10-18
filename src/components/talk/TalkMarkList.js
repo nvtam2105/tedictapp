@@ -6,7 +6,7 @@ import store from '../../stores';
 import TalkListItem from './TalkListItem';
 
 
-class MyTalkList extends Component {
+class TalkMarkList extends Component {
 
   componentWillMount() {
     this.setState({
@@ -25,4 +25,4 @@ class MyTalkList extends Component {
   }
 }
 
-export default MyTalkList;
+export default TalkMarkList;

@@ -32,9 +32,8 @@ class TalkList extends Component {
         this.setState({ offset: 0, refreshing: true },
             () => {
                 const { limit, offset } = this.state;
-                this.props.talks = [];
                 this.props.talksFetch({ limit, offset });
-                this.state.loading = false;
+                this.setState({ refreshing: false });
             }
         );
     };
@@ -76,8 +75,9 @@ class TalkList extends Component {
             <View style={{
                 paddingVertical: 20,
                 borderTopWidth: 1,
-                borderColor: "#CED0CE"}}>
-                { this.state.loading && 
+                borderColor: "#CED0CE"
+            }}>
+                {this.state.loading &&
                     (<ActivityIndicator animating size="large" />)
                 }
             </View >)

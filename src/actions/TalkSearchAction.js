@@ -1,7 +1,7 @@
 import { Actions } from 'react-native-router-flux';
 import Config from 'react-native-config';
 import axios from 'axios';
-import { TALKS_SEARCH_SUCCESS, TALKS_SEARCH_MORE, TALKS_FETCH_ERR } from './types';
+import { TALKS_SEARCH_SUCCESS, TALKS_SEARCH_REFRESH ,TALKS_SEARCH_MORE, TALKS_FETCH_ERR } from './types';
 
 
 export const talksSearch = ({ preSearch, search, limit, offset }) => {

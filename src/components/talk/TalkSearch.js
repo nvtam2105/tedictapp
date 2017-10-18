@@ -8,7 +8,7 @@ import TalkListItem from './TalkListItem';
 import { SearchBar } from '../common';
 
 
-class SearchTalk extends Component {
+class TalkSearch extends Component {
 
   constructor(props) {
     super(props);
@@ -53,7 +53,6 @@ class SearchTalk extends Component {
   onRefresh = () => {
     this.setState({
       offset: 0,
-      limit: 10,
       preSearch: '',
       refreshing: true
     }, () => {
@@ -62,7 +61,7 @@ class SearchTalk extends Component {
         this.props.talksSearch({ preSearch, search, limit, offset });
       }
       this.setState({
-        loading: false,
+        refreshing: false,
       })
     }
     );
@@ -159,4 +158,4 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = { talksSearch };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchTalk);
+export default connect(mapStateToProps, mapDispatchToProps)(TalkSearch);

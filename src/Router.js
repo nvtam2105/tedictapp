@@ -5,16 +5,22 @@ import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Foundation from 'react-native-vector-icons/Foundation';
 
-import TalkList from './components/talk/TalkList';
-import TalkDetail from './components/talk/TalkDetail';
-import TalkVideo from './components/talk/TalkVideo';
-import TalkScript from './components/talk/TalkScript';
-import TalkDictList from './components/talk/TalkDictList';
-import TalkDictItem from './components/talk/TalkDictItem';
-import MyTalkList from './components/talk/MyTalkList';
-import SearchTalk from './components/talk/SearchTalk';
 import SlideMenu from './components/menu/SlideMenu';
 import HomePage from './components/home/HomePage';
+
+import TalkList from './components/talk/TalkList';
+import TalkMarkList from './components/talk/TalkMarkList';
+import TalkSearch from './components/talk/TalkSearch';
+
+
+import TalkDetail from './components/talk/detail/TalkDetail';
+import TalkVideo from './components/talk/detail/TalkVideo';
+import TalkScript from './components/talk/detail/TalkScript';
+import TalkDictList from './components/talk/detail/TalkDictList';
+import TalkDictItem from './components/talk/detail/TalkDictItem';
+
+
+
 
 
 import { Icon, Text, Image, View, } from '@shoutem/ui';
@@ -41,7 +47,7 @@ const rightButton = (props) => {
 }
 const actionRightButton = () => {
     Alert.alert('hi');
-    Actions.searchTalk();
+    Actions.talkSearch();
 };
 const newestIcon = (props) => {
 
@@ -114,7 +120,7 @@ const RouterComponent = () => {
                                 //renderRightButton={rightButton} 
                                 />
 
-                            <Scene key="myTalkList" title="My Dictation List" component={MyTalkList} icon={myListIcon}
+                            <Scene key="talkMarkList" title="My Dictation List" component={TalkMarkList} icon={myListIcon}
                                 //onRight={() => Actions.searchTalk()}
                                 //rightTitle="right"
                                 //renderRightButton={rightButton}
@@ -122,7 +128,7 @@ const RouterComponent = () => {
 
                           
                            
-                            <Scene key="searchTalk" hideNavBar title="Search" component={SearchTalk} icon={searchIcon}
+                            <Scene key="takSearch" hideNavBar title="Search" component={TalkSearch} icon={searchIcon}
                                 renderRightButton={rightButton} />
                         </Tabs>
                     </Scene>

@@ -4,7 +4,7 @@ import { FlatList } from "react-native";
 import { View, Row, Caption, Text, Subtitle, Tile, Title, Overlay, Icon, Button } from '@shoutem/ui';
 import { connect } from 'react-redux';
 
-import { scriptFetch } from '../../actions';
+import { scriptFetch } from '../../../actions';
 
 
 class TalkScript extends Component {

@@ -25,9 +25,9 @@ class TalkListItem extends Component {
                         <Subtitle>{talk.name}</Subtitle>
                         <View styleName="horizontal space-between">
                             <Caption>{moment(talk.published_at).fromNow()}</Caption>
-                            <Caption>{talk.speaker}</Caption>
-                            <Caption>{talk.tag}</Caption>
-                            <Caption>{talk.viewed_count/1000}K</Caption>
+                            {/* <Caption>{talk.speaker}</Caption> */}
+                            <Caption>#{talk.tag}</Caption>
+                            {/* <Caption>{talk.viewed_count}K</Caption> */}
                         </View>
                     </View>
                 </Row>

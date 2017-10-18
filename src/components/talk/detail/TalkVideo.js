@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
 
-import { CardSection, Thumbnail, VideoPlayer } from '../common';
+import { CardSection, Thumbnail, VideoPlayer } from '../../common';
 
 class TalkVideo extends Component {
 

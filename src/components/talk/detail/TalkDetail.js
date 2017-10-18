@@ -1,19 +1,20 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
-import { Image, ImageBackground, TouchableWithoutFeedback, ActivityIndicator } from "react-native";
+
 import { Actions } from 'react-native-router-flux';
 import RNFetchBlob from 'react-native-fetch-blob';
 import ProgressBar from 'react-native-progress/Bar';
+
 import { connect } from 'react-redux';
+import { scriptFetch } from '../../../actions';
+import store from '../../../stores';
+
+import { Image, ImageBackground, TouchableWithoutFeedback, ActivityIndicator } from "react-native";
+import { CardSection, Thumbnail, VideoPlayer } from '../../common';
 
 
-import { CardSection, Thumbnail, VideoPlayer } from '../common';
 
 
-
-import { scriptFetch } from '../../actions';
-
-import store from '../../stores';
 
 import { View, Row, Caption, Text, Subtitle, Tile, Title, Overlay, Icon, Button } from '@shoutem/ui';
 
@@ -26,6 +27,16 @@ class TalkDetail extends Component {
         }
     }
 
+    componentWillMount() {
+
+    }
+
+    componentDidMount() {
+        Actions.refresh({ title: this.props.talk.name });
+        this.props.scriptFetch(this.props.talk.id);
+    }
+
+
     onPressPratice() {
         this.setState({ loading: true })
 
@@ -34,7 +45,7 @@ class TalkDetail extends Component {
             fileCache: true,
             appendExt: 'mp4'
         }).fetch('GET', this.props.talk.media, {
-            
+
         }).progress((received, total) => {
             this.setState({ progress: received / total });
         }).then((res) => {
@@ -50,20 +61,7 @@ class TalkDetail extends Component {
     }
 
     onPressFillGap() {
-        //Actions.talkVideo({ talk: this.props.talk });
-
-        //console.log(store);
-        //store.saveTalk(this.props.talk, this.props.script);
-        //var script = store.saveScript(this.props.script);
-
         let talk = store.getTalkById(this.props.talk.id);
-        // console.log(talk.toString());
-        // console.log(talkData);
-        // console.log(talkData.script);
-        // for (var i in talkData.script.sens) {
-        //     var sen = talkData.script.sens[i];
-        //     console.log(sen);
-        // }
         Actions.talkDictList({ talk: talk });
 
     }
@@ -76,15 +74,6 @@ class TalkDetail extends Component {
         Actions.talkScript({ talk: this.props.talk });
     }
 
-    componentWillMount() {
-
-    }
-
-    componentDidMount() {
-        Actions.refresh({ title: this.props.talk.name });
-        this.props.scriptFetch(this.props.talk.id);
-    }
-
     render() {
         const { stretch } = styles;
         const { talk } = this.props;
@@ -92,13 +81,20 @@ class TalkDetail extends Component {
             <View style={{ flex: 1 }}>
                 <ImageBackground style={stretch} source={{ uri: talk.image }} >
                     <TouchableWithoutFeedback onPress={this.onPressPlay.bind(this)}>
-                        <Image style={stretch} source={require('../../../assets/img/play_bt.png')} />
+                        <Image style={stretch} source={require('../../../../assets/img/play_bt.png')} />
                     </TouchableWithoutFeedback>
                 </ImageBackground>
 
                 <Text>{talk.description}</Text>
 
-                {!this.state.loading && (
+
+                {!this.props.script && (
+                    <Button styleName="dark">
+                        <Text>NO DICTATION AVALABLE</Text>
+                    </Button>
+                )
+                }
+                {!this.state.loading && this.props.script && (
                     <Button styleName="dark"
                         onPress={this.onPressPratice.bind(this)}
                         accessibilityLabel="Learn more about this purple button">
@@ -106,7 +102,7 @@ class TalkDetail extends Component {
                     </Button>
                 )
                 }
-                {this.state.loading && (
+                {this.state.loading && this.props.script && (
                     <View>
                         <ProgressBar
                             width={150}
@@ -117,6 +113,9 @@ class TalkDetail extends Component {
                             size="small" />
                     </View>)
                 }
+
+
+
 
                 <Button styleName="dark"
                     onPress={this.onPressFillGap.bind(this)}>
