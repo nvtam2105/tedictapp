@@ -28,33 +28,50 @@ class TalkDetail extends Component {
     }
 
     componentWillMount() {
-
+        console.log(this.props.talk);
     }
 
     componentDidMount() {
         Actions.refresh({ title: this.props.talk.name });
-        this.props.scriptFetch(this.props.talk.id);
+        if (this.props.talk.has_sub) {
+            this.props.scriptFetch(this.props.talk.id);
+        }
     }
 
 
     onPressPratice() {
         this.setState({ loading: true })
 
-        // Download Video
+        // Download Image and Video
         RNFetchBlob.config({
             fileCache: true,
-            appendExt: 'mp4'
-        }).fetch('GET', this.props.talk.media, {
+            appendExt: 'jpg'
+        }).fetch('GET', this.props.talk.image, {
 
         }).progress((received, total) => {
             this.setState({ progress: received / total });
         }).then((res) => {
             this.setState({ loading: false })
-            console.log('The file saved to ', res.path());
+            console.log('The file image saved to ', res.path());
 
-            this.props.talk.media = res.path();
+            this.props.talk.image = res.path();
+            // Download Video
+            RNFetchBlob.config({
+                fileCache: true,
+                appendExt: 'mp4'
+            }).fetch('GET', this.props.talk.media, {
 
-            store.saveTalk(this.props.talk, this.props.script);
+            }).progress((received, total) => {
+                this.setState({ progress: received / total });
+            }).then((res) => {
+                this.setState({ loading: false })
+                console.log('The file video saved to ', res.path());
+                this.props.talk.media = res.path();
+                store.saveTalk(this.props.talk, this.props.script);
+            }).catch((err) => {
+                console.log(err);
+            });
+
         }).catch((err) => {
             console.log(err);
         });

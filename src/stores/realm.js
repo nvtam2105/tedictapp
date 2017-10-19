@@ -19,6 +19,8 @@ class Talk {
       speaker: 'string',
       published_at: { type: 'date', optional: true},
       viewed_count: 'int',
+      has_sub: { type: 'bool', optional: true},
+      length: 'int',
       script: {type : 'Script'},
     }
   }
@@ -74,6 +76,7 @@ export const saveTalk = (talk, script) => {
         speaker: talk.speaker,
         published_at: new Date(talk.published_at),
         viewed_count: talk.viewed_count,
+        has_sub: talk.has_sub,
         script: {
           talk_id: script.talk_id,
           lang: script.lang,

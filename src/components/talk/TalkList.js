@@ -49,7 +49,9 @@ class TalkList extends Component {
                 () => {
                     const { limit, offset } = this.state;
                     this.props.talksFetch({ limit, offset });
-                    this.state.loading = false;
+                    this.setState({
+                        loading: false
+                    });
                     this.onEndReachedCalledDuringMomentum = true;
                 }
             );
@@ -76,7 +78,7 @@ class TalkList extends Component {
                 paddingVertical: 20,
                 borderTopWidth: 1,
                 borderColor: "#CED0CE"
-            }}>
+            }}>                
                 {this.state.loading &&
                     (<ActivityIndicator animating size="large" />)
                 }
