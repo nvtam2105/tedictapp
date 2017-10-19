@@ -12,16 +12,15 @@ class Talk {
       name: 'string',
       description: 'string',
       slug: 'string',
-      tag: 'string',
+      tag: { type: 'string', optional: true},
       native_language_code: 'string',
       media: 'string',
       image:  'string',
       speaker: 'string',
       published_at: { type: 'date', optional: true},
-      viewed_count: 'int',
       has_sub: { type: 'bool', optional: true},
-      length: 'int',
-      script: {type : 'Script'},
+      length: { type: 'int', optional: true},
+      script: {type : 'Script', optional: true},
     }
   }
 };
@@ -75,8 +74,8 @@ export const saveTalk = (talk, script) => {
         image: talk.image,
         speaker: talk.speaker,
         published_at: new Date(talk.published_at),
-        viewed_count: talk.viewed_count,
         has_sub: talk.has_sub,
+        length: talk.length,
         script: {
           talk_id: script.talk_id,
           lang: script.lang,

@@ -42,39 +42,41 @@ class TalkDetail extends Component {
     onPressPratice() {
         this.setState({ loading: true })
 
-        // Download Image and Video
-        RNFetchBlob.config({
+         // // Download Video
+         RNFetchBlob.config({
             fileCache: true,
-            appendExt: 'jpg'
-        }).fetch('GET', this.props.talk.image, {
+            appendExt: 'mp4'
+        }).fetch('GET', this.props.talk.media, {
 
         }).progress((received, total) => {
             this.setState({ progress: received / total });
         }).then((res) => {
             this.setState({ loading: false })
-            console.log('The file image saved to ', res.path());
-
-            this.props.talk.image = res.path();
-            // Download Video
-            RNFetchBlob.config({
-                fileCache: true,
-                appendExt: 'mp4'
-            }).fetch('GET', this.props.talk.media, {
-
-            }).progress((received, total) => {
-                this.setState({ progress: received / total });
-            }).then((res) => {
-                this.setState({ loading: false })
-                console.log('The file video saved to ', res.path());
-                this.props.talk.media = res.path();
-                store.saveTalk(this.props.talk, this.props.script);
-            }).catch((err) => {
-                console.log(err);
-            });
-
+            console.log('The file video saved to ', res.path());
+            this.props.talk.media = res.path();
+            store.saveTalk(this.props.talk, this.props.script);
         }).catch((err) => {
             console.log(err);
         });
+
+
+        // Download Image and Video
+        // RNFetchBlob.config({
+        //     fileCache: true,
+        //     appendExt: 'jpg'
+        // }).fetch('GET', this.props.talk.image, {
+
+        // }).progress((received, total) => {
+        //     this.setState({ progress: received / total });
+        // }).then((res) => {
+        //     this.setState({ loading: false })
+        //     console.log('The file image saved to ', res.path());
+        //     this.props.talk.image = res.path();
+        //     store.saveTalk(this.props.talk, this.props.script);
+           
+        // }).catch((err) => {
+        //     console.log(err);
+        // });
     }
 
     onPressFillGap() {

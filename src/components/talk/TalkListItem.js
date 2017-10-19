@@ -9,7 +9,6 @@ class TalkListItem extends Component {
 
     onRowPress() {
         Actions.talkDetail({ talk: this.props.talk });
-        console.log(this.props.talk);
     }
 
 
@@ -27,8 +26,8 @@ class TalkListItem extends Component {
                             <Caption>{moment(talk.published_at).fromNow()}</Caption>
                             {/* <Caption>{talk.speaker}</Caption> */}
                             
-                            <Caption>{moment.utc(talk.length).format("mm[m] ss[s]")}</Caption>
-                            <Caption>#{talk.tag}</Caption>
+                            <Caption>{moment.utc(talk.length).format("mm[m]")}</Caption>
+                            {/* <Caption>#{talk.tag}</Caption> */}
                             {/* <Caption>{talk.viewed_count}K</Caption> */}
                         </View>
                     </View>
