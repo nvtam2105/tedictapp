@@ -3,7 +3,7 @@ import { TouchableWithoutFeedback } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { CardSection, Thumbnail } from '../common';
 import { View, Row, Caption, Image, Text, Subtitle, Tile, Title, Overlay, Icon } from '@shoutem/ui';
-import moment from 'moment';
+import moment  from 'moment';
 
 class TalkListItem extends Component {
 
@@ -26,6 +26,8 @@ class TalkListItem extends Component {
                         <View styleName="horizontal space-between">
                             <Caption>{moment(talk.published_at).fromNow()}</Caption>
                             {/* <Caption>{talk.speaker}</Caption> */}
+                            
+                            <Caption>{moment.utc(talk.length).format("mm[m] ss[s]")}</Caption>
                             <Caption>#{talk.tag}</Caption>
                             {/* <Caption>{talk.viewed_count}K</Caption> */}
                         </View>
