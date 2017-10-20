@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
 import { TouchableWithoutFeedback } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import { CardSection, Thumbnail } from '../common';
-import { View, Row, Caption, Image, Text, Subtitle, Tile, Title, Overlay, Icon } from '@shoutem/ui';
-import moment  from 'moment';
+import { View, Row, Caption, Image, Subtitle } from '@shoutem/ui';
+import moment from 'moment';
 
 class TalkListItem extends Component {
 
     onRowPress() {
         Actions.talkDetail({ talk: this.props.talk });
     }
-
-
     render() {
         const { talk } = this.props;
         return (
@@ -24,11 +21,7 @@ class TalkListItem extends Component {
                         <Subtitle>{talk.name}</Subtitle>
                         <View styleName="horizontal space-between">
                             <Caption>{moment(talk.published_at).fromNow()}</Caption>
-                            {/* <Caption>{talk.speaker}</Caption> */}
-                            
-                            <Caption>{moment.utc(talk.length).format("mm[m]")}</Caption>
-                            {/* <Caption>#{talk.tag}</Caption> */}
-                            {/* <Caption>{talk.viewed_count}K</Caption> */}
+                            <Caption>{talk.length > 0 && (moment.utc(talk.length).format("mm[m]"))}</Caption>
                         </View>
                     </View>
                 </Row>
@@ -36,15 +29,5 @@ class TalkListItem extends Component {
         );
     }
 }
-
-const styles = {
-    titleStyle: {
-        flex: 1,
-        fontSize: 18,
-        justifyContent: 'center',
-        alignItems: 'center',
-        paddingLeft: 15
-    }
-};
 
 export default TalkListItem;
