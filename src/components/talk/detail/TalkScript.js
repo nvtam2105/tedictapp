@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
 import { FlatList } from "react-native";
-import { View, Row, Caption, Text, Subtitle, Tile, Title, Overlay, Icon, Button } from '@shoutem/ui';
+import { View, Row, Caption, Text, Subtitle, Tile, Title, Overlay, Icon, Button, Divider } from '@shoutem/ui';
 import { connect } from 'react-redux';
 
 import { scriptFetch } from '../../../actions';
@@ -22,14 +22,7 @@ class TalkScript extends Component {
 
     renderSeparator = () => {
         return (
-            <View
-                style={{
-                    height: 1,
-                    width: "86%",
-                    backgroundColor: "#CED0CE",
-                    marginLeft: "14%"
-                }}
-            />
+            <Divider styleName="line" />
         );
     };
 

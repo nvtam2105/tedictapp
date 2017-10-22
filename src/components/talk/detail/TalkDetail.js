@@ -100,7 +100,7 @@ class TalkDetail extends Component {
 
 
                 <Image
-                    styleName="large-banner hero"
+                    styleName="large"
                     source={{ uri: talk.image }}>
                     <Overlay styleName="rounded-small">
                         <Icon name="play" />
