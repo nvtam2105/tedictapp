@@ -1,10 +1,12 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
-import { View, Text, FlatList, ActivityIndicator } from "react-native";
-
 import { connect } from 'react-redux';
 import { talksFetch } from '../../actions';
 import TalkListItem from './TalkListItem';
+
+import { FlatList, ActivityIndicator } from "react-native";
+import { View, Divider } from '@shoutem/ui';
+
 
 class TalkList extends Component {
 
@@ -26,6 +28,8 @@ class TalkList extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
+        console.log(nextProps);
+        this.setState({ refreshing: false, loading: false });
     }
 
     onRefresh = () => {
@@ -33,7 +37,7 @@ class TalkList extends Component {
             () => {
                 const { limit, offset } = this.state;
                 this.props.talksFetch({ limit, offset });
-                this.setState({ refreshing: false });
+                
             }
         );
     };
@@ -49,9 +53,6 @@ class TalkList extends Component {
                 () => {
                     const { limit, offset } = this.state;
                     this.props.talksFetch({ limit, offset });
-                    this.setState({
-                        loading: false
-                    });
                     this.onEndReachedCalledDuringMomentum = true;
                 }
             );
@@ -61,24 +62,13 @@ class TalkList extends Component {
 
     renderSeparator = () => {
         return (
-            <View
-                style={{
-                    height: 1,
-                    width: "70%",
-                    backgroundColor: "#CED0CE",
-                    marginLeft: "14%"
-                }}
-            />
+            <Divider styleName="line" />
         );
     };
 
     renderFooter = () => {
         return (
-            <View style={{
-                paddingVertical: 20,
-                borderTopWidth: 1,
-                borderColor: "#CED0CE"
-            }}>                
+            <View style={{ paddingVertical: 20 }}>
                 {this.state.loading &&
                     (<ActivityIndicator animating size="large" />)
                 }
@@ -92,12 +82,11 @@ class TalkList extends Component {
                 extraData={this.state}
                 renderItem={({ item }) => (<TalkListItem talk={item} />)}
                 keyExtractor={item => item.id}
-                //ItemSeparatorComponent={this.renderSeparator}
+                ItemSeparatorComponent={this.renderSeparator}
                 ListFooterComponent={this.renderFooter}
                 onRefresh={this.onRefresh}
                 refreshing={this.state.refreshing}
                 onEndReached={this.onEndReached}
-                //bounces={false}
                 onEndReachedThreshold={0.5}
                 onMomentumScrollBegin={() => { this.onEndReachedCalledDuringMomentum = false; }}
 

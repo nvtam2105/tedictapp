@@ -4,7 +4,7 @@ import {
   Image, Button, Text,
   ListView, Tile, Title, Subtitle,
   TouchableOpacity, Screen, Divider,
-  Caption, Row, View
+  Caption, Row, View, Icon
 } from '@shoutem/ui';
 
 import { Actions } from 'react-native-router-flux';
@@ -13,12 +13,13 @@ class SlideMenu extends Component {
 
   renderItem = (row) => {
     return (
-      <View>
-        <Row>
-          <Text styleName="md-gutter-bottom">{row.item.key}</Text>
-        </Row>
-        <Divider styleName="line" />
-      </View>
+      <Row styleName="small">
+        <Icon name={row.item.icon} />
+        <View styleName="vertical">
+          <Text>{row.item.key}</Text>
+        </View>
+      </Row>
+
     );
   }
 
@@ -38,9 +39,9 @@ class SlideMenu extends Component {
 
   render() {
     const sectionListData = [
-      { data: [{ key: "My Dictation" }, { key: "My Bookmarks" }], key: "" },
-      { data: [{ key: "Discover" }], key: "" },
-      { data: [{ key: "Help" }, { key: "About" }], key: "" }
+      { data: [{ key: "My Dictation", icon: "add-to-favorites-off" }, { key: "Discover", icon: "social-wall" }, { key: "Notifications", icon: "notifications" }], key: "" },
+      { data: [{ key: "Settings", icon: "settings" }], key: "" },
+      { data: [{ key: "Rate App", icon: "like" }, { key: "Feedback", icon: "email" }, { key: "About", icon: "about" }], key: "" }
     ];
     return (
       <SectionList

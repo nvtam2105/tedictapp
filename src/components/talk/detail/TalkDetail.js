@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { scriptFetch } from '../../../actions';
 import store from '../../../stores';
 import moment from 'moment';
+import async from 'async';
 
 import RNFetchBlob from 'react-native-fetch-blob';
 import ProgressBar from 'react-native-progress/Bar';
@@ -25,51 +26,57 @@ class TalkDetail extends Component {
     }
 
     componentDidMount() {
-        Actions.refresh({ title: this.props.talk.name });
+        //Actions.refresh({ title: this.props.talk.name });
         if (this.props.talk.has_sub) {
             this.props.scriptFetch(this.props.talk.id);
         }
     }
 
+    _downloadImage = (_this, callback) => {
+        RNFetchBlob.config({
+            fileCache: true,
+            appendExt: 'jpg'
+        }).fetch('GET', _this.props.talk.image, {
 
-    onPressPratice() {
-        this.setState({ loading: true })
+        }).progress((received, total) => {
+        }).then((res) => {
+            callback(null, res.path());
+        }).catch((err) => {
+            console.log(err);
+            callback(null, err);
+        });
+    }
 
-        // // Download Video
+    _downloadVideo = (_this, callback) => {
+        _this.setState({ loading: true })
         RNFetchBlob.config({
             fileCache: true,
             appendExt: 'mp4'
-        }).fetch('GET', this.props.talk.media, {
+        }).fetch('GET', _this.props.talk.media, {
 
         }).progress((received, total) => {
-            this.setState({ progress: received / total });
+            _this.setState({ progress: received / total });
         }).then((res) => {
-            this.setState({ loading: false })
-            console.log('The file video saved to ', res.path());
-            this.props.talk.media = res.path();
-            store.saveTalk(this.props.talk, this.props.script);
+            _this.setState({ loading: false })
+            callback(null, res.path());
+
         }).catch((err) => {
             console.log(err);
+            callback(null, err);
         });
+    }
 
+    onPressPratice = (_this, _store) => {
+        async.parallel({
+            imagePath: this._downloadImage.bind(null, _this),
+            mediaPath: this._downloadVideo.bind(null, _this),
+        }, function (err, result) {
+            //console.log(result.imagePath, result.videoPath);
+            _this.props.talk.image = result.imagePath;
+            _this.props.talk.media = result.mediaPath;
+            _store.saveTalk(_this.props.talk, _this.props.script);
+        })
 
-        // Download Image and Video
-        // RNFetchBlob.config({
-        //     fileCache: true,
-        //     appendExt: 'jpg'
-        // }).fetch('GET', this.props.talk.image, {
-
-        // }).progress((received, total) => {
-        //     this.setState({ progress: received / total });
-        // }).then((res) => {
-        //     this.setState({ loading: false })
-        //     console.log('The file image saved to ', res.path());
-        //     this.props.talk.image = res.path();
-        //     store.saveTalk(this.props.talk, this.props.script);
-
-        // }).catch((err) => {
-        //     console.log(err);
-        // });
     }
 
     onPressFillGap() {
@@ -83,30 +90,31 @@ class TalkDetail extends Component {
     }
 
     onPressScript() {
+        //let talk = store.getTalkById(this.props.talk.id);
         Actions.talkScript({ talk: this.props.talk });
     }
-
     render() {
         const { talk } = this.props;
         return (
             <Screen>
+
+
                 <Image
-                    //styleName="large-portrait hero"
-                    //animationName="hero"
                     styleName="large-banner hero"
                     source={{ uri: talk.image }}>
-                    <Tile styleName="sm-gutter-horizontal">
-                        <Overlay styleName="rounded-small">
-                            <Icon name="play" />
-                        </Overlay>
-                        {/* <Tile animationName="hero"> */}
-                        <Subtitle>Content courtesy of TED.com</Subtitle>
-                        {/* </Tile> */}
-                    </Tile>
+                    <Overlay styleName="rounded-small">
+                        <Icon name="play" />
+                    </Overlay>
+                    <View style={styles.speakerOverlay}>
+                        <Subtitle style={{color: 'white'}}>{talk.speaker}</Subtitle>
+                    </View>
+                    <View style={styles.talkNameOverlay}>
+                        <Title style={{ color: 'white', fontWeight: '700'}} numberOfLines={2}>{talk.name}</Title>
+                    </View>
                 </Image>
                 <ScrollView>
                     <Screen styleName="paper">
-                        <Subtitle styleName="md-gutter multiline">{talk.name}</Subtitle>
+
                         <Divider styleName="line" />
                         <Row>
                             <Caption>{moment(talk.published_at).fromNow()}</Caption>
@@ -124,9 +132,9 @@ class TalkDetail extends Component {
                             }
                             {!this.state.loading && this.props.script && (
                                 <Button styleName="dark full-width"
-                                    onPress={this.onPressPratice.bind(this)}
+                                    onPress={this.onPressPratice.bind(null, this, store)}
                                     accessibilityLabel="Learn more about this purple button">
-                                    <Text>PRACTICE</Text>
+                                    <Text>Make Dictation</Text>
                                 </Button>
                             )
                             }
@@ -168,6 +176,31 @@ class TalkDetail extends Component {
         );
     }
 }
+
+const styles = {
+    talkNameOverlay: {
+      flex: 1,
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      position: 'absolute',
+      bottom: 0,
+      left: 0,
+      padding: 5,
+      
+      
+      
+    },
+
+    speakerOverlay: {
+        flex: 1,
+        flexDirection: 'row',
+        position: 'absolute',
+        bottom: 50,
+        left: 0,
+        padding: 5,
+        
+      },
+  }
 
 const mapStateToProps = state => {
     return { script: state.script };
