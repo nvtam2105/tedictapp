@@ -6,7 +6,6 @@ import com.facebook.react.ReactApplication;
 import com.reactnative.photoview.PhotoViewPackage;
 import cl.json.RNSharePackage;
 import com.BV.LinearGradient.LinearGradientPackage;
-import com.rnfs.RNFSPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -36,7 +35,6 @@ public class MainApplication extends Application implements ReactApplication {
             new PhotoViewPackage(),
             new RNSharePackage(),
             new LinearGradientPackage(),
-            new RNFSPackage(),
             new ReactVideoPackage(),
             new RNFetchBlobPackage(),
             new RealmReactPackage(),

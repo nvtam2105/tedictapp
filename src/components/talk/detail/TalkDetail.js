@@ -10,7 +10,10 @@ import RNFetchBlob from 'react-native-fetch-blob';
 import ProgressBar from 'react-native-progress/Bar';
 import { TouchableWithoutFeedback, ActivityIndicator } from "react-native";
 import { CardSection, Thumbnail, VideoPlayer } from '../../common';
-import { ScrollView, Screen, Image, Divider, View, Row, Caption, Text, Subtitle, Tile, Title, Overlay, Icon, Button } from '@shoutem/ui';
+import {
+    ScrollView, Screen, Image, Divider, View, Row, Caption, Text,
+    Subtitle, Tile, Title, Overlay, Icon, Button
+} from '@shoutem/ui';
 
 class TalkDetail extends Component {
 
@@ -97,33 +100,31 @@ class TalkDetail extends Component {
         const { talk } = this.props;
         return (
             <Screen>
-
-
-                <Image
-                    styleName="large"
-                    source={{ uri: talk.image }}>
-                    <Overlay styleName="rounded-small">
-                        <Icon name="play" />
-                    </Overlay>
-                    <View style={styles.speakerOverlay}>
-                        <Subtitle style={{color: 'white'}}>{talk.speaker}</Subtitle>
-                    </View>
-                    <View style={styles.talkNameOverlay}>
-                        <Title style={{ color: 'white', fontWeight: '700'}} numberOfLines={2}>{talk.name}</Title>
-                    </View>
-                </Image>
                 <ScrollView>
-                    <Screen styleName="paper">
+                    <Image
+                        styleName="large-banner"
+                        source={{ uri: talk.image }}>
+                        <Overlay styleName="rounded-small">
+                            <Icon name="play" />
+                        </Overlay>
+                        <View style={styles.speakerOverlay}>
+                            <Subtitle style={{ color: 'white' }}>{talk.speaker}</Subtitle>
+                        </View>
+                        <View style={styles.talkNameOverlay}>
+                            <Title style={{ color: 'white', fontWeight: '500' }} numberOfLines={2}>{talk.name}</Title>
+                        </View>
+                    </Image>
 
+
+                    <Screen styleName="paper">
                         <Divider styleName="line" />
-                        <Row>
+                        <Row styleName="small">
                             <Caption>{moment(talk.published_at).fromNow()}</Caption>
                             <Caption>{talk.length > 0 && (moment.utc(talk.length).format("mm[m]"))}</Caption>
-                            <Caption>{talk.speaker}</Caption>
                             <Caption>#{talk.tag}</Caption>
                         </Row>
                         <Divider styleName="line" />
-                        <View styleName="horizontal">
+                        <View styleName="horizontal space-bettween">
                             {!this.props.script && (
                                 <Button styleName="full-width">
                                     <Text>NO DICTATION AVALABLE</Text>
@@ -131,10 +132,9 @@ class TalkDetail extends Component {
                             )
                             }
                             {!this.state.loading && this.props.script && (
-                                <Button styleName="dark full-width"
-                                    onPress={this.onPressPratice.bind(null, this, store)}
-                                    accessibilityLabel="Learn more about this purple button">
-                                    <Text>Make Dictation</Text>
+                                <Button styleName="secondary confirmation"
+                                    onPress={this.onPressPratice.bind(null, this, store)}>
+                                    <Text>DICTATION</Text>
                                 </Button>
                             )
                             }
@@ -151,18 +151,19 @@ class TalkDetail extends Component {
                             }
 
 
-                            <Button styleName="dark full-width"
+                            <Button styleName="secondary confirmation"
                                 onPress={this.onPressFillGap.bind(this)}>
                                 <Text>FILL GAP</Text>
                             </Button>
-                            <Button styleName="dark full-width"
+                            <Button styleName="secondary confirmation"
                                 onPress={this.onPressPlay.bind(this)}>
                                 <Text>PLAY</Text>
                             </Button>
 
                         </View>
                         <View styleName="horizontal">
-                            <Button styleName="dark full-width"
+                            <Button styleName="confirmation"
+                                kind='squared'
                                 onPress={this.onPressScript.bind(this)}>
                                 <Text>SCRIPT</Text>
                             </Button>
@@ -172,23 +173,18 @@ class TalkDetail extends Component {
                     </Screen>
                 </ScrollView>
             </Screen>
-
         );
     }
 }
 
 const styles = {
     talkNameOverlay: {
-      flex: 1,
-      flexDirection: 'row',
-      flexWrap: 'wrap',
-      position: 'absolute',
-      bottom: 0,
-      left: 0,
-      padding: 5,
-      
-      
-      
+        flex: 1,
+        flexDirection: 'row',
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        padding: 5,
     },
 
     speakerOverlay: {
@@ -198,9 +194,9 @@ const styles = {
         bottom: 50,
         left: 0,
         padding: 5,
-        
-      },
-  }
+
+    },
+}
 
 const mapStateToProps = state => {
     return { script: state.script };
