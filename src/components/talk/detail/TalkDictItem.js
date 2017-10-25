@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
-import { Keyboard, Alert } from "react-native";
+import { Platform, Keyboard, Alert } from "react-native";
 
-import { View, Row, Caption, Text, TextInput, Subtitle, Tile, Title, Overlay, Icon, Button } from '@shoutem/ui';
+import {
+    ScrollView, Screen, Image, Divider, View, Row, Caption, Text,
+    Subtitle, Tile, Title, Overlay, Icon, Button, TextInput
+} from '@shoutem/ui';
+
+
 import { CardSection, Thumbnail, VideoPlayer } from '../../common';
 
 class TalkDictItem extends Component {
@@ -17,6 +22,7 @@ class TalkDictItem extends Component {
         }
 
         this.onKeyPress = this.onKeyPress.bind(this);
+        this.onChangeText = this.onChangeText.bind(this);
     }
 
     componentWillMount() {
@@ -30,6 +36,9 @@ class TalkDictItem extends Component {
 
     componentDidMount() {
         Actions.refresh({ title: `# ${this.props.index}/${this.props.total}` });
+    }
+
+    componentWillUnmount() {
     }
 
     onPressPlay(obj) {
@@ -57,33 +66,60 @@ class TalkDictItem extends Component {
     }
 
     onKeyPress(e) {
-        const { content, hiddenContent, currentIndex } = this.state;
-        if (typeof content[currentIndex] !== 'undefined'
-            && e.nativeEvent.key.toLowerCase() === content[currentIndex].toLowerCase()) {
-            this.setState({
-                hiddenContent: hiddenContent.substr(0, currentIndex) + content[currentIndex]
-                + hiddenContent.substr(currentIndex + content[currentIndex].length),
-            }, () => {
+        if (Platform.OS === 'ios') {
+            const { content, hiddenContent, currentIndex } = this.state;
+            if (typeof content[currentIndex] !== 'undefined'
+                && e.nativeEvent.key.toLowerCase() === content[currentIndex].toLowerCase()) {
                 this.setState({
-                    currentIndex: this.state.hiddenContent.indexOf("*"),
+                    hiddenContent: hiddenContent.substr(0, currentIndex) + content[currentIndex]
+                    + hiddenContent.substr(currentIndex + content[currentIndex].length),
+                }, () => {
+                    this.setState({
+                        currentIndex: this.state.hiddenContent.indexOf("*") === -1 ? 0 : this.state.hiddenContent.indexOf("*"),
+                    });
                 });
-            });
+            }
+        }
+    }
+
+    onChangeText(text) {
+        if (Platform.OS === 'android') {
+            //replace(/[^a-zA-Z]/g, ''),
+            const { content, hiddenContent, currentIndex } = this.state;
+            text = text.replace(/[^a-zA-Z]/g, '');
+            let charCode = text.charAt(text.length - 1);
+            if (typeof content[currentIndex] !== 'undefined'
+                && charCode === content[currentIndex].toLowerCase()) {
+                this.setState({
+                    hiddenContent: hiddenContent.substr(0, currentIndex) + content[currentIndex]
+                    + hiddenContent.substr(currentIndex + content[currentIndex].length),
+                }, () => {
+                    this.setState({
+                        currentIndex: this.state.hiddenContent.indexOf("*") === -1 ? 0 : this.state.hiddenContent.indexOf("*"),
+                    });
+                });
+            }
         }
     }
 
     render() {
         const { currentIndex, rate, playing } = this.state;
         return (
-            <View>
+            <Screen>
                 <TextInput
                     value={this.state.hiddenContent}
+                    autoFocus={true}
                     multiline={true}
-                    autoFocus
+                    selectionColor={'transparent'}
+                    caretHidden={true}
+                    underlineColorAndroid={'transparent'}
                     selection={{ start: currentIndex, end: currentIndex }}
                     onKeyPress={this.onKeyPress}
+                    onChangeText={this.onChangeText.bind(this)}
                 />
+
                 {playing && (
-                    <View style={{ flex: 1}}>
+                    <View style={{ flex: 1 }}>
                         <VideoPlayer
                             ref={(ref) => {
                                 this.player = ref
@@ -98,7 +134,7 @@ class TalkDictItem extends Component {
                 <Button onPress={this.onPressPlay.bind(this)}>
                     <Text>PLAY VIDEO</Text>
                 </Button>
-            </View>
+            </Screen>
         );
     }
 }
