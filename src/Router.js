@@ -8,7 +8,7 @@ import Foundation from 'react-native-vector-icons/Foundation';
 import SlideMenu from './components/menu/SlideMenu';
 import HomePage from './components/home/HomePage';
 
-import TalkList from './components/talk/TalkList';
+import TalkNewestList from './components/talk/TalkNewestList';
 import TalkMarkList from './components/talk/TalkMarkList';
 import TalkSearch from './components/talk/TalkSearch';
 
@@ -123,7 +123,7 @@ const RouterComponent = () => {
                         //activeBackgroundColor="white"
                         >
 
-                            <Scene key="talkList" title=" Newest" component={TalkList} icon={newestIcon}
+                            <Scene key="TalkNewestList" title=" Newest" component={TalkNewestList} icon={newestIcon}
                             //renderRightButton={rightButton} 
                             />
 

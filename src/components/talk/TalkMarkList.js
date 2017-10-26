@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, FlatList } from "react-native";
 import { Actions } from 'react-native-router-flux';
 
 import store from '../../stores';
-import TalkListItem from './TalkListItem';
+import TalkItem from './TalkItem';
 
 
 class TalkMarkList extends Component {
@@ -18,7 +18,7 @@ class TalkMarkList extends Component {
     return (
       <FlatList
         data={this.state.talks}
-        renderItem={({ item }) => (<TalkListItem talk={item} />)}
+        renderItem={({ item }) => (<TalkItem talk={item} persisted={true} />)}
         keyExtractor={item => item.id}
       />
     );

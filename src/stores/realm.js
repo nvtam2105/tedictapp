@@ -1,39 +1,39 @@
 import Realm from 'realm';
 
 class Talk {
-  static get () { return realm.objects(Talk.schema.name) }
+  static get() { return realm.objects(Talk.schema.name) }
 
   static schema = {
     name: 'Talk',
     primaryKey: 'id',
     properties: {
       id: 'int',
-      event: 'string',   
+      event: 'string',
       name: 'string',
       description: 'string',
       slug: 'string',
-      tag: { type: 'string', optional: true},
+      tag: { type: 'string', optional: true },
       native_language_code: 'string',
       media: 'string',
-      image:  'string',
+      image: 'string',
       speaker: 'string',
-      published_at: { type: 'date', optional: true},
-      has_sub: { type: 'bool', optional: true},
-      length: { type: 'int', optional: true},
-      script: {type : 'Script', optional: true},
+      published_at: { type: 'date', optional: true },
+      has_sub: { type: 'bool', optional: true },
+      length: { type: 'int', optional: true },
+      script: { type: 'Script', optional: true },
     }
   }
 };
 
 class Script {
-  static get () { return realm.objects(Script.schema.name) }
+  static get() { return realm.objects(Script.schema.name) }
   static schema = {
     name: 'Script',
     primaryKey: 'talk_id',
     properties: {
-      talk_id:  'int',
-      lang: { type: 'string', optional: true},
-      sens: {type: 'list', objectType: 'Sen'},
+      talk_id: 'int',
+      lang: { type: 'string', optional: true },
+      sens: { type: 'list', objectType: 'Sen' },
     }
   }
 };
@@ -44,7 +44,7 @@ let StringObjectSchema = {
 };
 
 class Sen {
-  static get () { return realm.objects(Sen.schema.name) }
+  static get() { return realm.objects(Sen.schema.name) }
   static schema = {
     name: 'Sen',
     primaryKey: '_id',
@@ -53,50 +53,55 @@ class Sen {
       start: 'int',
       end: 'int',
       content: 'string',
-      words : {type: 'list',  objectType:'StringObject'},
-      completed: { type: 'bool', optional: true},
-      completed_date: { type: 'date', optional: true},
+      words: { type: 'list', objectType: 'StringObject' },
+      completed: { type: 'bool', optional: true },
+      completed_date: { type: 'date', optional: true },
     }
   }
 };
 
 export const saveTalk = (talk, script) => {
-   realm.write(() => {
+  realm.write(() => {
     return realm.create(Talk.schema.name, {
-        id:  talk.id,
-        event: talk.event,
-        name: talk.name,
-        description: talk.description,
-        slug: talk.slug,
-        tag: talk.tag,
-        native_language_code: talk.native_language_code,
-        media: talk.media,
-        image: talk.image,
-        speaker: talk.speaker,
-        published_at: new Date(talk.published_at),
-        has_sub: talk.has_sub,
-        length: talk.length,
-        script: {
-          talk_id: script.talk_id,
-          lang: script.lang,
-          sens: script.sens,
-        },
-    },true)
+      id: talk.id,
+      event: talk.event,
+      name: talk.name,
+      description: talk.description,
+      slug: talk.slug,
+      tag: talk.tag,
+      native_language_code: talk.native_language_code,
+      media: talk.media,
+      image: talk.image,
+      speaker: talk.speaker,
+      published_at: new Date(talk.published_at),
+      has_sub: talk.has_sub,
+      length: talk.length,
+      script: {
+        talk_id: script.talk_id,
+        lang: script.lang,
+        sens: script.sens,
+      },
+    }, true)
   })
 }
 
 export const saveScript = (script) => {
   realm.write(() => {
-   return realm.create(Script.schema.name, {
-         talk_id: script.talk_id,
-         lang: script.lang,
-         sens: script.sens
-   },true)
- })
+    return realm.create(Script.schema.name, {
+      talk_id: script.talk_id,
+      lang: script.lang,
+      sens: script.sens
+    }, true)
+  })
 }
 
+// export const existTalk = (talkId) => {
+//   let talks = Talk.get().filtered(`id= ${talkId}`);
+//   return talks === null;
+// }
+
 export const getTalkById = (talkId) => {
-  let talks=  Talk.get().filtered(`script.talk_id= ${talkId}`);
+  let talks = Talk.get().filtered(`script.talk_id= ${talkId}`);
   return talks[0];
 }
 
@@ -111,10 +116,16 @@ export const getScripts = () => {
   return scripts;
 }
 
-const realm = new Realm({schema: [Talk, Script, Sen, StringObjectSchema]});
+const realm = new Realm({ schema: [Talk, Script, Sen, StringObjectSchema] });
 
 
+// User user = realm.where(User.class).equalTo("cardId", cardId).findFirst();
 
+// if (user != null) {
+//     // Exists
+// } else {
+//     // Not exist
+// }
 
 // export const getTodoItems = () => {
 //   const todoItems = TodoItem.get().sorted('createdTimestamp', true)

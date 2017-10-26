@@ -26,11 +26,12 @@ class TalkDetail extends Component {
 
     componentWillMount() {
         console.log(this.props.talk);
+        console.log(this.props.persisted);
     }
 
     componentDidMount() {
         //Actions.refresh({ title: this.props.talk.name });
-        if (this.props.talk.has_sub) {
+        if (!this.props.persisted && this.props.talk.has_sub) {
             this.props.scriptFetch(this.props.talk.id);
         }
     }
@@ -93,8 +94,8 @@ class TalkDetail extends Component {
     }
 
     onPressScript() {
-        //let talk = store.getTalkById(this.props.talk.id);
-        Actions.talkScript({ talk: this.props.talk });
+        this.props.persisted ? 
+            Actions.talkScript({ talk: this.props.talk }) : Actions.talkScript({ talk: this.props.talk });
     }
     render() {
         const { talk } = this.props;
@@ -103,7 +104,7 @@ class TalkDetail extends Component {
                 <ScrollView>
                     <Image
                         styleName="large-banner"
-                        source={{ uri: talk.image }}>
+                        source={{ uri: this.props.persisted ? 'file://' + talk.image : talk.image }} >
                         <Overlay styleName="rounded-small">
                             <Icon name="play" />
                         </Overlay>

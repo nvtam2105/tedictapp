@@ -3,7 +3,7 @@ import { Text, View, FlatList, ActivityIndicator } from "react-native";
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { talksSearch } from '../../actions';
-import TalkListItem from './TalkListItem';
+import TalkItem from './TalkItem';
 
 import { SearchBar } from '../common';
 
@@ -138,7 +138,7 @@ class TalkSearch extends Component {
     return (
       <FlatList
         data={this.props.talks}
-        renderItem={({ item }) => (<TalkListItem talk={item} />)}
+        renderItem={({ item }) => (<TalkItem talk={item} />)}
         keyExtractor={item => item.id}
         ListHeaderComponent={this.renderHeader}
         ListFooterComponent={this.renderFooter}

@@ -5,11 +5,30 @@ import { Actions } from 'react-native-router-flux';
 import { View, Row, Caption, Image, Subtitle, Title, Icon, Heading } from '@shoutem/ui';
 import moment from 'moment';
 
-class TalkListItem extends Component {
+import store from '../../stores';
+
+class TalkItem extends Component {
+
+
+    componentWillMount() {
+    
+    }
+
+    componentDidMount() {
+
+    }
+
 
     onRowPress() {
-        Actions.talkDetail({ talk: this.props.talk });
+        if (this.props.persisted) {
+            Actions.talkDetail({ talk: this.props.talk, persisted: true });
+        } else {
+            let talk = store.getTalkById(this.props.talk.id);
+            typeof talk === "undefined" ? Actions.talkDetail({ talk: this.props.talk, persisted: false })
+                : Actions.talkDetail({ talk: talk, persisted: true });
+        }
     }
+
     render() {
         const { talk } = this.props;
         return (
@@ -17,7 +36,7 @@ class TalkListItem extends Component {
                 <Row style={{ paddingHorizontal: 5, paddingVertical: 2.5 }}>
                     <Image
                         styleName="medium"
-                        source={{ uri: talk.image }} />
+                        source={{ uri: this.props.persisted ? 'file://' + talk.image : talk.image }} />
                     <View styleName="vertical stretch space-between">
                         <Caption>{_.toUpper(talk.tag)} </Caption>
                         <Subtitle styleName="top" numberOfLines={2}>{talk.name}</Subtitle>
@@ -33,4 +52,4 @@ class TalkListItem extends Component {
     }
 }
 
-export default TalkListItem;
+export default TalkItem;

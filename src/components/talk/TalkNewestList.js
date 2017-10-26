@@ -2,13 +2,13 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { talksFetch } from '../../actions';
-import TalkListItem from './TalkListItem';
+import TalkItem from './TalkItem';
 
 import { FlatList, ActivityIndicator } from "react-native";
 import { View, Divider } from '@shoutem/ui';
 
 
-class TalkList extends Component {
+class TalkNewestList extends Component {
 
     constructor(props) {
         super(props);
@@ -80,7 +80,7 @@ class TalkList extends Component {
             <FlatList style={{ flex: 1 }}
                 data={this.props.talks}
                 extraData={this.state}
-                renderItem={({ item }) => (<TalkListItem talk={item} />)}
+                renderItem={({ item }) => (<TalkItem talk={item} persisted={false} />)}
                 keyExtractor={item => item.id}
                 ItemSeparatorComponent={this.renderSeparator}
                 ListFooterComponent={this.renderFooter}
@@ -101,4 +101,4 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = { talksFetch };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TalkList);
+export default connect(mapStateToProps, mapDispatchToProps)(TalkNewestList);
