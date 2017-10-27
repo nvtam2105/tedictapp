@@ -38,9 +38,9 @@ class Script {
   }
 };
 
-let StringObjectSchema = {
-  name: 'StringObject',
-  properties: { text: 'string' }
+let Word = {
+  name: 'Word',
+  properties: { text: 'string', length: 'int' }
 };
 
 class Sen {
@@ -53,7 +53,7 @@ class Sen {
       start: 'int',
       end: 'int',
       content: 'string',
-      words: { type: 'list', objectType: 'StringObject' },
+      words: { type: 'list', objectType: 'Word' },
       completed: { type: 'bool', optional: true },
       completed_date: { type: 'date', optional: true },
     }
@@ -95,11 +95,6 @@ export const saveScript = (script) => {
   })
 }
 
-// export const existTalk = (talkId) => {
-//   let talks = Talk.get().filtered(`id= ${talkId}`);
-//   return talks === null;
-// }
-
 export const getTalkById = (talkId) => {
   let talks = Talk.get().filtered(`script.talk_id= ${talkId}`);
   return talks[0];
@@ -116,7 +111,7 @@ export const getScripts = () => {
   return scripts;
 }
 
-const realm = new Realm({ schema: [Talk, Script, Sen, StringObjectSchema] });
+const realm = new Realm({ schema: [Talk, Script, Sen, Word] });
 
 
 // User user = realm.where(User.class).equalTo("cardId", cardId).findFirst();

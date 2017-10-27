@@ -10,9 +10,10 @@ import { scriptFetch } from '../../../actions';
 class TalkScript extends Component {
 
     componentWillMount() {
-        console.log(this.props.talk);
-        // Check exist in local storage??
-        this.props.scriptFetch(this.props.talk.id);
+        if (!this.props.persisted) {
+            this.props.scriptFetch(this.props.talk.id);
+        }
+
 
     }
 
@@ -29,7 +30,7 @@ class TalkScript extends Component {
     render() {
         return (
             <FlatList style={{ flex: 1 }}
-                data={this.props.script.sens}
+                data={this.props.persisted ? this.props.talk.script.sens : this.props.script.sens}
                 renderItem={({ item, index }) => (
                     <Row>
 
@@ -52,7 +53,6 @@ class TalkScript extends Component {
 }
 
 const mapStateToProps = state => {
-    console.log(state);
     return { script: state.script };
 };
 

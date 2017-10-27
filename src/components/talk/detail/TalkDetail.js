@@ -94,9 +94,9 @@ class TalkDetail extends Component {
     }
 
     onPressScript() {
-        this.props.persisted ? 
-            Actions.talkScript({ talk: this.props.talk }) : Actions.talkScript({ talk: this.props.talk });
+        Actions.talkScript({ talk: this.props.talk, persisted: this.props.persisted });
     }
+
     render() {
         const { talk } = this.props;
         return (
