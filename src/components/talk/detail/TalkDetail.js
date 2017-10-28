@@ -148,9 +148,9 @@ class TalkDetail extends Component {
                                             width={150}
                                             progress={this.state.progress}
                                         />
-                                        <ActivityIndicator style={{ flex: 1 }}
+                                        {/* <ActivityIndicator style={{ flex: 1 }}
                                             animating={this.state.loading}
-                                            size="small" />
+                                            size="small" /> */}
                                     </View>)
                                 }
 

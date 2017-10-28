@@ -105,6 +105,11 @@ export const getTalks = () => {
   return talks;
 }
 
+export const deleteTalk = (talk) => {
+  realm.write(() => {
+    realm.delete(talk)
+  })
+}
 
 export const getScripts = () => {
   const scripts = Script.get();//.sorted('-published_at', true)

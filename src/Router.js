@@ -115,7 +115,7 @@ const RouterComponent = () => {
                         <Tabs
                             tabBarPosition="bottom"
                             key="tabbar"
-                            swipeEnabled
+                            //swipeEnabled
                             showLabel={false}
                         //tabBarStyle={styles.tabBarStyle}
 
