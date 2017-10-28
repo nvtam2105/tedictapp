@@ -106,19 +106,21 @@ class TalkDetail extends Component {
             <StyleProvider style={defaultTheme()}>
                 <Screen>
                     <ScrollView>
-                        <Image
-                            styleName="large-banner"
-                            source={{ uri: this.props.persisted ? 'file://' + talk.image : talk.image }} >
-                            <Overlay styleName="rounded-small">
-                                <Icon name="play" />
-                            </Overlay>
-                            <View style={styles.speakerOverlay}>
-                                <Subtitle style={{ color: 'white' }}>{talk.speaker}</Subtitle>
-                            </View>
-                            <View style={styles.talkNameOverlay}>
-                                <Title style={{ color: 'white', fontWeight: '500' }} numberOfLines={2}>{talk.name}</Title>
-                            </View>
-                        </Image>
+                        <TouchableWithoutFeedback onPress={this.onPressPlay.bind(this)}>
+                            <Image
+                                styleName="large-banner"
+                                source={{ uri: this.props.persisted ? 'file://' + talk.image : talk.image }} >
+                                <Overlay styleName="rounded-small">
+                                    <Icon name="play" />
+                                </Overlay>
+                                <View style={styles.speakerOverlay}>
+                                    <Subtitle style={{ color: 'white' }}>{talk.speaker}</Subtitle>
+                                </View>
+                                <View style={styles.talkNameOverlay}>
+                                    <Title style={{ color: 'white', fontWeight: '500' }} numberOfLines={2}>{talk.name}</Title>
+                                </View>
+                            </Image>
+                        </TouchableWithoutFeedback>
 
 
                         <Screen styleName="paper">
@@ -159,18 +161,19 @@ class TalkDetail extends Component {
                                     onPress={this.onPressFillGap.bind(this)}>
                                     <Text>FILL GAP</Text>
                                 </Button>
-                                <Button styleName="secondary" style={{ borderRadius: 5 }}
+                                {/* <Button styleName="secondary" style={{ borderRadius: 5 }}
                                     onPress={this.onPressPlay.bind(this)}>
                                     <Text>PLAY</Text>
-                                </Button>
-
-                            </View>
-                            <View styleName="horizontal stretch space-between" style={{ paddingHorizontal: 10, paddingVertical: 5 }}>
+                                </Button> */}
                                 <Button styleName="secondary" style={{ borderRadius: 5 }}
                                     kind='squared'
                                     onPress={this.onPressScript.bind(this)}>
                                     <Text>SCRIPT</Text>
                                 </Button>
+
+                            </View>
+                            <View styleName="horizontal stretch space-between" style={{ paddingHorizontal: 10, paddingVertical: 5 }}>
+                                
                             </View>
                             <Text styleName="md-gutter multiline">{talk.description}</Text>
                         </Screen>

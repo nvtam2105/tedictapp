@@ -41,7 +41,6 @@ class TalkMarkList extends Component {
     return (
       <FlatList
         scrollEnabled={this.state.scrollEnabled}
-
         data={this.state.talks}
         renderItem={({ item }) => this._renderItem(item)}
         keyExtractor={item => item.id}
