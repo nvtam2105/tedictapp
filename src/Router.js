@@ -51,8 +51,8 @@ const actionRightButton = () => {
 };
 const newestIcon = (props) => {
 
-    return (<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 5 }}>
-        <Icon name="social-wall" color={props.focused ? '#900' : 'black'} />
+    return (<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 7 }}>
+        <Icon name="page" color={props.focused ? '#900' : 'black'} />
         <Text style={{ fontSize: 12, color: props.focused ? '#900' : 'black' }}>Discover</Text>
     </View>);
 
@@ -60,25 +60,34 @@ const newestIcon = (props) => {
 
 const myListIcon = (props) => {
     //console.log(props);
-    return (<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 8 }}>
+    return (<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 7 }}>
         <Icon name="add-to-favorites-off" color={props.focused ? '#900' : 'black'} />
         <Text style={{ fontSize: 12, color: props.focused ? '#900' : 'black' }}>My List</Text>
     </View>);
 };
 
 const searchIcon = (props) => {
-    return (<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 5 }}>
+    return (<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 7 }}>
         <Icon name="search" color={props.focused ? '#900' : 'black'} />
         <Text style={{ fontSize: 12, color: props.focused ? '#900' : 'black' }}>Search</Text>
     </View>);
 };
 
 const bookmarkIcon = (props) => {
-    return (<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 5 }}>
+    return (<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 7 }}>
         <Icon name="page" color={props.focused ? '#900' : 'black'} />
         <Text style={{ fontSize: 12, color: props.focused ? '#900' : 'black' }}>Bookmark</Text>
     </View>);
 };
+
+
+const notificationIcon = (props) => {
+    return (<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 7 }}>
+        <Icon name="notifications" color={props.focused ? '#900' : 'black'} />
+        <Text style={{ fontSize: 12, color: props.focused ? '#900' : 'black' }}>Notification</Text>
+    </View>);
+};
+
 
 const TabIcon = ({ selected, title }) => (
     myListIcon
@@ -127,14 +136,17 @@ const RouterComponent = () => {
                             //renderRightButton={rightButton} 
                             />
 
-                            <Scene key="talkMarkList" title="My Dictation List" component={TalkMarkList} icon={myListIcon}
+                            <Scene key="talkMarkList" title="My Dictation" component={TalkMarkList} icon={myListIcon}
                             //onRight={() => Actions.searchTalk()}
                             //rightTitle="right"
                             //renderRightButton={rightButton}
                             />
 
-                            <Scene key="takSearch1" hideNavBar title="My Bookmark" component={TalkSearch} icon={bookmarkIcon}
+                            <Scene key="nofitication" hideNavBar title="Notifications" component={TalkSearch} icon={notificationIcon}
                                 renderRightButton={rightButton} />
+
+                             {/* <Scene key="takSearch1" hideNavBar title="My Bookmark" component={TalkSearch} icon={bookmarkIcon}
+                                renderRightButton={rightButton} /> */}
 
                             <Scene key="takSearch" hideNavBar title="Search" component={TalkSearch} icon={searchIcon}
                                 renderRightButton={rightButton} />
@@ -150,6 +162,7 @@ const RouterComponent = () => {
                 <Scene key="talkScript" component={TalkScript} backTitle=" " />
                 <Scene key="talkDictList" component={TalkDictList} backTitle=" " />
                 <Scene key="talkDictItem" component={TalkDictItem} />
+                
             </Scene>
         </Router>
     );

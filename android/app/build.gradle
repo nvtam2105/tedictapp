@@ -134,6 +134,10 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-push-notification')
+    compile ('com.google.android.gms:play-services-gcm:8.1.0') {
+        force = true;
+    }
     compile project(':react-native-photo-view')
     compile project(':react-native-share')
     compile project(':react-native-linear-gradient')
