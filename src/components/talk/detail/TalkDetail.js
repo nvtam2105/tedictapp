@@ -9,7 +9,10 @@ import async from 'async';
 import RNFetchBlob from 'react-native-fetch-blob';
 import ProgressBar from 'react-native-progress/Bar';
 import { TouchableWithoutFeedback, ActivityIndicator } from "react-native";
-import { CardSection, Thumbnail, VideoPlayer } from '../../common';
+
+import { StyleProvider } from '@shoutem/theme';
+import defaultTheme from '../../../themes';
+
 import {
     ScrollView, Screen, Image, Divider, View, Row, Caption, Text,
     Subtitle, Tile, Title, Overlay, Icon, Button
@@ -100,80 +103,80 @@ class TalkDetail extends Component {
     render() {
         const { talk } = this.props;
         return (
-            <Screen>
-                <ScrollView>
-                    <Image
-                        styleName="large-banner"
-                        source={{ uri: this.props.persisted ? 'file://' + talk.image : talk.image }} >
-                        <Overlay styleName="rounded-small">
-                            <Icon name="play" />
-                        </Overlay>
-                        <View style={styles.speakerOverlay}>
-                            <Subtitle style={{ color: 'white' }}>{talk.speaker}</Subtitle>
-                        </View>
-                        <View style={styles.talkNameOverlay}>
-                            <Title style={{ color: 'white', fontWeight: '500' }} numberOfLines={2}>{talk.name}</Title>
-                        </View>
-                    </Image>
+            <StyleProvider style={defaultTheme()}>
+                <Screen>
+                    <ScrollView>
+                        <Image
+                            styleName="large-banner"
+                            source={{ uri: this.props.persisted ? 'file://' + talk.image : talk.image }} >
+                            <Overlay styleName="rounded-small">
+                                <Icon name="play" />
+                            </Overlay>
+                            <View style={styles.speakerOverlay}>
+                                <Subtitle style={{ color: 'white' }}>{talk.speaker}</Subtitle>
+                            </View>
+                            <View style={styles.talkNameOverlay}>
+                                <Title style={{ color: 'white', fontWeight: '500' }} numberOfLines={2}>{talk.name}</Title>
+                            </View>
+                        </Image>
 
 
-                    <Screen styleName="paper">
-                        <Divider styleName="line" />
-                        <Row styleName="small">
-                            <Caption>{moment(talk.published_at).fromNow()}</Caption>
-                            <Caption>{talk.length > 0 && (moment.utc(talk.length).format("mm[m]"))}</Caption>
-                            <Caption>#{talk.tag}</Caption>
-                        </Row>
-                        <Divider styleName="line" />
-                        <View styleName="horizontal space-bettween">
-                            {!this.props.script && (
-                                <Button styleName="full-width">
-                                    <Text>NO DICTATION AVALABLE</Text>
+                        <Screen styleName="paper">
+
+                            <Row styleName="small">
+                                <Caption>{moment(talk.published_at).fromNow()}</Caption>
+                                <Caption>{talk.length > 0 && (moment.utc(talk.length).format("mm[m]"))}</Caption>
+                                <Caption>#{talk.tag}</Caption>
+                            </Row>
+                            <View styleName="horizontal space-between" style={{ paddingHorizontal: 10 }}>
+                                {!this.props.script && (
+                                    <Button styleName="full-width" style={{ borderRadius: 5 }}>
+                                        <Text>NO DICTATION AVALABLE</Text>
+                                    </Button>
+                                )
+                                }
+                                {!this.state.loading && this.props.script && (
+                                    <Button styleName="secondary" style={{ borderRadius: 5 }}
+                                        onPress={this.onPressPratice.bind(null, this, store)}>
+                                        <Text>DICTATION</Text>
+                                    </Button>
+                                )
+                                }
+                                {this.state.loading && this.props.script && (
+                                    <View>
+                                        <ProgressBar
+                                            width={150}
+                                            progress={this.state.progress}
+                                        />
+                                        <ActivityIndicator style={{ flex: 1 }}
+                                            animating={this.state.loading}
+                                            size="small" />
+                                    </View>)
+                                }
+
+
+                                <Button styleName="secondary" style={{ borderRadius: 5 }}
+                                    onPress={this.onPressFillGap.bind(this)}>
+                                    <Text>FILL GAP</Text>
                                 </Button>
-                            )
-                            }
-                            {!this.state.loading && this.props.script && (
-                                <Button styleName="secondary confirmation"
-                                    onPress={this.onPressPratice.bind(null, this, store)}>
-                                    <Text>DICTATION</Text>
+                                <Button styleName="secondary" style={{ borderRadius: 5 }}
+                                    onPress={this.onPressPlay.bind(this)}>
+                                    <Text>PLAY</Text>
                                 </Button>
-                            )
-                            }
-                            {this.state.loading && this.props.script && (
-                                <View>
-                                    <ProgressBar
-                                        width={150}
-                                        progress={this.state.progress}
-                                    />
-                                    <ActivityIndicator style={{ flex: 1 }}
-                                        animating={this.state.loading}
-                                        size="small" />
-                                </View>)
-                            }
 
-
-                            <Button styleName="secondary confirmation"
-                                onPress={this.onPressFillGap.bind(this)}>
-                                <Text>FILL GAP</Text>
-                            </Button>
-                            <Button styleName="secondary confirmation"
-                                onPress={this.onPressPlay.bind(this)}>
-                                <Text>PLAY</Text>
-                            </Button>
-
-                        </View>
-                        <View styleName="horizontal">
-                            <Button styleName="confirmation"
-                                kind='squared'
-                                onPress={this.onPressScript.bind(this)}>
-                                <Text>SCRIPT</Text>
-                            </Button>
-                        </View>
-                        <Divider styleName="line" />
-                        <Text styleName="md-gutter multiline">{talk.description}</Text>
-                    </Screen>
-                </ScrollView>
-            </Screen>
+                            </View>
+                            <View styleName="horizontal stretch space-between" style={{ paddingHorizontal: 10, paddingVertical: 5 }}>
+                                <Button styleName="secondary" style={{ borderRadius: 5 }}
+                                    kind='squared'
+                                    onPress={this.onPressScript.bind(this)}>
+                                    <Text>SCRIPT</Text>
+                                </Button>
+                            </View>
+                            <Text styleName="md-gutter multiline">{talk.description}</Text>
+                        </Screen>
+                    </ScrollView>
+                </Screen>
+            </StyleProvider>
         );
     }
 }

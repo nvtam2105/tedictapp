@@ -6,6 +6,10 @@ import { connect } from 'react-redux';
 
 import { scriptFetch } from '../../../actions';
 
+import { StyleProvider } from '@shoutem/theme';
+import defaultTheme from '../../../themes';
+
+
 
 class TalkScript extends Component {
 
@@ -32,18 +36,17 @@ class TalkScript extends Component {
             <FlatList style={{ flex: 1 }}
                 data={this.props.persisted ? this.props.talk.script.sens : this.props.script.sens}
                 renderItem={({ item, index }) => (
-                    <Row>
-
-                        <View styleName="vertical">
-                            <View styleName="horizontal space-between">
-                                <Text>{index + 1}</Text>
+                    <StyleProvider style={defaultTheme()}>
+                        <Row>
+                            <View styleName="vertical">
+                                <View styleName="horizontal space-between">
+                                    <Text>{index + 1}</Text>
+                                </View>
+                                <Text styleName="multiline">{item.content}</Text>
                             </View>
-                            <Text styleName="multiline">{item.content}</Text>
-                        </View>
-                        <Icon styleName="disclosure" name="right-arrow" />
-                    </Row>
-
-
+                            <Icon styleName="disclosure" name="right-arrow" />
+                        </Row>
+                    </StyleProvider>
                 )}
                 keyExtractor={item => item._id}
                 ItemSeparatorComponent={this.renderSeparator}

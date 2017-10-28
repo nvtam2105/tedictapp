@@ -5,6 +5,7 @@ import { talksFetch } from '../../actions';
 import TalkItem from './TalkItem';
 
 import { FlatList, ActivityIndicator } from "react-native";
+
 import { View, Divider } from '@shoutem/ui';
 
 
@@ -37,7 +38,7 @@ class TalkNewestList extends Component {
             () => {
                 const { limit, offset } = this.state;
                 this.props.talksFetch({ limit, offset });
-                
+
             }
         );
     };

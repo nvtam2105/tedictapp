@@ -10,6 +10,10 @@ import {
 
 import { CardSection, Thumbnail, VideoPlayer } from '../../common';
 
+import { StyleProvider } from '@shoutem/theme';
+import defaultTheme from '../../../themes';
+
+
 class TalkDictItem extends Component {
 
     constructor(props) {
@@ -105,36 +109,38 @@ class TalkDictItem extends Component {
     render() {
         const { currentIndex, rate, playing } = this.state;
         return (
-            <Screen>
-                <TextInput
-                    value={this.state.hiddenContent}
-                    autoFocus={true}
-                    multiline={true}
-                    selectionColor={'transparent'}
-                    caretHidden={true}
-                    underlineColorAndroid={'transparent'}
-                    selection={{ start: currentIndex, end: currentIndex }}
-                    onKeyPress={this.onKeyPress}
-                    onChangeText={this.onChangeText.bind(this)}
-                />
+            <StyleProvider style={defaultTheme()}>
+                <Screen>
+                    <TextInput
+                        value={this.state.hiddenContent}
+                        autoFocus={true}
+                        multiline={true}
+                        selectionColor={'transparent'}
+                        caretHidden={true}
+                        underlineColorAndroid={'transparent'}
+                        selection={{ start: currentIndex, end: currentIndex }}
+                        onKeyPress={this.onKeyPress}
+                        onChangeText={this.onChangeText.bind(this)}
+                    />
 
-                {playing && (
-                    <View style={{ flex: 1 }}>
-                        <VideoPlayer
-                            ref={(ref) => {
-                                this.player = ref
-                            }}
-                            autoplay
-                            onLoad={this.onLoad.bind(this)}
-                            onProgress={this.onProgress.bind(this)}
-                            video={{ uri: 'file://' + this.props.media }}
-                            rate={rate} />
-                    </View>
-                )}
-                <Button onPress={this.onPressPlay.bind(this)}>
-                    <Text>PLAY VIDEO</Text>
-                </Button>
-            </Screen>
+                    {playing && (
+                        <View style={{ flex: 1 }}>
+                            <VideoPlayer
+                                ref={(ref) => {
+                                    this.player = ref
+                                }}
+                                autoplay
+                                onLoad={this.onLoad.bind(this)}
+                                onProgress={this.onProgress.bind(this)}
+                                video={{ uri: 'file://' + this.props.media }}
+                                rate={rate} />
+                        </View>
+                    )}
+                    <Button onPress={this.onPressPlay.bind(this)}>
+                        <Text>PLAY VIDEO</Text>
+                    </Button>
+                </Screen>
+            </StyleProvider>
         );
     }
 }

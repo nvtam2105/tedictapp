@@ -4,6 +4,7 @@ import { View, Text, FlatList, ActivityIndicator, Button, Alert } from "react-na
 
 import { CardSection, Thumbnail } from '../../common';
 
+
 class TalkDictList extends Component {
 
     componentWillMount() {
