@@ -32,10 +32,11 @@ const theme1 = _.merge(getTheme(), {
             borderRadius: 35,
             padding: 0,
         },
+        'shoutem.ui.Icon': {
+            fontSize: scale(50),
+        }
     },
-    'shoutem.ui.Icon': {
-        fontSize: scale(50),
-    }
+   
 
 });
 
