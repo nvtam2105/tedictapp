@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SectionList } from 'react-native';
+import { SectionList, TouchableWithoutFeedback } from 'react-native';
 import {
   Image, Button, Text,
   ListView, Tile, Title, Subtitle,
@@ -7,18 +7,23 @@ import {
   Caption, Row, View, Icon
 } from '@shoutem/ui';
 
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+
 import { Actions } from 'react-native-router-flux';
 
 class SlideMenu extends Component {
 
   renderItem = (row) => {
     return (
-      <Row styleName="small">
-        <Icon name={row.item.icon} />
-        <View styleName="vertical">
-          <Text>{row.item.key}</Text>
-        </View>
-      </Row>
+      <TouchableWithoutFeedback onPress={Actions[row.item.scene]}>
+        <Row>
+          <View styleName="horizontal stretch" 
+            style={{alignItems: 'center', flexDirection: 'row'}}>
+            <MaterialIcons name={row.item.icon} size={25} />
+            <Text style={{ paddingLeft: 15 }}>{row.item.key}</Text>
+          </View>
+        </Row>
+      </TouchableWithoutFeedback>
 
     );
   }
@@ -39,9 +44,17 @@ class SlideMenu extends Component {
 
   render() {
     const sectionListData = [
-      { data: [{ key: "My Dictation", icon: "add-to-favorites-off" }, { key: "Discover", icon: "social-wall" }, { key: "Notifications", icon: "notifications" }], key: "" },
-      { data: [{ key: "Settings", icon: "settings" }], key: "" },
-      { data: [{ key: "Rate App", icon: "like" }, { key: "Feedback", icon: "email" }, { key: "About", icon: "about" }], key: "" }
+      {
+        data: [{ key: "My Talks", icon: "star-border", scene: "talkMarkList" },
+        { key: "Discover", icon: "format-list-bulleted", scene: "TalkNewestList" },
+        { key: "Notifications", icon: "notifications-none", scene: "nofitications" }], key: ""
+      },
+      { data: [{ key: "Settings", icon: "settings", scene: "talkMarkList" }], key: "" },
+      {
+        data: [{ key: "Rate App", icon: "star", scene: "talkMarkList" },
+        { key: "Feedback", icon: "email", scene: "talkMarkList" },
+        { key: "About", icon: "error-outline", scene: "talkMarkList" }], key: ""
+      }
     ];
     return (
       <SectionList

@@ -4,6 +4,7 @@ import { Scene, Router, Drawer, Tabs, Stack, Actions } from 'react-native-router
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Foundation from 'react-native-vector-icons/Foundation';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import SlideMenu from './components/menu/SlideMenu';
 import HomePage from './components/home/HomePage';
@@ -51,25 +52,25 @@ const actionRightButton = () => {
 };
 const newestIcon = (props) => {
 
-    return (<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 7 }}>
-        <Icon name="page" color={props.focused ? '#900' : 'black'} />
-        <Text style={{ fontSize: 12, color: props.focused ? '#900' : 'black' }}>Discover</Text>
+    return (<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 8 }}>
+        <MaterialIcons name="format-list-bulleted" color={props.focused ? '#900' : 'black'} size={25}/>
+        <Text style={{ fontSize: 11, color: props.focused ? '#900' : 'black' }}>Discover</Text>
     </View>);
 
 };
 
 const myListIcon = (props) => {
     //console.log(props);
-    return (<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 7 }}>
-        <Icon name="add-to-favorites-off" color={props.focused ? '#900' : 'black'} />
-        <Text style={{ fontSize: 12, color: props.focused ? '#900' : 'black' }}>My List</Text>
+    return (<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 8 }}>
+        <MaterialIcons name="star-border" color={props.focused ? '#900' : 'black'} size={25}/>
+        <Text style={{ fontSize: 11, color: props.focused ? '#900' : 'black' }}>My Talks</Text>
     </View>);
 };
 
 const searchIcon = (props) => {
-    return (<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 7 }}>
-        <Icon name="search" color={props.focused ? '#900' : 'black'} />
-        <Text style={{ fontSize: 12, color: props.focused ? '#900' : 'black' }}>Search</Text>
+    return (<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 8 }}>
+        <MaterialIcons name="search" color={props.focused ? '#900' : 'black'} size={25}/>
+        <Text style={{ fontSize: 11, color: props.focused ? '#900' : 'black' }}>Search</Text>
     </View>);
 };
 
@@ -82,9 +83,9 @@ const bookmarkIcon = (props) => {
 
 
 const notificationIcon = (props) => {
-    return (<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 7 }}>
-        <Icon name="notifications" color={props.focused ? '#900' : 'black'} />
-        <Text style={{ fontSize: 12, color: props.focused ? '#900' : 'black' }}>Notification</Text>
+    return (<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 8 }}>
+        <MaterialIcons name="notifications-none" color={props.focused ? '#900' : 'black'} size={25}/>
+        <Text style={{ fontSize: 11, color: props.focused ? '#900' : 'black' }}>Notifications</Text>
     </View>);
 };
 
@@ -132,17 +133,17 @@ const RouterComponent = () => {
                         //activeBackgroundColor="white"
                         >
 
-                            <Scene key="TalkNewestList" title=" Newest" component={TalkNewestList} icon={newestIcon}
+                            <Scene key="TalkNewestList" title="Discover" component={TalkNewestList} icon={newestIcon}
                             //renderRightButton={rightButton} 
                             />
 
-                            <Scene key="talkMarkList" title="My Dictation" component={TalkMarkList} icon={myListIcon}
+                            <Scene key="talkMarkList" title="My Talks" component={TalkMarkList} icon={myListIcon}
                             //onRight={() => Actions.searchTalk()}
                             //rightTitle="right"
                             //renderRightButton={rightButton}
                             />
 
-                            <Scene key="nofitication" hideNavBar title="Notifications" component={TalkSearch} icon={notificationIcon}
+                            <Scene key="nofitications" hideNavBar title="Notifications" component={TalkSearch} icon={notificationIcon}
                                 renderRightButton={rightButton} />
 
                              {/* <Scene key="takSearch1" hideNavBar title="My Bookmark" component={TalkSearch} icon={bookmarkIcon}

@@ -152,21 +152,21 @@ class TalkDetail extends Component {
                         <Screen styleName="paper">
                             <Row>
                                 <View styleName="horizontal stretch space-between">
-                                    <View styleName="horizontal" >
-                                        <FontAwesome name="calendar" size={20} />
+                                    <View styleName="horizontal" style={{alignItems: 'center', flexDirection: 'row'}}>
+                                        <Ionicons name="ios-calendar-outline" size={18} />
                                         <Subtitle style={{ paddingLeft: 8 }}>{moment(talk.published_at).fromNow()}</Subtitle>
                                     </View>
-                                    <View styleName="horizontal">
-                                        <Ionicons name="ios-time-outline" size={20} />
+                                    <View styleName="horizontal" style={{alignItems: 'center', flexDirection: 'row'}}>
+                                        <Ionicons name="ios-time-outline" size={18} />
                                         <Subtitle style={{ paddingLeft: 8 }}>{talk.length > 0 && (moment.utc(talk.length).format("mm [min]"))}</Subtitle>
                                     </View>
-                                    <View styleName="horizontal">
-                                        <Ionicons name="md-pricetag" size={20} />
+                                    <View styleName="horizontal" style={{alignItems: 'center', flexDirection: 'row'}}>
+                                        <Ionicons name="md-pricetag" size={18} />
                                         <Subtitle style={{ paddingLeft: 8 }}>{_.startCase(talk.tag)}</Subtitle>
                                     </View>
                                 </View>
                             </Row>
-
+                            
                             <View>
                                 {!this.state.persisted && (
                                     <View styleName="horizontal stretch space-between" style={{ padding: 10 }}>
