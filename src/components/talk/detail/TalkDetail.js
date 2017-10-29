@@ -5,6 +5,7 @@ import { scriptFetch } from '../../../actions';
 import store from '../../../stores';
 import moment from 'moment';
 import async from 'async';
+import _ from 'lodash';
 
 import RNFetchBlob from 'react-native-fetch-blob';
 import ProgressBar from 'react-native-progress/Bar';
@@ -18,18 +19,24 @@ import {
     Subtitle, Tile, Title, Overlay, Icon, Button
 } from '@shoutem/ui';
 
+import EvilIcons from 'react-native-vector-icons/EvilIcons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Foundation from 'react-native-vector-icons/Foundation';
+
+
 class TalkDetail extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            loading: false
+            loading: false,
+            persisted: this.props.persisted,
         }
     }
 
     componentWillMount() {
-        console.log(this.props.talk);
-        console.log(this.props.persisted);
+        //console.log(this.props.talk);
+        //console.log(this.props.persisted);
     }
 
     componentDidMount() {
@@ -55,7 +62,7 @@ class TalkDetail extends Component {
     }
 
     _downloadVideo = (_this, callback) => {
-        _this.setState({ loading: true })
+
         RNFetchBlob.config({
             fileCache: true,
             appendExt: 'mp4'
@@ -64,7 +71,7 @@ class TalkDetail extends Component {
         }).progress((received, total) => {
             _this.setState({ progress: received / total });
         }).then((res) => {
-            _this.setState({ loading: false })
+            //_this.setState({ loading: false })
             callback(null, res.path());
 
         }).catch((err) => {
@@ -73,20 +80,35 @@ class TalkDetail extends Component {
         });
     }
 
-    onPressPratice = (_this, _store) => {
-        async.parallel({
-            imagePath: this._downloadImage.bind(null, _this),
-            mediaPath: this._downloadVideo.bind(null, _this),
-        }, function (err, result) {
-            //console.log(result.imagePath, result.videoPath);
-            _this.props.talk.image = result.imagePath;
-            _this.props.talk.media = result.mediaPath;
-            _store.saveTalk(_this.props.talk, _this.props.script);
-        })
+    onPresMakeDicatation = (_this, _store) => {
+        if (_this.props.talk.has_sub) {
+
+            _this.setState({ loading: true })
+            async.parallel({
+                imagePath: this._downloadImage.bind(null, _this),
+                mediaPath: this._downloadVideo.bind(null, _this),
+            }, function (err, result) {
+                _this.props.talk.image = result.imagePath;
+                _this.props.talk.media = result.mediaPath;
+                _store.saveTalk(_this.props.talk, _this.props.script);
+                _this.setState({
+                    loading: false,
+                    persisted: true,
+                })
+            })
+        } else {
+            Alert.alert("No Avalable DICTAION");
+        }
 
     }
 
-    onPressFillGap() {
+    onPressTedictGap() {
+        let talk = store.getTalkById(this.props.talk.id);
+        Actions.talkDictList({ talk: talk });
+
+    }
+
+    onPressTedict() {
         let talk = store.getTalkById(this.props.talk.id);
         Actions.talkDictList({ talk: talk });
 
@@ -113,8 +135,11 @@ class TalkDetail extends Component {
                                 <Overlay styleName="rounded-small">
                                     <Icon name="play" />
                                 </Overlay>
+                                <View style={styles.tedComOverlay}>
+                                    <Subtitle style={{ color: 'white' }}>Content courtesy of TED.com</Subtitle>
+                                </View>
                                 <View style={styles.speakerOverlay}>
-                                    <Subtitle style={{ color: 'white' }}>{talk.speaker}</Subtitle>
+                                    <Subtitle style={{ color: 'white' }}>{talk.speaker} <Caption style={{ color: 'white' }}>at {talk.event}</Caption></Subtitle>
                                 </View>
                                 <View style={styles.talkNameOverlay}>
                                     <Title style={{ color: 'white', fontWeight: '500' }} numberOfLines={2}>{talk.name}</Title>
@@ -122,87 +147,123 @@ class TalkDetail extends Component {
                             </Image>
                         </TouchableWithoutFeedback>
 
-
                         <Screen styleName="paper">
-
-                            <Row styleName="small">
-                                <Caption>{moment(talk.published_at).fromNow()}</Caption>
-                                <Caption>{talk.length > 0 && (moment.utc(talk.length).format("mm[m]"))}</Caption>
-                                <Caption>#{talk.tag}</Caption>
+                            <Row>
+                                <View styleName="horizontal stretch space-between">
+                                    <View styleName="horizontal stretch">
+                                        <FontAwesome name="calendar" size={20} />
+                                        <Subtitle style={{ paddingLeft: 5 }}>{moment(talk.published_at).fromNow()}</Subtitle>
+                                    </View>
+                                    <View styleName="horizontal stretch">
+                                        <Icon name="history" />
+                                        <Subtitle style={{ paddingLeft: 5 }}>{talk.length > 0 && (moment.utc(talk.length).format("mm[m]"))}</Subtitle>
+                                    </View>
+                                    <View styleName="horizontal stretch">
+                                        <FontAwesome name="tag" size={20} />
+                                        <Subtitle style={{ paddingLeft: 5 }}>{_.toUpper(talk.tag)}</Subtitle>
+                                    </View>
+                                </View>
                             </Row>
-                            <View styleName="horizontal space-between" style={{ paddingHorizontal: 10 }}>
-                                {!this.props.script && (
-                                    <Button styleName="full-width" style={{ borderRadius: 5 }}>
-                                        <Text>NO DICTATION AVALABLE</Text>
-                                    </Button>
-                                )
-                                }
-                                {!this.state.loading && this.props.script && (
-                                    <Button styleName="secondary" style={{ borderRadius: 5 }}
-                                        onPress={this.onPressPratice.bind(null, this, store)}>
-                                        <Text>DICTATION</Text>
-                                    </Button>
-                                )
-                                }
-                                {this.state.loading && this.props.script && (
-                                    <View>
-                                        <ProgressBar
-                                            width={150}
-                                            progress={this.state.progress}
-                                        />
-                                        {/* <ActivityIndicator style={{ flex: 1 }}
-                                            animating={this.state.loading}
-                                            size="small" /> */}
-                                    </View>)
-                                }
 
+                            <View>
+                                {!this.state.persisted && (
+                                    <View styleName="horizontal space-between" style={{ paddingHorizontal: 10 }}>
+                                        {!this.state.loading && (
+                                            <Button styleName="secondary"
+                                                onPress={this.onPresMakeDicatation.bind(null, this, store)}>
+                                                <Text>MAKE DICTATION</Text>
+                                            </Button>
+                                        )
+                                        }
 
-                                <Button styleName="secondary" style={{ borderRadius: 5 }}
-                                    onPress={this.onPressFillGap.bind(this)}>
-                                    <Text>FILL GAP</Text>
-                                </Button>
-                                {/* <Button styleName="secondary" style={{ borderRadius: 5 }}
-                                    onPress={this.onPressPlay.bind(this)}>
-                                    <Text>PLAY</Text>
-                                </Button> */}
-                                <Button styleName="secondary" style={{ borderRadius: 5 }}
-                                    kind='squared'
-                                    onPress={this.onPressScript.bind(this)}>
-                                    <Text>SCRIPT</Text>
-                                </Button>
+                                        {this.state.loading && (
+                                            <View style={{ alignItems: 'flex-start' }}>
+                                                <ProgressBar
+                                                    progress={this.state.progress}
+                                                />
+                                            </View>
+                                        )
+                                        }
 
+                                        <Button styleName="secondary"
+                                            onPress={this.onPressPlay.bind(this)}>
+                                            <Text>PLAY ONLINE</Text>
+                                        </Button>
+                                        <Button styleName="secondary"
+                                            onPress={this.onPressScript.bind(this)}>
+                                            <Text>SCRIPT</Text>
+                                        </Button>
+                                    </View>
+                                )}
+
+                                {this.state.persisted && (
+                                    <View styleName="space-between">
+                                        <View styleName="horizontal space-between" style={{ padding: 10 }}>
+                                            <Button styleName="secondary"
+                                                onPress={this.onPressTedict.bind(this)}>
+                                                <Text>TEDICT</Text>
+                                            </Button>
+                                            <Button styleName="secondary"
+                                                onPress={this.onPressTedictGap.bind(this)}>
+                                                <Text>TEDICT-Gap</Text>
+                                            </Button>
+                                            <Button styleName="secondary"
+                                                onPress={this.onPressPlay.bind(this)}>
+                                                <Text>PLAY VIDEO</Text>
+                                            </Button>
+
+                                        </View>
+                                        <View styleName="stretch space-between" style={{ paddingHorizontal: 10 }}>
+                                            <Button styleName="secondary"
+                                                onPress={this.onPressScript.bind(this)}>
+                                                <Text>SCRIPT</Text>
+                                            </Button>
+                                        </View>
+                                    </View>
+                                )}
                             </View>
                             <View styleName="horizontal stretch space-between" style={{ paddingHorizontal: 10, paddingVertical: 5 }}>
-                                
+
                             </View>
                             <Text styleName="md-gutter multiline">{talk.description}</Text>
                         </Screen>
                     </ScrollView>
-                </Screen>
-            </StyleProvider>
+                </Screen >
+            </StyleProvider >
         );
     }
 }
 
 const styles = {
+    speakerOverlay: {
+        flex: 1,
+        flexDirection: 'row',
+        position: 'absolute',
+        bottom: 45,
+        left: 0,
+        padding: 10,
+
+    },
+
     talkNameOverlay: {
         flex: 1,
         flexDirection: 'row',
         position: 'absolute',
         bottom: 0,
+
         left: 0,
-        padding: 5,
+        padding: 10,
     },
 
-    speakerOverlay: {
+    tedComOverlay: {
         flex: 1,
         flexDirection: 'row',
         position: 'absolute',
-        bottom: 50,
-        left: 0,
-        padding: 5,
-
+        top: 0,
+        //padding: 5,
     },
+
+
 }
 
 const mapStateToProps = state => {

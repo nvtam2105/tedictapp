@@ -17,8 +17,18 @@ const theme1 = _.merge(getTheme(), {
     'shoutem.ui.Caption': {
         fontSize: scale(8),
         lineHeight: lineHeight(scale(8)),
+    },
+    'shoutem.ui.Button': {
+        '.secondary': {
+            backgroundColor: '#4682b4',
+            borderColor: '#4682b4',
+        }
     }
+
 });
+
+
+
 
 const theme2 = _.merge(getTheme(), {
     'shoutem.ui.Subtitle': {
