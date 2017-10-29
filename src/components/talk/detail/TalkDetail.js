@@ -22,7 +22,9 @@ import {
 } from '@shoutem/ui';
 
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 
@@ -134,8 +136,8 @@ class TalkDetail extends Component {
                             <Image
                                 styleName="large-banner"
                                 source={{ uri: this.state.persisted ? 'file://' + talk.image : talk.image }} >
-                                <Overlay styleName="rounded-small">
-                                    <Icon name="play" />
+                                <Overlay styleName="rounded-large">
+                                    <Icon name="play"/>
                                 </Overlay>
                                 <View style={styles.tedComOverlay}>
                                     <Subtitle style={{ color: 'white' }}>Content courtesy of TED.com</Subtitle>
@@ -153,7 +155,7 @@ class TalkDetail extends Component {
                             <Row>
                                 <View styleName="horizontal stretch space-between">
                                     <View styleName="horizontal" style={{ alignItems: 'center', flexDirection: 'row' }}>
-                                        <Ionicons name="ios-calendar-outline" size={18} />
+                                        <SimpleLineIcons name="calendar" size={18} />
                                         <Subtitle style={{ paddingLeft: 8 }}>{moment(talk.published_at).fromNow()}</Subtitle>
                                     </View>
 

@@ -24,6 +24,17 @@ const theme1 = _.merge(getTheme(), {
             borderColor: '#4682b4',
             borderRadius: 5,
         }
+    },
+    'shoutem.ui.Overlay': {
+        '.rounded-large': {
+            width: 70,
+            height: 70,
+            borderRadius: 35,
+            padding: 0,
+        },
+    },
+    'shoutem.ui.Icon': {
+        fontSize: scale(50),
     }
 
 });
