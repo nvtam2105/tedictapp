@@ -8,8 +8,10 @@ import async from 'async';
 import _ from 'lodash';
 
 import RNFetchBlob from 'react-native-fetch-blob';
-import ProgressBar from 'react-native-progress/Bar';
-import { TouchableWithoutFeedback, ActivityIndicator } from "react-native";
+//import ProgressBar from 'react-native-progress/Bar';
+import * as Progress from 'react-native-progress';
+
+import { TouchableWithoutFeedback, ActivityIndicator, Alert } from "react-native";
 
 import { StyleProvider } from '@shoutem/theme';
 import defaultTheme from '../../../themes';
@@ -21,7 +23,7 @@ import {
 
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import Foundation from 'react-native-vector-icons/Foundation';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 
 class TalkDetail extends Component {
@@ -97,7 +99,7 @@ class TalkDetail extends Component {
                 })
             })
         } else {
-            Alert.alert("No Avalable DICTAION");
+            Alert.alert("Not available dictation of this talk");
         }
 
     }
@@ -131,7 +133,7 @@ class TalkDetail extends Component {
                         <TouchableWithoutFeedback onPress={this.onPressPlay.bind(this)}>
                             <Image
                                 styleName="large-banner"
-                                source={{ uri: this.props.persisted ? 'file://' + talk.image : talk.image }} >
+                                source={{ uri: this.state.persisted ? 'file://' + talk.image : talk.image }} >
                                 <Overlay styleName="rounded-small">
                                     <Icon name="play" />
                                 </Overlay>
@@ -150,24 +152,24 @@ class TalkDetail extends Component {
                         <Screen styleName="paper">
                             <Row>
                                 <View styleName="horizontal stretch space-between">
-                                    <View styleName="horizontal stretch">
+                                    <View styleName="horizontal" >
                                         <FontAwesome name="calendar" size={20} />
-                                        <Subtitle style={{ paddingLeft: 5 }}>{moment(talk.published_at).fromNow()}</Subtitle>
+                                        <Subtitle style={{ paddingLeft: 8 }}>{moment(talk.published_at).fromNow()}</Subtitle>
                                     </View>
-                                    <View styleName="horizontal stretch">
-                                        <Icon name="history" />
-                                        <Subtitle style={{ paddingLeft: 5 }}>{talk.length > 0 && (moment.utc(talk.length).format("mm[m]"))}</Subtitle>
+                                    <View styleName="horizontal">
+                                        <Ionicons name="ios-time-outline" size={20} />
+                                        <Subtitle style={{ paddingLeft: 8 }}>{talk.length > 0 && (moment.utc(talk.length).format("mm [min]"))}</Subtitle>
                                     </View>
-                                    <View styleName="horizontal stretch">
-                                        <FontAwesome name="tag" size={20} />
-                                        <Subtitle style={{ paddingLeft: 5 }}>{_.toUpper(talk.tag)}</Subtitle>
+                                    <View styleName="horizontal">
+                                        <Ionicons name="md-pricetag" size={20} />
+                                        <Subtitle style={{ paddingLeft: 8 }}>{_.startCase(talk.tag)}</Subtitle>
                                     </View>
                                 </View>
                             </Row>
 
                             <View>
                                 {!this.state.persisted && (
-                                    <View styleName="horizontal space-between" style={{ paddingHorizontal: 10 }}>
+                                    <View styleName="horizontal stretch space-between" style={{ padding: 10 }}>
                                         {!this.state.loading && (
                                             <Button styleName="secondary"
                                                 onPress={this.onPresMakeDicatation.bind(null, this, store)}>
@@ -178,7 +180,8 @@ class TalkDetail extends Component {
 
                                         {this.state.loading && (
                                             <View style={{ alignItems: 'flex-start' }}>
-                                                <ProgressBar
+                                                <Progress.Circle
+                                                    showsText={true}
                                                     progress={this.state.progress}
                                                 />
                                             </View>
@@ -198,7 +201,7 @@ class TalkDetail extends Component {
 
                                 {this.state.persisted && (
                                     <View styleName="space-between">
-                                        <View styleName="horizontal space-between" style={{ padding: 10 }}>
+                                        <View styleName="horizontal space-between" style={{ paddingHorizontal: 10 }}>
                                             <Button styleName="secondary"
                                                 onPress={this.onPressTedict.bind(this)}>
                                                 <Text>TEDICT</Text>
@@ -213,7 +216,8 @@ class TalkDetail extends Component {
                                             </Button>
 
                                         </View>
-                                        <View styleName="stretch space-between" style={{ paddingHorizontal: 10 }}>
+                                        <View styleName="horizontal space-between" style={{ padding: 10 }}>
+                                            {/* style={{ flex: 1, padding: 10, alignItems: 'center', flexDirection: 'row', justifyContent: 'center', }}> */}
                                             <Button styleName="secondary"
                                                 onPress={this.onPressScript.bind(this)}>
                                                 <Text>SCRIPT</Text>

@@ -11,6 +11,7 @@ import defaultTheme from '../../../themes';
 
 
 
+
 class TalkScript extends Component {
 
     componentWillMount() {
@@ -33,24 +34,24 @@ class TalkScript extends Component {
 
     render() {
         return (
-            <FlatList style={{ flex: 1 }}
-                data={this.props.persisted ? this.props.talk.script.sens : this.props.script.sens}
-                renderItem={({ item, index }) => (
-                    <StyleProvider style={defaultTheme()}>
-                        <Row>
-                            <View styleName="vertical">
-                                <View styleName="horizontal space-between">
-                                    <Text>{index + 1}</Text>
+            <StyleProvider style={defaultTheme()}>
+                <FlatList style={{ flex: 1 }}
+                    data={this.props.persisted ? this.props.talk.script.sens : this.props.script.sens}
+                    renderItem={({ item, index }) => (
+                            <Row>
+                                <View styleName="vertical">
+                                    <View styleName="horizontal space-between">
+                                        <Title>{index + 1}</Title>
+                                    </View>
+                                    <Subtitle styleName="multiline">{item.content}</Subtitle>
                                 </View>
-                                <Text styleName="multiline">{item.content}</Text>
-                            </View>
-                            <Icon styleName="disclosure" name="right-arrow" />
-                        </Row>
-                    </StyleProvider>
-                )}
-                keyExtractor={item => item._id}
-                ItemSeparatorComponent={this.renderSeparator}
-            />
+                                <Icon styleName="disclosure" name="right-arrow" />
+                            </Row>
+                    )}
+                    keyExtractor={item => item._id}
+                    ItemSeparatorComponent={this.renderSeparator}
+                />
+            </StyleProvider>
         );
     }
 }

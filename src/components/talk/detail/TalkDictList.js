@@ -1,8 +1,17 @@
 import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
-import { View, Text, FlatList, ActivityIndicator, Button, Alert } from "react-native";
+import { FlatList, ActivityIndicator, Alert } from "react-native";
 
-import { CardSection, Thumbnail } from '../../common';
+//import { CardSection, Thumbnail } from '../../common';
+
+import {
+    ScrollView, Screen, Image, Divider, View, Row, Caption, Text,
+    Card,Heading,
+    Subtitle, Tile, Title, Overlay, Icon, Button
+} from '@shoutem/ui';
+
+import { StyleProvider } from '@shoutem/theme';
+import defaultTheme from '../../../themes';
 
 
 class TalkDictList extends Component {
@@ -17,22 +26,24 @@ class TalkDictList extends Component {
 
     render() {
         return (
-            <FlatList style={{ flex: 1 }}
-                data={this.props.talk.script.sens}
-                renderItem={({ item, index }) => (<View style={{ flex: 1 }}>
-                        <CardSection>
-                            <Button title={`${++index}`} onPress={() => 
-                            Actions.talkDictItem({ 
+            <StyleProvider style={defaultTheme()}>
+                <FlatList style={{ flex: 1 }}
+                    data={this.props.talk.script.sens}
+                    renderItem={({ item, index }) => (<View style={{ flex: 1 }}>
+                        <Button styleName="full-width" onPress={() =>
+                            Actions.talkDictItem({
                                 sen: item,
                                 index: index,
                                 total: this.props.talk.script.sens.length,
                                 media: this.props.talk.media
-                             })} />
-                        </CardSection>
+                            })} >
+                            <Heading>{`${++index}`}</Heading>
+                        </Button>
                     </View>)}
-                keyExtractor={item => item._id}
-                numColumns={3}
-            />
+                    keyExtractor={item => item._id}
+                    numColumns={3}
+                />
+            </StyleProvider>
         );
     }
 }

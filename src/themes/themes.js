@@ -22,6 +22,7 @@ const theme1 = _.merge(getTheme(), {
         '.secondary': {
             backgroundColor: '#4682b4',
             borderColor: '#4682b4',
+            borderRadius: 5,
         }
     }
 
