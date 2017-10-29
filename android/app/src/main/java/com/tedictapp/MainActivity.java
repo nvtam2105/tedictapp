@@ -1,6 +1,7 @@
 package com.tedictapp;
 
 import com.facebook.react.ReactActivity;
+import com.sbugert.rnadmob.RNAdMobPackage;
 import io.realm.react.RealmReactPackage;
 import com.brentvatne.react.ReactVideoPackage;
 import com.oblador.vectoricons.VectorIconsPackage;

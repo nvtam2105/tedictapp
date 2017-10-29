@@ -17,6 +17,7 @@ import com.brentvatne.react.ReactVideoPackage;
 import io.realm.react.RealmReactPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
+import com.sbugert.rnadmob.RNAdMobPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -33,6 +34,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNAdMobPackage(),
             new ReactNativePushNotificationPackage(),
             new PhotoViewPackage(),
             new RNSharePackage(),

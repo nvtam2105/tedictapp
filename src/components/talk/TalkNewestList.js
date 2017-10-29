@@ -6,7 +6,10 @@ import TalkItem from './TalkItem';
 
 import { FlatList, ActivityIndicator } from "react-native";
 
-import { View, Divider } from '@shoutem/ui';
+import { View, Divider, Screen } from '@shoutem/ui';
+
+import { AdMobBanner } from 'react-native-admob';
+
 
 
 class TalkNewestList extends Component {
@@ -78,20 +81,28 @@ class TalkNewestList extends Component {
 
     render() {
         return (
-            <FlatList style={{ flex: 1 }}
-                data={this.props.talks}
-                extraData={this.state}
-                renderItem={({ item }) => (<TalkItem talk={item} persisted={false} />)}
-                keyExtractor={item => item.id}
-                ItemSeparatorComponent={this.renderSeparator}
-                ListFooterComponent={this.renderFooter}
-                onRefresh={this.onRefresh}
-                refreshing={this.state.refreshing}
-                onEndReached={this.onEndReached}
-                onEndReachedThreshold={0.5}
-                onMomentumScrollBegin={() => { this.onEndReachedCalledDuringMomentum = false; }}
+            <Screen>
+                <FlatList style={{ flex: 1 }}
+                    data={this.props.talks}
+                    extraData={this.state}
+                    renderItem={({ item }) => (<TalkItem talk={item} persisted={false} />)}
+                    keyExtractor={item => item.id}
+                    ItemSeparatorComponent={this.renderSeparator}
+                    ListFooterComponent={this.renderFooter}
+                    onRefresh={this.onRefresh}
+                    refreshing={this.state.refreshing}
+                    onEndReached={this.onEndReached}
+                    onEndReachedThreshold={0.5}
+                    onMomentumScrollBegin={() => { this.onEndReachedCalledDuringMomentum = false; }}
 
-            />
+                />
+
+                <AdMobBanner
+                    bannerSize="fullBanner"
+                    adUnitID="ca-app-pub-2762011960549047/5900347229"
+                    testDeviceID="EMULATOR"
+                    didFailToReceiveAdWithError={(err) => { console.log(err) }} />
+            </Screen>
         );
     }
 }

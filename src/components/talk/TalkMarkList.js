@@ -4,6 +4,8 @@ import { Actions } from 'react-native-router-flux';
 
 import store from '../../stores';
 import TalkMarkItem from './TalkMarkItem';
+import { Screen } from '@shoutem/ui';
+import { AdMobBanner } from 'react-native-admob';
 
 
 class TalkMarkList extends Component {
@@ -39,12 +41,19 @@ class TalkMarkList extends Component {
 
 
     return (
-      <FlatList
-        scrollEnabled={this.state.scrollEnabled}
-        data={this.state.talks}
-        renderItem={({ item }) => this._renderItem(item)}
-        keyExtractor={item => item.id}
-      />
+      <Screen>
+        <FlatList
+          scrollEnabled={this.state.scrollEnabled}
+          data={this.state.talks}
+          renderItem={({ item }) => this._renderItem(item)}
+          keyExtractor={item => item.id}
+        />
+        <AdMobBanner
+          bannerSize="fullBanner"
+          adUnitID="ca-app-pub-2762011960549047/5900347229"
+          testDeviceID="EMULATOR"
+          didFailToReceiveAdWithError={(err) => { console.log(err) }} />
+      </Screen>
     );
   }
 }
