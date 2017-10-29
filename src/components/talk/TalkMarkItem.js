@@ -51,7 +51,7 @@ class TalkMarkItem extends Component {
                                 <Subtitle styleName="top" numberOfLines={2}>{talk.name}</Subtitle>
                                 <View styleName="horizontal space-between">
                                     <Caption>{moment(talk.published_at).fromNow()}</Caption>
-                                    <Caption>{talk.length > 0 && (moment.utc(talk.length).format("mm [m]"))}</Caption>
+                                    <Caption>{talk.length > 0 && (moment.utc(talk.length).format("mm [min]"))}</Caption>
                                 </View>
                             </View>
                             <Icon styleName="disclosure" name="right-arrow" />
