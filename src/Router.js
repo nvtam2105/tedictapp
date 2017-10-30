@@ -20,6 +20,8 @@ import TalkScript from './components/talk/detail/TalkScript';
 import TalkDictList from './components/talk/detail/TalkDictList';
 import TalkDictItem from './components/talk/detail/TalkDictItem';
 
+import TalkDictItemSwiper from './components/talk/detail/TalkDictItemSwiper';
+
 
 
 
@@ -163,6 +165,7 @@ const RouterComponent = () => {
                 <Scene key="talkScript" component={TalkScript} backTitle=" " />
                 <Scene key="talkDictList" component={TalkDictList} backTitle=" " />
                 <Scene key="talkDictItem" component={TalkDictItem} />
+                <Scene key="talkDictItemSwiper" component={TalkDictItemSwiper} backTitle=" " />
                 
             </Scene>
         </Router>
