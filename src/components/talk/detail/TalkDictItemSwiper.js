@@ -14,7 +14,7 @@ import {
 import { StyleProvider } from '@shoutem/theme';
 import defaultTheme from '../../../themes';
 
-import TalkDictItem  from './TalkDictItem';
+import TalkDictItem from './TalkDictItem';
 
 
 class TalkDictItemSwiper extends Component {
@@ -24,19 +24,22 @@ class TalkDictItemSwiper extends Component {
     }
 
     componentDidMount() {
-        Actions.refresh({ title: this.props.talk.name });
+        //Actions.refresh({ title: this.props.talk.name });
     }
 
     render() {
         return (
             <StyleProvider style={defaultTheme()}>
-                <Swiper loop={false} index={0} loadMinimal loadMinimalSize={1} showsButtons={false} showsPagination={false} autoplay={false}>
-                    {_.map(this.props.talk.script.sens, (item, index) => {
-                        console.log(item);
+                <Swiper loop={false} index={0} 
+                    loadMinimal loadMinimalSize={0} 
+                    showsButtons={false} showsPagination={false} autoplay={false}>
+                    {this.props.talk.script.sens.map((item, key) => {
+                        //console.log(key);
                         return (
                             <TalkDictItem
                                 sen={item}
-                                index={index}
+                                key={key}
+                                index={key+1}
                                 total={this.props.talk.script.sens.length}
                                 media={this.props.talk.media} />
                         )

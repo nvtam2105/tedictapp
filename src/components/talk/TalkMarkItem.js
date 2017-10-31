@@ -38,7 +38,7 @@ class TalkMarkItem extends Component {
         return (
             <Swipeout right={this.props.swipeBtns}
                 scroll={this.props.scroll}
-                autoClose='true'
+                autoClose={true}
                 backgroundColor='transparent'>
                 <StyleProvider style={defaultTheme()}>
                     <TouchableWithoutFeedback onPress={this.onRowPress.bind(this)}>

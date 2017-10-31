@@ -30,8 +30,8 @@ class TalkDictItem extends Component {
     }
 
     componentWillMount() {
-        console.log('componentWillMount=' + this.props);
-        console.log(this.props);
+        //console.log('componentWillMount=' + this.props);
+        //console.log(this.props);
         this.setState({
             currentIndex: this.state.hiddenContent.indexOf("*"),
         });

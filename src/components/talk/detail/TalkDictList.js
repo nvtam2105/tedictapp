@@ -6,7 +6,7 @@ import { FlatList, ActivityIndicator, Alert } from "react-native";
 
 import {
     ScrollView, Screen, Image, Divider, View, Row, Caption, Text,
-    Card,Heading,
+    Card, Heading,
     Subtitle, Tile, Title, Overlay, Icon, Button
 } from '@shoutem/ui';
 
@@ -31,12 +31,20 @@ class TalkDictList extends Component {
                     data={this.props.talk.script.sens}
                     renderItem={({ item, index }) => (<View style={{ flex: 1 }}>
                         <Button styleName="full-width" onPress={() =>
-                            Actions.talkDictItem({
-                                sen: item,
-                                index: index,
-                                total: this.props.talk.script.sens.length,
-                                media: this.props.talk.media
-                            })} >
+                            Actions.talkDictItemSwiper(
+                                {
+                                    talk: this.props.talk,
+                                    selectedIndex: index,
+                                }
+                            )
+                            // Actions.talkDictItem({
+                            //     sen: item,
+                            //     index: index,
+                            //     total: this.props.talk.script.sens.length,
+                            //     media: this.props.talk.media
+                            // })
+
+                        } >
                             <Heading>{`${++index}`}</Heading>
                         </Button>
                     </View>)}
