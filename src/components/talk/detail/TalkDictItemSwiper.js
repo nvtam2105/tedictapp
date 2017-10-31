@@ -23,23 +23,23 @@ class TalkDictItemSwiper extends Component {
         console.log(this.props.talk);
     }
 
-    componentDidMount() {
-        //Actions.refresh({ title: this.props.talk.name });
-    }
+    // componentDidMount() {
+    //     //Actions.refresh({ title: this.props.talk.name });
+    //     //console.log(this.props.selectedIndex);
+    // }
 
     render() {
         return (
             <StyleProvider style={defaultTheme()}>
-                <Swiper loop={false} index={0} 
-                    loadMinimal loadMinimalSize={0} 
+                <Swiper loop={false} index={this.props.selectedIndex > 0 ? this.props.selectedIndex : 0}
+                    loadMinimal loadMinimalSize={0}
                     showsButtons={false} showsPagination={false} autoplay={false}>
                     {this.props.talk.script.sens.map((item, key) => {
-                        //console.log(key);
                         return (
                             <TalkDictItem
                                 sen={item}
                                 key={key}
-                                index={key+1}
+                                index={key + 1}
                                 total={this.props.talk.script.sens.length}
                                 media={this.props.talk.media} />
                         )

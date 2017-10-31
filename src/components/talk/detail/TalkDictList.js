@@ -34,16 +34,9 @@ class TalkDictList extends Component {
                             Actions.talkDictItemSwiper(
                                 {
                                     talk: this.props.talk,
-                                    selectedIndex: index,
+                                    selectedIndex: index - 1,
                                 }
                             )
-                            // Actions.talkDictItem({
-                            //     sen: item,
-                            //     index: index,
-                            //     total: this.props.talk.script.sens.length,
-                            //     media: this.props.talk.media
-                            // })
-
                         } >
                             <Heading>{`${++index}`}</Heading>
                         </Button>
