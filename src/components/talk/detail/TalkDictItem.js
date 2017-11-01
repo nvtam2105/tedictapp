@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
-import { Platform, Keyboard, Alert } from "react-native";
+import { Platform, Keyboard, Alert, Slider } from "react-native";
 
 import {
     ScrollView, Screen, Image, Divider, View, Row, Caption, Text,
@@ -13,6 +13,12 @@ import { CardSection, Thumbnail, VideoPlayer } from '../../common';
 import { StyleProvider } from '@shoutem/theme';
 import defaultTheme from '../../../themes';
 
+import EvilIcons from 'react-native-vector-icons/EvilIcons';
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import Octicons from 'react-native-vector-icons/Octicons';
 
 class TalkDictItem extends Component {
 
@@ -134,11 +140,24 @@ class TalkDictItem extends Component {
                                 onProgress={this.onProgress.bind(this)}
                                 video={{ uri: 'file://' + this.props.media }}
                                 rate={rate} />
+
                         </View>
                     )}
-                    <Button onPress={this.onPressPlay.bind(this)}>
-                        <Text>PLAY VIDEO</Text>
-                    </Button>
+                    <Row>
+                        <View styleName="horizontal space-between">
+                            <Slider 
+                            style={{ width: 50 }}
+                            //step={1}
+                            onValueChange={(value) => Alert.alert(value)} />
+                            <Octicons name="triangle-down" size={30}/>
+                            <Text>x1.0</Text>
+                            <Octicons name="triangle-up" size={30}/>
+                            <Button onPress={this.onPressPlay.bind(this)}>
+                                <FontAwesome name="play" size={30} />
+                            </Button>
+                        </View>
+                    </Row>
+
                 </Screen>
             </StyleProvider>
         );
