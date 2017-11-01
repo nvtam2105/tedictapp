@@ -5,9 +5,9 @@ import { Actions } from 'react-native-router-flux';
 import { View, Row, Caption, Image, Subtitle, Title, Icon, Heading, Text } from '@shoutem/ui';
 import { StyleProvider } from '@shoutem/theme';
 
-import defaultTheme from '../../themes';
+import defaultTheme from '../../../themes';
 import moment from 'moment';
-import store from '../../stores';
+import store from '../../../stores';
 
 import Swipeout from 'react-native-swipeout';
 

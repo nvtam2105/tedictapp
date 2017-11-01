@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { talksFetch } from '../../actions';
+import { talksFetch } from '../../../actions';
 import TalkItem from './TalkItem';
 
 import { FlatList, ActivityIndicator } from "react-native";

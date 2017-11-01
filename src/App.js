@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { AppState, Platform } from 'react-native';
+import { AppState, Platform, KeyboardAvoidingView } from 'react-native';
+
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
@@ -15,7 +16,7 @@ class App extends Component {
   constructor(props) {
     super(props);
   }
-  
+
   componentWillMount() {
     initPushNotification();
 
@@ -36,10 +37,10 @@ class App extends Component {
         //date = date.toISOString();
       }
 
-      PushNotification.localNotificationSchedule({
-        message: "My Notification Message",
-        date,
-      });
+      // PushNotification.localNotificationSchedule({
+      //   message: "My Notification Message",
+      //   date,
+      // });
     }
   }
 
@@ -58,8 +59,11 @@ class App extends Component {
 
     return (
       <Provider store={store}>
-        <Router />
-      </Provider>
+        <KeyboardAvoidingView
+          behavior={"padding"}>
+          <Router />
+        </KeyboardAvoidingView>
+      </Provider >
     );
   }
 }

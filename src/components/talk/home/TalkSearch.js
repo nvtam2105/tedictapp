@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { Text, View, FlatList, ActivityIndicator } from "react-native";
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import { talksSearch } from '../../actions';
+import { talksSearch } from '../../../actions';
 import TalkItem from './TalkItem';
 
-import { SearchBar } from '../common';
+import { SearchBar } from '../../common';
 
 
 class TalkSearch extends Component {

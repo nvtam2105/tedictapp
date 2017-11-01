@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
-import { Platform, Keyboard, Alert, Slider } from "react-native";
+import { Platform, Keyboard, Alert, Slider, KeyboardAvoidingView } from "react-native";
+
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
 
 import {
     ScrollView, Screen, Image, Divider, View, Row, Caption, Text,
@@ -116,49 +119,54 @@ class TalkDictItem extends Component {
         const { currentIndex, rate, playing } = this.state;
         return (
             <StyleProvider style={defaultTheme()}>
-                <Screen>
-                    <TextInput
-                        value={this.state.hiddenContent}
-                        autoFocus={true}
-                        multiline={true}
-                        selectionColor={'transparent'}
-                        caretHidden={true}
-                        underlineColorAndroid={'transparent'}
-                        selection={{ start: currentIndex, end: currentIndex }}
-                        onKeyPress={this.onKeyPress}
-                        onChangeText={this.onChangeText.bind(this)}
-                    />
+                {/* <KeyboardAwareScrollView
+                    enableOnAndroid={true}
+                    extraHeight={50}> */}
+                    <Screen>
+                        <TextInput
+                            value={this.state.hiddenContent}
+                            autoFocus={true}
+                            multiline={true}
+                            selectionColor={'transparent'}
+                            caretHidden={true}
+                            underlineColorAndroid={'transparent'}
+                            selection={{ start: currentIndex, end: currentIndex }}
+                            onKeyPress={this.onKeyPress}
+                            onChangeText={this.onChangeText.bind(this)}
+                        />
 
-                    {playing && (
-                        <View style={{ flex: 1 }}>
-                            <VideoPlayer
-                                ref={(ref) => {
-                                    this.player = ref
-                                }}
-                                autoplay
-                                onLoad={this.onLoad.bind(this)}
-                                onProgress={this.onProgress.bind(this)}
-                                video={{ uri: 'file://' + this.props.media }}
-                                rate={rate} />
+                        {playing && (
+                            <View style={{ flex: 1 }}>
+                                <VideoPlayer
+                                    ref={(ref) => {
+                                        this.player = ref
+                                    }}
+                                    autoplay
+                                    onLoad={this.onLoad.bind(this)}
+                                    onProgress={this.onProgress.bind(this)}
+                                    video={{ uri: 'file://' + this.props.media }}
+                                    rate={rate} />
 
-                        </View>
-                    )}
-                    <Row>
-                        <View styleName="horizontal space-between">
-                            <Slider 
-                            style={{ width: 50 }}
-                            //step={1}
-                            onValueChange={(value) => Alert.alert(value)} />
-                            <Octicons name="triangle-down" size={30}/>
-                            <Text>x1.0</Text>
-                            <Octicons name="triangle-up" size={30}/>
-                            <Button onPress={this.onPressPlay.bind(this)}>
-                                <FontAwesome name="play" size={30} />
-                            </Button>
-                        </View>
-                    </Row>
+                            </View>
+                        )}
+                        <Row>
+                            <View styleName="horizontal space-between">
+                                <Slider
+                                    style={{ width: 50 }}
+                                    //step={1}
+                                    onValueChange={(value) => Alert.alert(value)} />
 
-                </Screen>
+                                <Octicons name="triangle-down" size={30} />
+                                <Text>x1.0</Text>
+                                <Octicons name="triangle-up" size={30} />
+                                <Button onPress={this.onPressPlay.bind(this)}>
+                                    <MaterialIcons name={this.state.playing ? 'pause' : 'play-arrow'} size={30} />
+                                </Button>
+                            </View>
+                        </Row>
+
+                    </Screen>
+                {/* </KeyboardAwareScrollView> */}
             </StyleProvider>
         );
     }

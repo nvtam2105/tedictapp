@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, FlatList } from "react-native";
 import { Actions } from 'react-native-router-flux';
 
-import store from '../../stores';
+import store from '../../../stores';
 import TalkMarkItem from './TalkMarkItem';
 import { Screen } from '@shoutem/ui';
 import { AdMobBanner } from 'react-native-admob';

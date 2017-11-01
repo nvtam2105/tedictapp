@@ -8,22 +8,15 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import SlideMenu from './components/menu/SlideMenu';
 import HomePage from './components/home/HomePage';
-
-import TalkNewestList from './components/talk/TalkNewestList';
-import TalkMarkList from './components/talk/TalkMarkList';
-import TalkSearch from './components/talk/TalkSearch';
-
-
+import TalkNewestList from './components/talk/home/TalkNewestList';
+import TalkMarkList from './components/talk/home/TalkMarkList';
+import TalkSearch from './components/talk/home/TalkSearch';
 import TalkDetail from './components/talk/detail/TalkDetail';
 import TalkVideo from './components/talk/detail/TalkVideo';
 import TalkScript from './components/talk/detail/TalkScript';
 import TalkDictList from './components/talk/detail/TalkDictList';
 import TalkDictItem from './components/talk/detail/TalkDictItem';
-
 import TalkDictItemSwiper from './components/talk/detail/TalkDictItemSwiper';
-
-
-
 
 
 import { Icon, Text, Image, View, Button, TouchableOpacity } from '@shoutem/ui';
