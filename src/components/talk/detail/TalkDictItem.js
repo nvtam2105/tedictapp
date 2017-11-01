@@ -122,6 +122,7 @@ class TalkDictItem extends Component {
                 {/* <KeyboardAwareScrollView
                     enableOnAndroid={true}
                     extraHeight={50}> */}
+                <KeyboardAwareScrollView>
                     <Screen>
                         <TextInput
                             value={this.state.hiddenContent}
@@ -166,6 +167,7 @@ class TalkDictItem extends Component {
                         </Row>
 
                     </Screen>
+                </KeyboardAwareScrollView>
                 {/* </KeyboardAwareScrollView> */}
             </StyleProvider>
         );

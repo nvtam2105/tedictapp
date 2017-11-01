@@ -59,10 +59,9 @@ class App extends Component {
 
     return (
       <Provider store={store}>
-        <KeyboardAvoidingView
-          behavior={"padding"}>
+        {/* <KeyboardAvoidingView behavior={"padding"}> */}
           <Router />
-        </KeyboardAvoidingView>
+        {/* </KeyboardAvoidingView> */}
       </Provider >
     );
   }
