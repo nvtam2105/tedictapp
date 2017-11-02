@@ -36,6 +36,7 @@ class TalkDictItem extends Component {
 
         this.onKeyPress = this.onKeyPress.bind(this);
         this.onChangeText = this.onChangeText.bind(this);
+        this.onPressPlay = this.onPressPlay.bind(this);
     }
 
     componentWillMount() {
@@ -54,11 +55,15 @@ class TalkDictItem extends Component {
     componentWillUnmount() {
     }
 
-    onPressPlay(obj) {
-        console.log('onPressPlay' + obj);
+    onPressPlay() {
+        console.log('onPressPlay');
         this.setState({
             playing: !this.state.playing,
         });
+        this.player.setState({
+            isPlaying: this.state.playing,
+        });
+        //this.player.onPlayPress();
     }
 
 
@@ -71,6 +76,8 @@ class TalkDictItem extends Component {
             this.player.setState({
                 isPlaying: !this.player.state.isPlaying,
             });
+            this.player.onPlayPress();
+
             this.setState({
                 playing: false
             });
@@ -119,38 +126,28 @@ class TalkDictItem extends Component {
         const { currentIndex, rate, playing } = this.state;
         return (
             <StyleProvider style={defaultTheme()}>
-                {/* <KeyboardAwareScrollView
-                    enableOnAndroid={true}
-                    extraHeight={50}> */}
-                <KeyboardAwareScrollView>
+                <KeyboardAwareScrollView enableOnAndroid={Platform.OS === 'android'}>
                     <Screen>
-                        <TextInput
-                            value={this.state.hiddenContent}
-                            autoFocus={true}
-                            multiline={true}
-                            selectionColor={'transparent'}
-                            caretHidden={true}
-                            underlineColorAndroid={'transparent'}
-                            selection={{ start: currentIndex, end: currentIndex }}
-                            onKeyPress={this.onKeyPress}
-                            onChangeText={this.onChangeText.bind(this)}
-                        />
 
-                        {playing && (
-                            <View style={{ flex: 1 }}>
-                                <VideoPlayer
-                                    ref={(ref) => {
-                                        this.player = ref
-                                    }}
-                                    autoplay
-                                    onLoad={this.onLoad.bind(this)}
-                                    onProgress={this.onProgress.bind(this)}
-                                    video={{ uri: 'file://' + this.props.media }}
-                                    rate={rate} />
+                        
+                            <Row>
+                                <View style={{ flex: 1 }}>
+                                    <VideoPlayer
+                                        ref={(ref) => {
+                                            this.player = ref
+                                        }}
+                                        pauseOnPress={true}
+                                        endWithThumbnail
+                                        autoplay
+                                        onLoad={this.onLoad.bind(this)}
+                                        onProgress={this.onProgress.bind(this)}
+                                        video={{ uri: 'file://' + this.props.media }}
+                                        rate={rate} />
 
-                            </View>
-                        )}
-                        <Row>
+                                </View>
+                            </Row>
+                       
+                         <Row>
                             <View styleName="horizontal space-between">
                                 <Slider
                                     style={{ width: 50 }}
@@ -165,10 +162,23 @@ class TalkDictItem extends Component {
                                 </Button>
                             </View>
                         </Row>
+                        <TextInput
+                            style={{ height: 200 }}
+                            value={this.state.hiddenContent}
+                            autoFocus={true}
+                            multiline={true}
+                            selectionColor={'transparent'}
+                            caretHidden={true}
+                            underlineColorAndroid={'transparent'}
+                            selection={{ start: currentIndex, end: currentIndex }}
+                            onKeyPress={this.onKeyPress}
+                            onChangeText={this.onChangeText.bind(this)}
+                        />
+
+                       
 
                     </Screen>
                 </KeyboardAwareScrollView>
-                {/* </KeyboardAwareScrollView> */}
             </StyleProvider>
         );
     }

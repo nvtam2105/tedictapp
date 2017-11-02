@@ -2,6 +2,6 @@
   "name": "tedictapp",
   "displayName": "tedictapp",
   "androidStatusBar": {
-    "backgroundColor": "#000000"
+    "backgroundColor": "#eeeeee"
   }
 }

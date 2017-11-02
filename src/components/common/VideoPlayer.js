@@ -466,18 +466,19 @@ class VideoPlayer extends Component {
             { marginTop: -this.getSizeStyles().height },
           ]}
         >
-          {/* <TouchableOpacity
+          <TouchableOpacity
             style={styles.overlayButton}
             onPress={() => {
               this.showControls();
               if (pauseOnPress)
+                console.log('Click to view');
                 this.onPlayPress();
             }}
             onLongPress={() => {
               if (fullScreenOnLongPress && Platform.OS !== 'android')
                 this.onToggleFullScreen();
             }}
-          /> */}
+          />
         </View>
         {/* {((!this.state.isPlaying) || this.state.isControlsVisible)
           ? this.renderControls() : this.renderSeekBar(true)} */}
