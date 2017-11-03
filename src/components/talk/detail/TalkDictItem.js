@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
-import { Platform, Keyboard, Alert, Slider, KeyboardAvoidingView } from "react-native";
+import PropTypes from 'prop-types';
+
+import { StyleSheet, Platform, Keyboard, Alert, Slider, KeyboardAvoidingView } from "react-native";
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 
 import {
     ScrollView, Screen, Image, Divider, View, Row, Caption, Text,
-    Subtitle, Tile, Title, Overlay, Icon, Button, TextInput
+    Subtitle, Tile, Title, Overlay, Icon, Button, TextInput, TouchableOpacity
 } from '@shoutem/ui';
 
 
@@ -22,26 +24,30 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Octicons from 'react-native-vector-icons/Octicons';
+import Video from 'react-native-video'; // eslint-disable-line
 
 class TalkDictItem extends Component {
 
     constructor(props) {
         super(props);
+
         this.state = {
-            playing: true,
             content: this.props.sen.content,
             hiddenContent: this.props.sen.content.replace(/[a-zA-Z]/g, '*'),
-            rate: 1.0
+
+            isPlaying: true,
+            isReplay: false,
+            rate: 1.0,
+
         }
 
         this.onKeyPress = this.onKeyPress.bind(this);
         this.onChangeText = this.onChangeText.bind(this);
-        this.onPressPlay = this.onPressPlay.bind(this);
+        this.onPlayPress = this.onPlayPress.bind(this);
+
     }
 
     componentWillMount() {
-        //console.log('componentWillMount=' + this.props);
-        //console.log(this.props);
         this.setState({
             currentIndex: this.state.hiddenContent.indexOf("*"),
         });
@@ -55,33 +61,27 @@ class TalkDictItem extends Component {
     componentWillUnmount() {
     }
 
-    onPressPlay() {
-        console.log('onPressPlay');
+    onPlayPress() {
+        if (this.state.isReplay) {
+            this.player.seek(this.props.sen.start / 1000);
+        }
         this.setState({
-            playing: !this.state.playing,
+            isPlaying: !this.state.isPlaying,
+            isReplay: false,
         });
-        this.player.setState({
-            isPlaying: this.state.playing,
-        });
-        //this.player.onPlayPress();
     }
-
 
     onLoad(obj) {
         this.player.seek(this.props.sen.start / 1000);
+
     }
 
     onProgress(obj) {
-        if (obj.currentTime >= this.props.sen.end / 1000) {
-            this.player.setState({
-                isPlaying: !this.player.state.isPlaying,
-            });
-            this.player.onPlayPress();
-
+        if (obj.currentTime > this.props.sen.end / 1000) {
             this.setState({
-                playing: false
+                isPlaying: false,
+                isReplay: true,
             });
-
         }
     }
 
@@ -123,47 +123,14 @@ class TalkDictItem extends Component {
     }
 
     render() {
-        const { currentIndex, rate, playing } = this.state;
+        const { currentIndex, rate, isPlaying } = this.state;
         return (
             <StyleProvider style={defaultTheme()}>
                 <KeyboardAwareScrollView enableOnAndroid={Platform.OS === 'android'}>
                     <Screen>
-
-                        
-                            <Row>
-                                <View style={{ flex: 1 }}>
-                                    <VideoPlayer
-                                        ref={(ref) => {
-                                            this.player = ref
-                                        }}
-                                        pauseOnPress={true}
-                                        endWithThumbnail
-                                        autoplay
-                                        onLoad={this.onLoad.bind(this)}
-                                        onProgress={this.onProgress.bind(this)}
-                                        video={{ uri: 'file://' + this.props.media }}
-                                        rate={rate} />
-
-                                </View>
-                            </Row>
-                       
-                         <Row>
-                            <View styleName="horizontal space-between">
-                                <Slider
-                                    style={{ width: 50 }}
-                                    //step={1}
-                                    onValueChange={(value) => Alert.alert(value)} />
-
-                                <Octicons name="triangle-down" size={30} />
-                                <Text>x1.0</Text>
-                                <Octicons name="triangle-up" size={30} />
-                                <Button onPress={this.onPressPlay.bind(this)}>
-                                    <MaterialIcons name={this.state.playing ? 'pause' : 'play-arrow'} size={30} />
-                                </Button>
-                            </View>
-                        </Row>
                         <TextInput
-                            style={{ height: 200 }}
+                            ref={(ref) => this.textInput = ref}
+                            style={{ height: 100 }}
                             value={this.state.hiddenContent}
                             autoFocus={true}
                             multiline={true}
@@ -175,7 +142,39 @@ class TalkDictItem extends Component {
                             onChangeText={this.onChangeText.bind(this)}
                         />
 
-                       
+                        <Row>
+                            <View>
+                                <TouchableOpacity onPress={this.onPlayPress.bind(this)}>
+                                    <Video
+                                        style={{
+                                            height: 200
+                                        }}
+                                        ref={p => { this.player = p; }}
+                                        paused={!this.state.isPlaying}
+                                        onProgress={this.onProgress.bind(this)}
+                                        onLoad={this.onLoad.bind(this)}
+                                        source={{ uri: 'file://' + this.props.media }}
+                                        resizeMode={'cover'}
+                                    />
+                                </TouchableOpacity>
+                            </View>
+                        </Row>
+                        <Row>
+                            <View styleName="horizontal space-between">
+                                <Slider
+                                    style={{ width: 50 }}
+                                    //step={1}
+                                    onValueChange={(value) => Alert.alert(value)} />
+
+                                <Octicons name="triangle-down" size={30} />
+                                <Text>x1.0</Text>
+                                <Octicons name="triangle-up" size={30} />
+                                <Button onPress={this.onPlayPress.bind(this)}>
+                                    <MaterialIcons name={this.state.isReplay ? 'replay' :(this.state.isPlaying ? 'pause' : 'play-arrow')} size={30} />
+                                </Button>
+                            </View>
+                        </Row>
+
 
                     </Screen>
                 </KeyboardAwareScrollView>
@@ -183,5 +182,6 @@ class TalkDictItem extends Component {
         );
     }
 }
+
 
 export default TalkDictItem;

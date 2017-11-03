@@ -480,8 +480,8 @@ class VideoPlayer extends Component {
             }}
           />
         </View>
-        {/* {((!this.state.isPlaying) || this.state.isControlsVisible)
-          ? this.renderControls() : this.renderSeekBar(true)} */}
+        {((!this.state.isPlaying) || this.state.isControlsVisible)
+          ? this.renderControls() : this.renderSeekBar(true)}
       </View>
     );
   }
