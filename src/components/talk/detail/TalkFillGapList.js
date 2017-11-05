@@ -14,10 +14,10 @@ import { StyleProvider } from '@shoutem/theme';
 import defaultTheme from '../../../themes';
 
 
-class TalkDictList extends Component {
+class TalkFillGapList extends Component {
 
     componentDidMount() {
-        Actions.refresh({ title: 'Dict List' });
+        Actions.refresh({ title: 'FillGap List' });
     }
 
     render() {
@@ -31,7 +31,7 @@ class TalkDictList extends Component {
                                 {
                                     talk: this.props.talk,
                                     selectedIndex: index - 1,
-                                    isFillGap: false,
+                                    isFillGap: true,
                                 }
                             )
                         } >
@@ -46,4 +46,4 @@ class TalkDictList extends Component {
     }
 }
 
-export default TalkDictList;
+export default TalkFillGapList;

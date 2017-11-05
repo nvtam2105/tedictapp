@@ -15,18 +15,10 @@ import { StyleProvider } from '@shoutem/theme';
 import defaultTheme from '../../../themes';
 
 import TalkDictItem from './TalkDictItem';
+import TalkFillGapItem from './TalkFillGapItem';
 
 
-class TalkDictItemSwiper extends Component {
-
-    componentWillMount() {
-        console.log(this.props.talk);
-    }
-
-    // componentDidMount() {
-    //     //Actions.refresh({ title: this.props.talk.name });
-    //     //console.log(this.props.selectedIndex);
-    // }
+class TalkDictSwiper extends Component {
 
     render() {
         return (
@@ -35,19 +27,28 @@ class TalkDictItemSwiper extends Component {
                     loadMinimal loadMinimalSize={0}
                     showsButtons={false} showsPagination={false} autoplay={false}>
                     {this.props.talk.script.sens.map((item, key) => {
+
                         return (
-                            <TalkDictItem
+                            this.props.isFillGap ? (<TalkFillGapItem
                                 sen={item}
                                 key={key}
                                 index={key + 1}
                                 total={this.props.talk.script.sens.length}
-                                media={this.props.talk.media} />
+                                media={this.props.talk.media} />)
+                                : (<TalkDictItem
+                                    sen={item}
+                                    key={key}
+                                    index={key + 1}
+                                    total={this.props.talk.script.sens.length}
+                                    media={this.props.talk.media} />)
+
                         )
-                    })}
+                    })
+                    }
                 </Swiper>
             </StyleProvider>
         );
     }
 }
 
-export default TalkDictItemSwiper;
+export default TalkDictSwiper;

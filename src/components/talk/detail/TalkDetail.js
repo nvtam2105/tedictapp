@@ -108,7 +108,8 @@ class TalkDetail extends Component {
 
     onPressTedictGap() {
         let talk = store.getTalkById(this.props.talk.id);
-        Actions.talkDictItemSwiper({ talk: talk });
+        //Actions.talkDictItemSwiper({ talk: talk });
+        Actions.talkFillGapList({ talk: talk });
 
     }
 
@@ -146,7 +147,7 @@ class TalkDetail extends Component {
                                     <Subtitle style={{ color: 'white' }}>{talk.speaker} <Caption style={{ color: 'white' }}>at {talk.event}</Caption></Subtitle>
                                 </View>
                                 <View style={styles.talkNameOverlay}>
-                                    <Title style={{ color: 'white', fontWeight: '500' }} numberOfLines={2}>{talk.name}</Title>
+                                    <Title style={{ color: 'white', fontWeight: '500' }} numberOfLines={1}>{talk.name}</Title>
                                 </View>
                             </Image>
                         </TouchableWithoutFeedback>
@@ -250,7 +251,7 @@ const styles = {
         flex: 1,
         flexDirection: 'row',
         position: 'absolute',
-        bottom: 45,
+        bottom: 22,
         left: 0,
         padding: 10,
 

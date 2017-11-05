@@ -54,7 +54,8 @@ class Sen {
       end: 'int',
       content: 'string',
       words: { type: 'list', objectType: 'Word' },
-      completed: { type: 'bool', optional: true },
+      completed_gap: { type: 'bool', optional: true },
+      completed_dict: { type: 'bool', optional: true },
       completed_date: { type: 'date', optional: true },
     }
   }

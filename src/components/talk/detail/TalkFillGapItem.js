@@ -18,7 +18,7 @@ import Video from 'react-native-video'; // eslint-disable-line
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 
-class TalkDictItem extends Component {
+class TalkFillGapItem extends Component {
 
     constructor(props) {
         super(props);
@@ -214,4 +214,4 @@ class TalkDictItem extends Component {
 }
 
 
-export default TalkDictItem;
+export default TalkFillGapItem;
