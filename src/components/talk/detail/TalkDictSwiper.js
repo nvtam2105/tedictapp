@@ -13,9 +13,7 @@ import {
 
 import { StyleProvider } from '@shoutem/theme';
 import defaultTheme from '../../../themes';
-
 import TalkDictItem from './TalkDictItem';
-import TalkFillGapItem from './TalkFillGapItem';
 
 
 class TalkDictSwiper extends Component {
@@ -29,21 +27,14 @@ class TalkDictSwiper extends Component {
                     {this.props.talk.script.sens.map((item, key) => {
 
                         return (
-                            this.props.isFillGap ? (<TalkFillGapItem
+                            <TalkDictItem
+                                isFillGap={this.props.isFillGap}
                                 sen={item}
                                 key={key}
                                 index={key + 1}
                                 total={this.props.talk.script.sens.length}
                                 media={this.props.talk.media} />)
-                                : (<TalkDictItem
-                                    sen={item}
-                                    key={key}
-                                    index={key + 1}
-                                    total={this.props.talk.script.sens.length}
-                                    media={this.props.talk.media} />)
-
-                        )
-                    })
+                        })
                     }
                 </Swiper>
             </StyleProvider>

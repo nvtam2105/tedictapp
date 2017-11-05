@@ -17,7 +17,7 @@ import defaultTheme from '../../../themes';
 class TalkDictList extends Component {
 
     componentDidMount() {
-        Actions.refresh({ title: 'Dict List' });
+        Actions.refresh({ title: this.props.talk.name });
     }
 
     render() {
@@ -31,11 +31,11 @@ class TalkDictList extends Component {
                                 {
                                     talk: this.props.talk,
                                     selectedIndex: index - 1,
-                                    isFillGap: false,
+                                    isFillGap: this.props.isFillGap,
                                 }
                             )
                         } >
-                            <Heading>{`${++index}`}</Heading>
+                            <Title>{`${++index}`}</Title>
                         </Button>
                     </View>)}
                     keyExtractor={item => item._id}

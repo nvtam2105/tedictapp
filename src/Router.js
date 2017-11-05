@@ -15,7 +15,6 @@ import TalkDetail from './components/talk/detail/TalkDetail';
 import TalkVideo from './components/talk/detail/TalkVideo';
 import TalkScript from './components/talk/detail/TalkScript';
 import TalkDictList from './components/talk/detail/TalkDictList';
-import TalkFillGapList from './components/talk/detail/TalkFillGapList';
 import TalkDictItem from './components/talk/detail/TalkDictItem';
 import TalkDictSwiper from './components/talk/detail/TalkDictSwiper';
 
@@ -158,7 +157,6 @@ const RouterComponent = () => {
                 <Scene key="talkVideo" component={TalkVideo} backTitle=" " />
                 <Scene key="talkScript" component={TalkScript} backTitle=" " />
                 <Scene key="talkDictList" component={TalkDictList} backTitle=" " />
-                <Scene key="talkFillGapList" component={TalkFillGapList} backTitle=" " />
                 <Scene key="talkDictItem" component={TalkDictItem} />
                 <Scene key="talkDictSwiper" component={TalkDictSwiper} backTitle=" " />
                 

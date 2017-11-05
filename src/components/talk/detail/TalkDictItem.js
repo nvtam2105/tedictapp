@@ -25,7 +25,10 @@ class TalkDictItem extends Component {
 
         this.state = {
             content: this.props.sen.content,
-            hiddenContent: this.props.sen.content.replace(/[a-zA-Z]/g, '_'),
+            hiddenContent: this.props.isFillGap ?
+                this.props.sen.content.replace(/(\b(\w{7,}))/g, function (text) {
+                    return text.replace(/[a-zA-Z]/g, '_');
+                }) : this.props.sen.content.replace(/[a-zA-Z]/g, '_'),
 
             isPlaying: true,
             isReplay: false,
@@ -89,9 +92,10 @@ class TalkDictItem extends Component {
                 this.setState({
                     hiddenContent: hiddenContent.substr(0, currentIndex) + content[currentIndex]
                     + hiddenContent.substr(currentIndex + content[currentIndex].length),
+
                 }, () => {
                     this.setState({
-                        currentIndex: this.state.hiddenContent.indexOf("_") === -1 ? 0 : this.state.hiddenContent.indexOf("_"),
+                        currentIndex: this.state.hiddenContent.indexOf("_") === -1 ? this.state.hiddenContent.length - 1 : this.state.hiddenContent.indexOf("_"),
                     });
                 });
             }
@@ -182,12 +186,8 @@ class TalkDictItem extends Component {
                                     maximumValue={2} minimumValue={0.0}
                                     onValueChange={(value) => this.onSliderChange(value)} />
 
-                                <View style={{
-                                    flex: 1,
-                                    flexDirection: 'row',
-                                    justifyContent: 'center',
-                                    alignItems: 'center',
-                                }}>
+                                <View styleName="horizontal stretch"
+                                    style={{ alignItems: 'center', flexDirection: 'row' }}>
                                     <TouchableOpacity onPress={this.onRateDown.bind(this)}>
                                         <Octicons name="triangle-down" size={30} />
                                     </TouchableOpacity>

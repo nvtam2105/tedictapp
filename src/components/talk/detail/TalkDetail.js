@@ -108,14 +108,13 @@ class TalkDetail extends Component {
 
     onPressTedictGap() {
         let talk = store.getTalkById(this.props.talk.id);
-        //Actions.talkDictItemSwiper({ talk: talk });
-        Actions.talkFillGapList({ talk: talk });
+        Actions.talkDictList({ talk: talk, isFillGap: true });
 
     }
 
     onPressTedict() {
         let talk = store.getTalkById(this.props.talk.id);
-        Actions.talkDictList({ talk: talk });
+        Actions.talkDictList({ talk: talk, isFillGap: false });
 
     }
 
