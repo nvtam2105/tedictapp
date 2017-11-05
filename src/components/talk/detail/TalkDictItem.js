@@ -4,12 +4,12 @@ import PropTypes from 'prop-types';
 
 import { StyleSheet, Platform, Keyboard, Alert, Slider, KeyboardAvoidingView } from "react-native";
 
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
 
 
 import {
-    ScrollView, Screen, Image, Divider, View, Row, Caption, Text,
-    Subtitle, Tile, Title, Overlay, Icon, Button, TextInput, TouchableOpacity
+    ScrollView, Screen, Image, Divider, View, Row, Caption, Text, TouchableOpacity,
+    Subtitle, Tile, Title, Overlay, Icon, Button, TextInput,
 } from '@shoutem/ui';
 
 
@@ -25,6 +25,8 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Octicons from 'react-native-vector-icons/Octicons';
 import Video from 'react-native-video'; // eslint-disable-line
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
 
 class TalkDictItem extends Component {
 
@@ -37,6 +39,7 @@ class TalkDictItem extends Component {
 
             isPlaying: true,
             isReplay: false,
+            volume: 1,
             rate: 1.0,
 
         }
@@ -44,6 +47,9 @@ class TalkDictItem extends Component {
         this.onKeyPress = this.onKeyPress.bind(this);
         this.onChangeText = this.onChangeText.bind(this);
         this.onPlayPress = this.onPlayPress.bind(this);
+        this.onSliderChange = this.onSliderChange.bind(this);
+        this.onRateDown = this.onRateDown.bind(this);
+        this.onRateUp = this.onRateUp.bind(this);
 
     }
 
@@ -122,6 +128,25 @@ class TalkDictItem extends Component {
         }
     }
 
+    onSliderChange(value) {
+        this.setState({
+            volume: value,
+        });
+
+    }
+
+    onRateUp() {
+        this.setState({
+            rate: this.state.rate + 0.1,
+        });
+    }
+
+    onRateDown() {
+        this.setState({
+            rate: this.state.rate > 0 ? this.state.rate - 0.1 : 0,
+        });
+    }
+
     render() {
         const { currentIndex, rate, isPlaying } = this.state;
         return (
@@ -155,22 +180,30 @@ class TalkDictItem extends Component {
                                         onLoad={this.onLoad.bind(this)}
                                         source={{ uri: 'file://' + this.props.media }}
                                         resizeMode={'cover'}
+                                        rate={this.state.rate}
+                                        volume={this.state.volume}
                                     />
                                 </TouchableOpacity>
                             </View>
                         </Row>
                         <Row>
-                            <View styleName="horizontal space-between">
-                                <Slider
-                                    style={{ width: 50 }}
-                                    //step={1}
-                                    onValueChange={(value) => Alert.alert(value)} />
+                            <View styleName="horizontal stretch space-between">
+                                <Slider step={0.2} value={this.state.volume} style={{ width: 100 }}
+                                    maximumValue={2} minimumValue={0.0}
+                                    onValueChange={(value) => this.onSliderChange(value)} />
 
-                                <Octicons name="triangle-down" size={30} />
-                                <Text>x1.0</Text>
-                                <Octicons name="triangle-up" size={30} />
+                                <TouchableOpacity onPress={this.onRateDown.bind(this)}>
+                                    <Octicons name="triangle-down" size={30} />
+                                </TouchableOpacity>
+
+                                <Text>{this.state.rate.toFixed(1)}x</Text>
+
+                                <TouchableOpacity onPress={this.onRateUp.bind(this)}>
+                                    <Octicons name="triangle-up" size={30} />
+                                </TouchableOpacity>
+
                                 <Button onPress={this.onPlayPress.bind(this)}>
-                                    <MaterialIcons name={this.state.isReplay ? 'replay' :(this.state.isPlaying ? 'pause' : 'play-arrow')} size={30} />
+                                    <MaterialIcons name={this.state.isReplay ? 'replay' : (this.state.isPlaying ? 'pause' : 'play-arrow')} size={30} />
                                 </Button>
                             </View>
                         </Row>
