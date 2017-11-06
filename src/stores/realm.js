@@ -54,9 +54,10 @@ class Sen {
       end: 'int',
       content: 'string',
       words: { type: 'list', objectType: 'Word' },
-      completed_gap: { type: 'bool', optional: true },
       completed_dict: { type: 'bool', optional: true },
-      completed_date: { type: 'date', optional: true },
+      completed_gap: { type: 'bool', optional: true },
+      completed_dict_date: { type: 'date', optional: true },
+      completed_gap_date: { type: 'date', optional: true },
     }
   }
 };
@@ -115,6 +116,27 @@ export const deleteTalk = (talk) => {
 export const getScripts = () => {
   const scripts = Script.get();//.sorted('-published_at', true)
   return scripts;
+}
+export const completedDict = (sen) => {
+  realm.write(() => {
+    try {
+        sen.completed_dict = true,
+        sen.completed_dict_date = new Date()
+    } catch (e) {
+      console.warn(e)
+    }
+  })
+}
+
+export const completedGap = (sen) => {
+  realm.write(() => {
+    try {
+        sen.completed_gap = true,
+        sen.completed_gap_date = new Date()
+    } catch (e) {
+      console.warn(e)
+    }
+  })
 }
 
 const realm = new Realm({ schema: [Talk, Script, Sen, Word] });

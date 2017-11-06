@@ -16,6 +16,13 @@ import defaultTheme from '../../../themes';
 
 class TalkDictList extends Component {
 
+    componentWillMount() {
+        this.setState({
+            sens: this.props.talk.script.sens,
+
+        });
+    }
+
     componentDidMount() {
         Actions.refresh({ title: this.props.talk.name });
     }
@@ -24,7 +31,7 @@ class TalkDictList extends Component {
         return (
             <StyleProvider style={defaultTheme()}>
                 <FlatList style={{ flex: 1 }}
-                    data={this.props.talk.script.sens}
+                    data={this.state.sens}
                     renderItem={({ item, index }) => (<View style={{ flex: 1 }}>
                         <Button styleName="full-width" onPress={() =>
                             Actions.talkDictSwiper(
@@ -32,10 +39,11 @@ class TalkDictList extends Component {
                                     talk: this.props.talk,
                                     selectedIndex: index - 1,
                                     isFillGap: this.props.isFillGap,
+                                    completed: this.props.isFillGap ? item.completed_gap : item.completed_dict
                                 }
                             )
                         } >
-                            <Title>{`${++index}`}</Title>
+                            <Title>{item.completed_dict ? 'OK' : `${++index}`}</Title>
                         </Button>
                     </View>)}
                     keyExtractor={item => item._id}

@@ -17,6 +17,7 @@ import Octicons from 'react-native-vector-icons/Octicons';
 import Video from 'react-native-video'; // eslint-disable-line
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
+import store from '../../../stores';
 
 class TalkDictItem extends Component {
 
@@ -25,10 +26,10 @@ class TalkDictItem extends Component {
 
         this.state = {
             content: this.props.sen.content,
-            hiddenContent: this.props.isFillGap ?
+            hiddenContent: this.props.completed ? this.props.sen.content : (this.props.isFillGap ?
                 this.props.sen.content.replace(/(\b(\w{7,}))/g, function (text) {
                     return text.replace(/[a-zA-Z]/g, '_');
-                }) : this.props.sen.content.replace(/[a-zA-Z]/g, '_'),
+                }) : this.props.sen.content.replace(/[a-zA-Z]/g, '_')),
 
             isPlaying: true,
             isReplay: false,
@@ -97,6 +98,17 @@ class TalkDictItem extends Component {
                     this.setState({
                         currentIndex: this.state.hiddenContent.indexOf("_") === -1 ? this.state.hiddenContent.length - 1 : this.state.hiddenContent.indexOf("_"),
                     });
+
+                    if(this.state.hiddenContent.indexOf("_") === -1 && this.props.isFillGap) {
+                        store.completedGap(this.props.sen); 
+                        //this.props.sen.completed_gap = true;
+                        //this.props.sen.completed_gap_date = new Date();
+                    } else {
+                        store.completedDict(this.props.sen);
+                        //this.props.sen.completed_dict = true;
+                        //this.props.sen.completed_dict_date = new Date();
+                    }   
+                        
                 });
             }
         }
@@ -115,8 +127,18 @@ class TalkDictItem extends Component {
                     + hiddenContent.substr(currentIndex + content[currentIndex].length),
                 }, () => {
                     this.setState({
-                        currentIndex: this.state.hiddenContent.indexOf("_") === -1 ? 0 : this.state.hiddenContent.indexOf("_"),
+                        currentIndex: this.state.hiddenContent.indexOf("_") === -1 ? this.state.hiddenContent.length - 1 : this.state.hiddenContent.indexOf("_"),
                     });
+                    
+                    if(this.state.hiddenContent.indexOf("_") === -1 && this.props.isFillGap) {
+                        store.completedGap(this.props.sen); 
+                        this.props.sen.completed_gap = true;
+                        this.props.sen.completed_gap_date = new Date();
+                    } else {
+                        store.completedDict(this.props.sen);
+                        this.props.sen.completed_dict = true;
+                        this.props.sen.completed_dict_date = new Date();
+                    }   
                 });
             }
         }
