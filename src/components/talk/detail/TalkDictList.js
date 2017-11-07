@@ -13,13 +13,13 @@ import {
 import { StyleProvider } from '@shoutem/theme';
 import defaultTheme from '../../../themes';
 
+import store from '../../../stores';
 
 class TalkDictList extends Component {
 
     componentWillMount() {
         this.setState({
-            sens: this.props.talk.script.sens,
-
+            talk: this.props.talk,
         });
     }
 
@@ -27,23 +27,34 @@ class TalkDictList extends Component {
         Actions.refresh({ title: this.props.talk.name });
     }
 
+
+    componentWillReceiveProps() {
+        this.setState({
+            talk: store.getTalkById(this.props.talk.id),
+        });
+    }
+
+
     render() {
         return (
             <StyleProvider style={defaultTheme()}>
                 <FlatList style={{ flex: 1 }}
-                    data={this.state.sens}
+                    data={this.state.talk.script.sens}
                     renderItem={({ item, index }) => (<View style={{ flex: 1 }}>
-                        <Button styleName="full-width" onPress={() =>
+                        <Button styleName="full-width" onPress={() => {
                             Actions.talkDictSwiper(
                                 {
-                                    talk: this.props.talk,
-                                    selectedIndex: index - 1,
+                                    talk: this.state.talk,
+                                    selectedIndex: index,
                                     isFillGap: this.props.isFillGap,
                                     completed: this.props.isFillGap ? item.completed_gap : item.completed_dict
                                 }
-                            )
+                            );
+                            }
                         } >
-                            <Title>{item.completed_dict ? 'OK' : `${++index}`}</Title>
+
+                            {!this.props.isFillGap && (<Title style={{ color: item.completed_dict ? 'red' : 'black' }}>{item.completed_dict ? "OK" : `${++index}`}</Title>)}
+                            {this.props.isFillGap && (<Title style={{ color: item.completed_gap ? 'red' : 'black' }}>{item.completed_gap ? "OK" : `${++index}`}</Title>)}
                         </Button>
                     </View>)}
                     keyExtractor={item => item._id}

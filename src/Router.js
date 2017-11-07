@@ -48,7 +48,7 @@ const actionRightButton = () => {
 const newestIcon = (props) => {
 
     return (<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 8 }}>
-        <MaterialIcons name="format-list-bulleted" color={props.focused ? '#900' : 'black'} size={25}/>
+        <MaterialIcons name="format-list-bulleted" color={props.focused ? '#900' : 'black'} size={25} />
         <Text style={{ fontSize: 11, color: props.focused ? '#900' : 'black' }}>Discover</Text>
     </View>);
 
@@ -57,14 +57,14 @@ const newestIcon = (props) => {
 const myListIcon = (props) => {
     //console.log(props);
     return (<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 8 }}>
-        <MaterialIcons name="star-border" color={props.focused ? '#900' : 'black'} size={25}/>
+        <MaterialIcons name="star-border" color={props.focused ? '#900' : 'black'} size={25} />
         <Text style={{ fontSize: 11, color: props.focused ? '#900' : 'black' }}>My Talks</Text>
     </View>);
 };
 
 const searchIcon = (props) => {
     return (<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 8 }}>
-        <MaterialIcons name="search" color={props.focused ? '#900' : 'black'} size={25}/>
+        <MaterialIcons name="search" color={props.focused ? '#900' : 'black'} size={25} />
         <Text style={{ fontSize: 11, color: props.focused ? '#900' : 'black' }}>Search</Text>
     </View>);
 };
@@ -79,7 +79,7 @@ const bookmarkIcon = (props) => {
 
 const notificationIcon = (props) => {
     return (<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 8 }}>
-        <MaterialIcons name="notifications-none" color={props.focused ? '#900' : 'black'} size={25}/>
+        <MaterialIcons name="notifications-none" color={props.focused ? '#900' : 'black'} size={25} />
         <Text style={{ fontSize: 11, color: props.focused ? '#900' : 'black' }}>Notifications</Text>
     </View>);
 };
@@ -141,13 +141,13 @@ const RouterComponent = () => {
                             <Scene key="nofitications" hideNavBar title="Notifications" component={TalkSearch} icon={notificationIcon}
                                 renderRightButton={rightButton} />
 
-                             {/* <Scene key="takSearch1" hideNavBar title="My Bookmark" component={TalkSearch} icon={bookmarkIcon}
+                            {/* <Scene key="takSearch1" hideNavBar title="My Bookmark" component={TalkSearch} icon={bookmarkIcon}
                                 renderRightButton={rightButton} /> */}
 
                             <Scene key="takSearch" hideNavBar title="Search" component={TalkSearch} icon={searchIcon}
                                 renderRightButton={rightButton} />
 
-                            
+
                         </Tabs>
                     </Scene>
                 </Drawer>
@@ -157,9 +157,11 @@ const RouterComponent = () => {
                 <Scene key="talkVideo" component={TalkVideo} backTitle=" " />
                 <Scene key="talkScript" component={TalkScript} backTitle=" " />
                 <Scene key="talkDictList" component={TalkDictList} backTitle=" " />
+                <Scene key="talkDictSwiper" component={TalkDictSwiper} backTitle=" "
+                    onBack={() => {console.log('back'); Actions.pop({ refresh: { test: true }})}} />
                 <Scene key="talkDictItem" component={TalkDictItem} />
-                <Scene key="talkDictSwiper" component={TalkDictSwiper} backTitle=" " />
-                
+
+
             </Scene>
         </Router>
     );

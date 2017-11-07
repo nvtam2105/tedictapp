@@ -99,16 +99,12 @@ class TalkDictItem extends Component {
                         currentIndex: this.state.hiddenContent.indexOf("_") === -1 ? this.state.hiddenContent.length - 1 : this.state.hiddenContent.indexOf("_"),
                     });
 
-                    if(this.state.hiddenContent.indexOf("_") === -1 && this.props.isFillGap) {
-                        store.completedGap(this.props.sen); 
-                        //this.props.sen.completed_gap = true;
-                        //this.props.sen.completed_gap_date = new Date();
-                    } else {
+                    if (this.state.hiddenContent.indexOf("_") === -1 && this.props.isFillGap) {
+                        store.completedGap(this.props.sen);
+                    } else if (this.state.hiddenContent.indexOf("_") === -1 && !this.props.isFillGap) {
                         store.completedDict(this.props.sen);
-                        //this.props.sen.completed_dict = true;
-                        //this.props.sen.completed_dict_date = new Date();
-                    }   
-                        
+                    }
+
                 });
             }
         }
@@ -129,16 +125,12 @@ class TalkDictItem extends Component {
                     this.setState({
                         currentIndex: this.state.hiddenContent.indexOf("_") === -1 ? this.state.hiddenContent.length - 1 : this.state.hiddenContent.indexOf("_"),
                     });
-                    
-                    if(this.state.hiddenContent.indexOf("_") === -1 && this.props.isFillGap) {
-                        store.completedGap(this.props.sen); 
-                        this.props.sen.completed_gap = true;
-                        this.props.sen.completed_gap_date = new Date();
-                    } else {
+
+                    if (this.state.hiddenContent.indexOf("_") === -1 && this.props.isFillGap) {
+                        store.completedGap(this.props.sen);
+                    } else if (this.state.hiddenContent.indexOf("_") === -1 && !this.props.isFillGap) {
                         store.completedDict(this.props.sen);
-                        this.props.sen.completed_dict = true;
-                        this.props.sen.completed_dict_date = new Date();
-                    }   
+                    }
                 });
             }
         }
