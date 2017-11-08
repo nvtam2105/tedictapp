@@ -26,7 +26,7 @@ class TalkDictItem extends Component {
 
         this.state = {
             content: this.props.sen.content,
-            hiddenContent: _initHiddenContent(),
+            hiddenContent: this._initHiddenContent(),
 
             isPlaying: true,
             isReplay: false,

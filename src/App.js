@@ -7,8 +7,8 @@ import thunk from 'redux-thunk';
 import Router from './Router';
 import reducers from './reducers';
 
-import initPushNotification from './PushController';
-import PushNotification from 'react-native-push-notification';
+//import initPushNotification from './PushController';
+//import PushNotification from 'react-native-push-notification';
 
 
 class App extends Component {
@@ -18,8 +18,7 @@ class App extends Component {
   }
 
   componentWillMount() {
-    initPushNotification();
-
+    //initPushNotification();
   }
   componentDidMount() {
     AppState.addEventListener('change', this.handleAppStateChange);
@@ -59,9 +58,7 @@ class App extends Component {
 
     return (
       <Provider store={store}>
-        {/* <KeyboardAvoidingView behavior={"padding"}> */}
           <Router />
-        {/* </KeyboardAvoidingView> */}
       </Provider >
     );
   }
