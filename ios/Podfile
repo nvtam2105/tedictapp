@@ -6,6 +6,7 @@ target 'tedictapp' do
   # use_frameworks!
   # Pods for tedictapp
   pod 'Google-Mobile-Ads-SDK'
+  pod 'FirebaseMessaging'
 
 end
 
