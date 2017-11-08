@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { PropTypes } from "react";
 import { StyleSheet, Text, View, ViewPropTypes, Image, TouchableWithoutFeedback } from "react-native";
-import Button from 'react-native-button';
 import { Actions } from 'react-native-router-flux';
 
 const contextTypes = {
