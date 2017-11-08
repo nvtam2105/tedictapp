@@ -22,7 +22,7 @@ import TalkDictSwiper from './components/talk/detail/TalkDictSwiper';
 import { Icon, Text, Image, View, Button, TouchableOpacity } from '@shoutem/ui';
 
 
-const menuIcon = (<Icon name="sidebar" size={30} />);
+const menuIcon = (<MaterialIcons name="menu" size={25} color={'#900'}/>);
 
 const backImage = (props) => {
     return FontAwesome.getImageSource('bars', 25).then(
