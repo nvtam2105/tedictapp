@@ -43,16 +43,29 @@ class TalkDictList extends Component {
                     renderItem={({ item, index }) => (<View style={{ flex: 1 }}>
                         <Button styleName="full-width" onPress={() => {
                             console.log('TalkDictList=' + index);
-                            Actions.talkDictSwiper(
-                                {
-                                    talk: this.state.talk,
-                                    selectedIndex: item.completed_gap || item.completed_dict ? index : index - 1,
-                                    isFillGap: this.props.isFillGap,
-                                    // /completed: this.props.isFillGap ? item.completed_gap : item.completed_dict
-                                }
-                            );
+                            {
+                                this.props.isFillGap && (
+                                    Actions.talkDictSwiper(
+                                        {
+                                            talk: this.state.talk,
+                                            selectedIndex: item.completed_gap ? index : index - 1,
+                                            isFillGap: this.props.isFillGap,
+                                        }
+                                    )
+                                )
                             }
-                        } >
+                            {
+                                !this.props.isFillGap && (
+                                    Actions.talkDictSwiper(
+                                        {
+                                            talk: this.state.talk,
+                                            selectedIndex: item.completed_dict ? index : index - 1,
+                                            isFillGap: this.props.isFillGap,
+                                        }
+                                    )
+                                )
+                            }
+                        }} >
 
                             {!this.props.isFillGap && (<Title style={{ color: item.completed_dict ? 'red' : 'black' }}>{item.completed_dict ? "OK" : `${++index}`}</Title>)}
                             {this.props.isFillGap && (<Title style={{ color: item.completed_gap ? 'red' : 'black' }}>{item.completed_gap ? "OK" : `${++index}`}</Title>)}

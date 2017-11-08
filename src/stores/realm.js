@@ -109,7 +109,11 @@ export const getTalks = () => {
 
 export const deleteTalk = (talk) => {
   realm.write(() => {
+    realm.delete(talk.script.sens)
+    realm.delete(talk.script)    
     realm.delete(talk)
+
+    
   })
 }
 
