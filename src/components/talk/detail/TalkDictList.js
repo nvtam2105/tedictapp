@@ -42,12 +42,13 @@ class TalkDictList extends Component {
                     data={this.state.talk.script.sens}
                     renderItem={({ item, index }) => (<View style={{ flex: 1 }}>
                         <Button styleName="full-width" onPress={() => {
+                            console.log('TalkDictList=' + index);
                             Actions.talkDictSwiper(
                                 {
                                     talk: this.state.talk,
-                                    selectedIndex: index,
+                                    selectedIndex: item.completed_gap || item.completed_dict ? index : index - 1,
                                     isFillGap: this.props.isFillGap,
-                                    completed: this.props.isFillGap ? item.completed_gap : item.completed_dict
+                                    // /completed: this.props.isFillGap ? item.completed_gap : item.completed_dict
                                 }
                             );
                             }

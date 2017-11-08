@@ -158,7 +158,7 @@ const RouterComponent = () => {
                 <Scene key="talkScript" component={TalkScript} backTitle=" " />
                 <Scene key="talkDictList" component={TalkDictList} backTitle=" " />
                 <Scene key="talkDictSwiper" component={TalkDictSwiper} backTitle=" "
-                    onBack={() => {console.log('back'); Actions.pop({ refresh: { test: true }})}} />
+                    onBack={() => {Actions.pop({ refresh: { test: Math.random() }})}} />
                 <Scene key="talkDictItem" component={TalkDictItem} />
 
 

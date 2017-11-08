@@ -26,7 +26,7 @@ class TalkDictItem extends Component {
 
         this.state = {
             content: this.props.sen.content,
-            hiddenContent: this.props.completed ? this.props.sen.content : (this.props.isFillGap ?
+            hiddenContent: this.props.sen.completed_gap || this.props.sen.completed_dict ? this.props.sen.content : (this.props.isFillGap ?
                 this.props.sen.content.replace(/(\b(\w{7,}))/g, function (text) {
                     return text.replace(/[a-zA-Z]/g, '_');
                 }) : this.props.sen.content.replace(/[a-zA-Z]/g, '_')),
@@ -55,7 +55,7 @@ class TalkDictItem extends Component {
     }
 
     componentDidMount() {
-        Actions.refresh({ title: `# ${this.props.index}/${this.props.total}` });
+        Actions.refresh({ title: `# ${this.props.index + 1}/${this.props.total}` });
     }
 
     componentWillUnmount() {

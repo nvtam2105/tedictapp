@@ -21,17 +21,18 @@ class TalkDictSwiper extends Component {
     render() {
         return (
             <StyleProvider style={defaultTheme()}>
-                <Swiper loop={false} index={this.props.selectedIndex > 0 ? this.props.selectedIndex : 0}
+                <Swiper loop={false} index={this.props.selectedIndex}
                     loadMinimal loadMinimalSize={0}
                     showsButtons={false} showsPagination={false} autoplay={false}>
                     {this.props.talk.script.sens.map((item, key) => {
-
+                        console.log('TalkDictSwiper-selectedIndex=' + this.props.selectedIndex);
+                        console.log('TalkDictSwiper-key=' + key);
                         return (
                             <TalkDictItem
                                 isFillGap={this.props.isFillGap}
                                 sen={item}
                                 key={key}
-                                index={key + 1}
+                                index={key}
                                 total={this.props.talk.script.sens.length}
                                 media={this.props.talk.media} />)
                         })
