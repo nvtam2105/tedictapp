@@ -8,11 +8,11 @@
  */
 
 #import "AppDelegate.h"
-
+#import "RNFIRMessaging.h"
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 #import <React/RCTPushNotificationManager.h>
-#import "RNFIRMessaging.h"
+
 
 @implementation AppDelegate
 

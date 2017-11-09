@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "950613902586",
+    "firebase_url": "https://tedict-app.firebaseio.com",
+    "project_id": "tedict-app",
+    "storage_bucket": "tedict-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:950613902586:android:36a9999d4a1593c7",
+        "android_client_info": {
+          "package_name": "com.tedictapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "950613902586-iqmf4epgqmtqncp9mfihmv1p392ka5a0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDef1MmEpdd2zRY4XIwUXg7b9zzSsC4kKY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

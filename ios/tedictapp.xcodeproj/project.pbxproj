@@ -72,6 +72,10 @@
 		DA3851AE7E514A65A3E5D87A /* Rubik-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B3638FA9554A46B28BDD98FF /* Rubik-Bold.ttf */; };
 		E06FEE3D68D94FAB9B158692 /* Rubik-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 774B0C4B8EB64DB3AB071F70 /* Rubik-LightItalic.ttf */; };
 		E164C7AFDEED41E3A0433F5A /* Rubik-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C195174B2C174444B5B6C39E /* Rubik-BlackItalic.ttf */; };
+		F745477E1FB453C50092FB68 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F7D9C6001FB428C0003CB755 /* GoogleService-Info.plist */; };
+		F74547AE1FB453CC0092FB68 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F7D9C6001FB428C0003CB755 /* GoogleService-Info.plist */; };
+		F74547AF1FB453CC0092FB68 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F7D9C6001FB428C0003CB755 /* GoogleService-Info.plist */; };
+		F74547B01FB453CD0092FB68 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F7D9C6001FB428C0003CB755 /* GoogleService-Info.plist */; };
 		F7D0897054204EE486AA4584 /* Rubik-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4CF1F1E0D651419C9848A23A /* Rubik-Regular.ttf */; };
 		FA8DCC0A17B14F11A4D6C492 /* Rubik-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F9C3B8AFB00A4EB2893084C1 /* Rubik-Medium.ttf */; };
 		FC4E3C346F2D47E1A06FE530 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04857CCF4E614ADE82DB517D /* Octicons.ttf */; };
@@ -498,6 +502,7 @@
 		E8194330C5CB4229917FB77F /* libc++.tbd */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		F253761E9E284182BA1F3FE2 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		F476CE36158B4128BC980282 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
+		F7D9C6001FB428C0003CB755 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F8606CDD79BC474A97A34C12 /* Rubik-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-Italic.ttf"; path = "../node_modules/@shoutem/ui/fonts/Rubik-Italic.ttf"; sourceTree = "<group>"; };
 		F9C3B8AFB00A4EB2893084C1 /* Rubik-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-Medium.ttf"; path = "../node_modules/@shoutem/ui/fonts/Rubik-Medium.ttf"; sourceTree = "<group>"; };
 		FDA20F968FAC40C7BC579471 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
@@ -657,6 +662,7 @@
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
+				F7D9C6001FB428C0003CB755 /* GoogleService-Info.plist */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
@@ -1518,6 +1524,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F74547AE1FB453CC0092FB68 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1538,6 +1545,7 @@
 				FC4E3C346F2D47E1A06FE530 /* Octicons.ttf in Resources */,
 				51253D7F0A0A42D6B4478FB3 /* SimpleLineIcons.ttf in Resources */,
 				4B41671B04A747DC9A017E07 /* Zocial.ttf in Resources */,
+				F745477E1FB453C50092FB68 /* GoogleService-Info.plist in Resources */,
 				2CF259D5ADF34504B1C6AB13 /* rubicon-icon-font.ttf in Resources */,
 				3C25413EB40D407EAC834A37 /* Rubik-Black.ttf in Resources */,
 				E164C7AFDEED41E3A0433F5A /* Rubik-BlackItalic.ttf in Resources */,
@@ -1558,6 +1566,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */,
+				F74547AF1FB453CC0092FB68 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1565,6 +1574,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F74547B01FB453CD0092FB68 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

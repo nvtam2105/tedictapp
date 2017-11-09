@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppState, Platform, KeyboardAvoidingView } from 'react-native';
+import { AppState, Platform, KeyboardAvoidingView, StyleSheet, Text, TouchableOpacity, View, Clipboard } from 'react-native';
 
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
@@ -7,181 +7,172 @@ import thunk from 'redux-thunk';
 import Router from './Router';
 import reducers from './reducers';
 
-//import initPushNotification from './PushController';
-//import PushNotification from 'react-native-push-notification';
-
-import FCM, { FCMEvent, RemoteNotificationResult, WillPresentNotificationResult, NotificationType } from 'react-native-fcm';
-
-// this shall be called regardless of app state: running, background or not running. Won't be called when app is killed by user in iOS
-FCM.on(FCMEvent.Notification, async (notif) => {
-  // there are two parts of notif. notif.notification contains the notification payload, notif.data contains data payload
-  if (notif.local_notification) {
-    //this is a local notification
-  }
-  if (notif.opened_from_tray) {
-    //iOS: app is open/resumed because user clicked banner
-    //Android: app is open/resumed because user clicked banner or tapped app icon
-  }
-  // await someAsyncCall();
-
-  if (Platform.OS === 'ios') {
-    //optional
-    //iOS requires developers to call completionHandler to end notification process. If you do not call it your background remote notifications could be throttled, to read more about it see the above documentation link.
-    //This library handles it for you automatically with default behavior (for remote notification, finish with NoData; for WillPresent, finish depend on "show_in_foreground"). However if you want to return different result, follow the following code to override
-    //notif._notificationType is available for iOS platfrom
-    switch (notif._notificationType) {
-      case NotificationType.Remote:
-        notif.finish(RemoteNotificationResult.NewData) //other types available: RemoteNotificationResult.NewData, RemoteNotificationResult.ResultFailed
-        break;
-      case NotificationType.NotificationResponse:
-        notif.finish();
-        break;
-      case NotificationType.WillPresent:
-        notif.finish(WillPresentNotificationResult.All) //other types available: WillPresentNotificationResult.None
-        break;
-    }
-  }
-});
-FCM.on(FCMEvent.RefreshToken, (token) => {
-  console.log(token)
-  // fcm token may not be available on first load, catch it here
-});
+import FCM from "react-native-fcm";
+import PushController from "./firebase/PushController";
+import firebaseClient from "./firebase/FirebaseClient";
 
 class App extends Component {
 
   constructor(props) {
     super(props);
-  }
 
-  otherMethods() {
-
-    FCM.subscribeToTopic('/topics/foo-bar');
-    FCM.unsubscribeFromTopic('/topics/foo-bar');
-    FCM.presentLocalNotification({
-      id: "UNIQ_ID_STRING",                               // (optional for instant notification)
-      title: "My Notification Title",                     // as FCM payload
-      body: "My Notification Message",                    // as FCM payload (required)
-      sound: "default",                                   // as FCM payload
-      priority: "high",                                   // as FCM payload
-      click_action: "ACTION",                             // as FCM payload
-      badge: 10,                                          // as FCM payload IOS only, set 0 to clear badges
-      number: 10,                                         // Android only
-      ticker: "My Notification Ticker",                   // Android only
-      auto_cancel: true,                                  // Android only (default true)
-      large_icon: "ic_launcher",                           // Android only
-      icon: "ic_launcher",                                // as FCM payload, you can relace this with custom icon you put in mipmap
-      big_text: "Show when notification is expanded",     // Android only
-      sub_text: "This is a subText",                      // Android only
-      color: "red",                                       // Android only
-      vibrate: 300,                                       // Android only default: 300, no vibration if you pass 0
-      group: "group",                                     // Android only
-      picture: "https://google.png",                      // Android only bigPicture style
-      ongoing: true,                                      // Android only
-      my_custom_data: 'my_custom_field_value',             // extra data you want to throw
-      lights: true,                                       // Android only, LED blinking (default false)
-      show_in_foreground                                  // notification when app is in foreground (local & remote)
-    });
-
-    FCM.scheduleLocalNotification({
-      fire_date: new Date().getTime(),      //RN's converter is used, accept epoch time and whatever that converter supports
-      id: "UNIQ_ID_STRING",    //REQUIRED! this is what you use to lookup and delete notification. In android notification with same ID will override each other
-      body: "from future past",
-      repeat_interval: "week" //day, hour
-    })
-
-    FCM.getScheduledLocalNotifications().then(notif => console.log(notif));
-
-    //these clears notification from notification center/tray
-    FCM.removeAllDeliveredNotifications()
-    FCM.removeDeliveredNotification("UNIQ_ID_STRING")
-
-    //these removes future local notifications
-    FCM.cancelAllLocalNotifications()
-    FCM.cancelLocalNotification("UNIQ_ID_STRING")
-
-    FCM.setBadgeNumber(1);                                       // iOS only and there's no way to set it in Android, yet.
-    FCM.getBadgeNumber().then(number => console.log(number));     // iOS only and there's no way to get it in Android, yet.
-    FCM.send('984XXXXXXXXX', {
-      my_custom_data_1: 'my_custom_field_value_1',
-      my_custom_data_2: 'my_custom_field_value_2'
-    });
-
-    FCM.deleteInstanceId()
-      .then(() => {
-        //Deleted instance id successfully
-        //This will reset Instance ID and revokes all tokens.
-      })
-      .catch(error => {
-        //Error while deleting instance id
-      });
-  }
-
-  componentWillMount() {
-    //initPushNotification();
-    // iOS: show permission prompt for the first call. later just check permission in user settings
-    // Android: check permission in user settings
-    FCM.requestPermissions().then(() => console.log('granted')).catch(() => console.log('notification permission rejected'));
-
-    FCM.getFCMToken().then(token => {
-      console.log(token)
-      // store fcm token in your server
-    });
-
-    this.notificationListener = FCM.on(FCMEvent.Notification, async (notif) => {
-      // optional, do some component related stuff
-    });
-
-    // initial notification contains the notification that launchs the app. If user launchs app by clicking banner, the banner notification info will be here rather than through FCM.on event
-    // sometimes Android kills activity when app goes to background, and when resume it broadcasts notification before JS is run. You can use FCM.getInitialNotification() to capture those missed events.
-    // initial notification will be triggered all the time even when open app by icon so send some action identifier when you send notification
-    FCM.getInitialNotification().then(notif => {
-      console.log(notif)
-    });
-  }
-  componentDidMount() {
-    AppState.addEventListener('change', this.handleAppStateChange);
-    // stop listening for events
-    this.notificationListener.remove();
-  }
-
-  componentWillUnmount() {
-    AppState.removeEventListener('change', this.handleAppStateChange);
-  }
-
-  handleAppStateChange(appState) {
-    if (appState === 'background') {
-      let date = new Date(Date.now() + (10 * 1000)) // in 60 secs
-
-      if (Platform.OS === 'ios') {
-        //date = date.toISOString();
-      }
-
-      // PushNotification.localNotificationSchedule({
-      //   message: "My Notification Message",
-      //   date,
-      // });
+    this.state = {
+      token: "",
+      tokenCopyFeedback: ""
     }
+  }
+
+  componentDidMount() {
+    FCM.getInitialNotification().then(notif => {
+      this.setState({
+        initNotif: notif
+      })
+    });
+  }
+
+  showLocalNotification() {
+    FCM.presentLocalNotification({
+      vibrate: 500,
+      title: 'Hello',
+      body: 'Test Notification',
+      big_text: 'i am large, i am large, i am large, i am large, i am large, i am large, i am large, i am large, i am large, i am large, i am large, i am large, i am large, i am large, i am large, i am large, i am large, i am large, i am large, i am large, i am large, i am large, i am large, i am large, i am large, i am large, i am large',
+      priority: "high",
+      sound: "bell.mp3",
+      large_icon: "https://image.freepik.com/free-icon/small-boy-cartoon_318-38077.jpg",
+      show_in_foreground: true,
+      number: 10
+    });
+  }
+
+  scheduleLocalNotification() {
+    FCM.scheduleLocalNotification({
+      id: 'testnotif',
+      fire_date: new Date().getTime() + 5000,
+      vibrate: 500,
+      title: 'Hello',
+      body: 'Test Scheduled Notification',
+      sub_text: 'sub text',
+      priority: "high",
+      large_icon: "https://image.freepik.com/free-icon/small-boy-cartoon_318-38077.jpg",
+      show_in_foreground: true,
+      picture: 'https://firebase.google.com/_static/af7ae4b3fc/images/firebase/lockup.png'
+    });
   }
 
   render() {
-    const logger = (store) => (next) => (action) => {
-      let previous = JSON.stringify(store.getState())
-      next(action)
-      // console.log(
-      //     'action: ' + JSON.stringify(action) +
-      //     '\n\tprevious: ' + previous +
-      //     '\n\tcurrent: ' + JSON.stringify(store.getState())
-      // )
-    }
+    // const logger = (store) => (next) => (action) => {
+    //   let previous = JSON.stringify(store.getState())
+    //   next(action)
+    //   // console.log(
+    //   //     'action: ' + JSON.stringify(action) +
+    //   //     '\n\tprevious: ' + previous +
+    //   //     '\n\tcurrent: ' + JSON.stringify(store.getState())
+    //   // )
+    // }
 
-    const store = createStore(reducers, {}, applyMiddleware(thunk, logger));
+    // const store = createStore(reducers, {}, applyMiddleware(thunk, logger));
+
+    // return (
+    //   <Provider store={store}>
+    //     <Router />
+    //   </Provider >
+    // );
+
+    let { token, tokenCopyFeedback } = this.state;
 
     return (
-      <Provider store={store}>
-        <Router />
-      </Provider >
+      <View style={styles.container}>
+        <PushController
+          onChangeToken={token => this.setState({ token: token || "" })}
+        />
+        <Text style={styles.welcome}>
+          Welcome to Simple Fcm Client!
+        </Text>
+
+        <Text>
+          Init notif: {JSON.stringify(this.state.initNotif)}
+
+        </Text>
+
+        <Text selectable={true} onPress={() => this.setClipboardContent(this.state.token)} style={styles.instructions}>
+          Token: {this.state.token}
+        </Text>
+
+        <Text style={styles.feedback}>
+          {this.state.tokenCopyFeedback}
+        </Text>
+
+        <Text style={styles.feedback}>
+          Remote notif won't be available to iOS emulators
+        </Text>
+
+        <TouchableOpacity onPress={() => firebaseClient.sendNotification(token)} style={styles.button}>
+          <Text style={styles.buttonText}>Send Notification</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => firebaseClient.sendData(token)} style={styles.button}>
+          <Text style={styles.buttonText}>Send Data</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => firebaseClient.sendNotificationWithData(token)} style={styles.button}>
+          <Text style={styles.buttonText}>Send Notification With Data</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => this.showLocalNotification()} style={styles.button}>
+          <Text style={styles.buttonText}>Send Local Notification</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => this.scheduleLocalNotification()} style={styles.button}>
+          <Text style={styles.buttonText}>Schedule Notification in 5s</Text>
+        </TouchableOpacity>
+      </View>
     );
   }
+
+  setClipboardContent(text) {
+    Clipboard.setString(text);
+    this.setState({ tokenCopyFeedback: "Token copied to clipboard." });
+    setTimeout(() => { this.clearTokenCopyFeedback() }, 2000);
+  }
+
+  clearTokenCopyFeedback() {
+    this.setState({ tokenCopyFeedback: "" });
+  }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+  },
+  welcome: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
+  },
+  instructions: {
+    textAlign: 'center',
+    color: '#333333',
+    marginBottom: 2,
+  },
+  feedback: {
+    textAlign: 'center',
+    color: '#996633',
+    marginBottom: 3,
+  },
+  button: {
+    backgroundColor: "teal",
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    marginVertical: 15,
+    borderRadius: 10
+  },
+  buttonText: {
+    color: "white",
+    backgroundColor: "transparent"
+  },
+});
 
 export default App;
