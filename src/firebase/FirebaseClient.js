@@ -81,7 +81,7 @@ class FirebaseClient {
 		// }
   	let headers = new Headers({
   		"Content-Type": "application/json",
-      "Authorization": "key=" + Platform.OS === 'android' ? FirebaseConstants.KEY_ANDROID : FirebaseConstants.KEY
+      "Authorization": "key=" + FirebaseConstants.KEY
   	});
 
 		try {
