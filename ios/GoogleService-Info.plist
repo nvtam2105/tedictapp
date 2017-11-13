@@ -7,9 +7,9 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>950613902586-i5rf3b4vlo1ovlf2u3hijlh5fe8jnnru.apps.googleusercontent.com</string>
+	<string>950613902586-c46osif4ubkjq71c872dieqs6tdik3qu.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.950613902586-i5rf3b4vlo1ovlf2u3hijlh5fe8jnnru</string>
+	<string>com.googleusercontent.apps.950613902586-c46osif4ubkjq71c872dieqs6tdik3qu</string>
 	<key>API_KEY</key>
 	<string>AIzaSyCf2y0nW56CTkzm9Fs8OdqDGpoVHwBSBFA</string>
 	<key>GCM_SENDER_ID</key>
@@ -17,7 +17,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>org.react.native.example.tedictapp.wse</string>
+	<string>org.react.native.tedictapp</string>
 	<key>PROJECT_ID</key>
 	<string>tedict-app</string>
 	<key>STORAGE_BUCKET</key>
@@ -33,7 +33,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:950613902586:ios:bd4b0e258e69868d</string>
+	<string>1:950613902586:ios:787bd33df352a461</string>
 	<key>DATABASE_URL</key>
 	<string>https://tedict-app.firebaseio.com</string>
 </dict>
