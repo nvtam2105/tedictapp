@@ -11,8 +11,20 @@ import FCM from "react-native-fcm";
 import PushController from "./firebase/PushController";
 import firebaseClient from "./firebase/FirebaseClient";
 
+import store from './stores';
+
 class App extends Component {
-  
+
+  componentWillMount() {
+    store.getItem('firstLaunch').then((value) => {
+      this.setState({
+        firstLaunch: value !== null || value === 'true'
+      })
+    });
+
+
+  }
+
   render() {
     const logger = (store) => (next) => (action) => {
       let previous = JSON.stringify(store.getState())
@@ -28,7 +40,7 @@ class App extends Component {
 
     return (
       <Provider store={store}>
-        <Router />
+        <Router firstLaunch={this.state.firstLaunch === null} />
       </Provider >
     );
   }

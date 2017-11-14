@@ -6,6 +6,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Foundation from 'react-native-vector-icons/Foundation';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
+import AppIntro from './components/intro/AppIntro';
 import SlideMenu from './components/menu/SlideMenu';
 import HomePage from './components/home/HomePage';
 import TalkNewestList from './components/talk/home/TalkNewestList';
@@ -22,7 +23,8 @@ import TalkDictSwiper from './components/talk/detail/TalkDictSwiper';
 import { Icon, Text, Image, View, Button, TouchableOpacity } from '@shoutem/ui';
 
 
-const menuIcon = (<MaterialIcons name="menu" size={25} color={'#900'}/>);
+
+const menuIcon = (<MaterialIcons name="menu" size={25} color={'#900'} />);
 
 const backImage = (props) => {
     return FontAwesome.getImageSource('bars', 25).then(
@@ -104,10 +106,17 @@ const styles = StyleSheet.create({
     },
 });
 
-const RouterComponent = () => {
+const RouterComponent = (firstLaunch) => {
+    console.log(firstLaunch);
     return (
         <Router>
             <Scene key="root">
+
+                
+                    <Scene key="appIntro" component={AppIntro} hideNavBar initial={firstLaunch} />
+                
+
+
                 <Drawer hideNavBar key="drawer" contentComponent={SlideMenu} drawerIcon={menuIcon}
                     openDrawerOffset={10}>
                     {/* <Scene key="home">
@@ -129,6 +138,7 @@ const RouterComponent = () => {
                         >
 
                             <Scene key="TalkNewestList" title="Discover" component={TalkNewestList} icon={newestIcon}
+                            initial
                             //renderRightButton={rightButton} 
                             />
 
@@ -153,12 +163,13 @@ const RouterComponent = () => {
                 </Drawer>
 
 
+
                 <Scene key="talkDetail" component={TalkDetail} backTitle=" " />
                 <Scene key="talkVideo" component={TalkVideo} backTitle=" " />
                 <Scene key="talkScript" component={TalkScript} backTitle=" " />
                 <Scene key="talkDictList" component={TalkDictList} backTitle=" " />
                 <Scene key="talkDictSwiper" component={TalkDictSwiper} backTitle=" "
-                    onBack={() => {Actions.pop({ refresh: { test: Math.random() }})}} />
+                    onBack={() => { Actions.pop({ refresh: { test: Math.random() } }) }} />
                 <Scene key="talkDictItem" component={TalkDictItem} />
 
 
