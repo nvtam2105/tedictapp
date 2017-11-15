@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { StyleSheet, Alert } from "react-native";
+import { StyleSheet, Alert, ActivityIndicator } from "react-native";
 import { Scene, Router, Drawer, Tabs, Stack, Actions } from 'react-native-router-flux';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -21,7 +21,7 @@ import TalkDictItem from './components/talk/detail/TalkDictItem';
 import TalkDictSwiper from './components/talk/detail/TalkDictSwiper';
 
 
-import { Icon, Text, Image, View, Button, TouchableOpacity, ActivityIndicator } from '@shoutem/ui';
+import { Icon, Text, Image, View, Button, TouchableOpacity } from '@shoutem/ui';
 
 import store from './stores';
 
@@ -114,31 +114,28 @@ class RouterComponent extends Component {
         super(props);
         this.state = {
             firstLaunch: true,
-            checkFirstLaunch: false,
+            loading: false,
         };
     };
 
     componentWillMount() {
-        //console.log(firstLaunch);
-        //let firstLaunch = null;
         store.getItem('firstLaunch').then((value) => {
             if (value && value === 'false') {
                 this.setState({
                     firstLaunch: false,
-                    checkFirstLaunch: true,
+                    loading: true,
                 });
             } else {
                 this.setState({
-                    firstLaunch: true,
-                    checkFirstLaunch: true,
+                    loading: true,
                 });
             }
         });
 
     }
     render() {
-        if (!this.state.checkFirstLaunch) {
-            return null;
+        if (!this.state.loading) {
+            return <View style={{alignItems: 'center', justifyContent: 'center', flex: 1}}><ActivityIndicator animating size="large" /></View>;;
         } else {
             return (
                 <Router>
