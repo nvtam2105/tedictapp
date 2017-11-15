@@ -44,7 +44,7 @@ class TalkDetail extends Component {
     }
 
     componentDidMount() {
-        //Actions.refresh({ title: this.props.talk.name });
+        Actions.refresh({ title: this.props.talk.name });
         if (!this.props.persisted && this.props.talk.has_sub) {
             this.props.scriptFetch(this.props.talk.id);
         }

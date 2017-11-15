@@ -135,17 +135,12 @@ class RouterComponent extends Component {
     }
     render() {
         if (!this.state.loading) {
-            return <View style={{alignItems: 'center', justifyContent: 'center', flex: 1}}><ActivityIndicator animating size="large" /></View>;;
+            return <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}><ActivityIndicator animating size="large" /></View>;;
         } else {
             return (
                 <Router>
                     <Scene key="root">
-
-
                         <Scene key="appIntro" component={AppIntro} hideNavBar initial={this.state.firstLaunch} />
-
-
-
                         <Drawer hideNavBar key="drawer" contentComponent={SlideMenu} drawerIcon={menuIcon}
                             initial={!this.state.firstLaunch}
                             openDrawerOffset={10}>
@@ -153,8 +148,6 @@ class RouterComponent extends Component {
                         <Scene key="homePage" component={HomePage} initial />
 
                     </Scene> */}
-
-
                             <Scene hideNavBar >
                                 <Tabs
                                     tabBarPosition="bottom"
@@ -191,8 +184,6 @@ class RouterComponent extends Component {
                                 </Tabs>
                             </Scene>
                         </Drawer>
-
-
 
                         <Scene key="talkDetail" component={TalkDetail} backTitle=" " />
                         <Scene key="talkVideo" component={TalkVideo} backTitle=" " />
