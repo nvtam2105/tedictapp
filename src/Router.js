@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Component } from 'react';
+
 import { StyleSheet, Alert } from "react-native";
 import { Scene, Router, Drawer, Tabs, Stack, Actions } from 'react-native-router-flux';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
@@ -20,8 +21,9 @@ import TalkDictItem from './components/talk/detail/TalkDictItem';
 import TalkDictSwiper from './components/talk/detail/TalkDictSwiper';
 
 
-import { Icon, Text, Image, View, Button, TouchableOpacity } from '@shoutem/ui';
+import { Icon, Text, Image, View, Button, TouchableOpacity, ActivityIndicator } from '@shoutem/ui';
 
+import store from './stores';
 
 
 const menuIcon = (<MaterialIcons name="menu" size={25} color={'#900'} />);
@@ -106,76 +108,109 @@ const styles = StyleSheet.create({
     },
 });
 
-const RouterComponent = (firstLaunch) => {
-    console.log(firstLaunch);
-    return (
-        <Router>
-            <Scene key="root">
+class RouterComponent extends Component {
 
-                
-                    <Scene key="appIntro" component={AppIntro} hideNavBar initial={firstLaunch} />
-                
+    constructor(props) {
+        super(props);
+        this.state = {
+            firstLaunch: true,
+            checkFirstLaunch: false,
+        };
+    };
+
+    componentWillMount() {
+        //console.log(firstLaunch);
+        //let firstLaunch = null;
+        store.getItem('firstLaunch').then((value) => {
+            if (value && value === 'false') {
+                this.setState({
+                    firstLaunch: false,
+                    checkFirstLaunch: true,
+                });
+            } else {
+                this.setState({
+                    firstLaunch: true,
+                    checkFirstLaunch: true,
+                });
+            }
+        });
+
+    }
+    render() {
+        if (!this.state.checkFirstLaunch) {
+            return null;
+        } else {
+            return (
+                <Router>
+                    <Scene key="root">
 
 
-                <Drawer hideNavBar key="drawer" contentComponent={SlideMenu} drawerIcon={menuIcon}
-                    openDrawerOffset={10}>
-                    {/* <Scene key="home">
+                        <Scene key="appIntro" component={AppIntro} hideNavBar initial={this.state.firstLaunch} />
+
+
+
+                        <Drawer hideNavBar key="drawer" contentComponent={SlideMenu} drawerIcon={menuIcon}
+                            initial={!this.state.firstLaunch}
+                            openDrawerOffset={10}>
+                            {/* <Scene key="home">
                         <Scene key="homePage" component={HomePage} initial />
 
                     </Scene> */}
 
 
-                    <Scene hideNavBar>
-                        <Tabs
-                            tabBarPosition="bottom"
-                            key="tabbar"
-                            swipeEnabled={false}
-                            showLabel={false}
-                        //tabBarStyle={styles.tabBarStyle}
+                            <Scene hideNavBar >
+                                <Tabs
+                                    tabBarPosition="bottom"
+                                    key="tabbar"
+                                    swipeEnabled={false}
+                                    showLabel={false}
+                                //tabBarStyle={styles.tabBarStyle}
 
-                        //inactiveBackgroundColor="rgba(255, 0, 0, 0.5)"
-                        //activeBackgroundColor="white"
-                        >
+                                //inactiveBackgroundColor="rgba(255, 0, 0, 0.5)"
+                                //activeBackgroundColor="white"
+                                >
 
-                            <Scene key="TalkNewestList" title="Discover" component={TalkNewestList} icon={newestIcon}
-                            initial
-                            //renderRightButton={rightButton} 
-                            />
+                                    <Scene key="TalkNewestList" title="Discover" component={TalkNewestList} icon={newestIcon}
 
-                            <Scene key="talkMarkList" title="My Talks" component={TalkMarkList} icon={myListIcon}
-                            //onRight={() => Actions.searchTalk()}
-                            //rightTitle="right"
-                            //renderRightButton={rightButton}
-                            />
+                                    //renderRightButton={rightButton} 
+                                    />
 
-                            <Scene key="nofitications" hideNavBar title="Notifications" component={TalkSearch} icon={notificationIcon}
-                                renderRightButton={rightButton} />
+                                    <Scene key="talkMarkList" title="My Talks" component={TalkMarkList} icon={myListIcon}
+                                    //onRight={() => Actions.searchTalk()}
+                                    //rightTitle="right"
+                                    //renderRightButton={rightButton}
+                                    />
 
-                            {/* <Scene key="takSearch1" hideNavBar title="My Bookmark" component={TalkSearch} icon={bookmarkIcon}
+                                    <Scene key="nofitications" hideNavBar title="Notifications" component={TalkSearch} icon={notificationIcon}
+                                        renderRightButton={rightButton} />
+
+                                    {/* <Scene key="takSearch1" hideNavBar title="My Bookmark" component={TalkSearch} icon={bookmarkIcon}
                                 renderRightButton={rightButton} /> */}
 
-                            <Scene key="takSearch" hideNavBar title="Search" component={TalkSearch} icon={searchIcon}
-                                renderRightButton={rightButton} />
+                                    <Scene key="takSearch" hideNavBar title="Search" component={TalkSearch} icon={searchIcon}
+                                        renderRightButton={rightButton} />
 
 
-                        </Tabs>
+                                </Tabs>
+                            </Scene>
+                        </Drawer>
+
+
+
+                        <Scene key="talkDetail" component={TalkDetail} backTitle=" " />
+                        <Scene key="talkVideo" component={TalkVideo} backTitle=" " />
+                        <Scene key="talkScript" component={TalkScript} backTitle=" " />
+                        <Scene key="talkDictList" component={TalkDictList} backTitle=" " />
+                        <Scene key="talkDictSwiper" component={TalkDictSwiper} backTitle=" "
+                            onBack={() => { Actions.pop({ refresh: { test: Math.random() } }) }} />
+                        <Scene key="talkDictItem" component={TalkDictItem} />
+
+
                     </Scene>
-                </Drawer>
-
-
-
-                <Scene key="talkDetail" component={TalkDetail} backTitle=" " />
-                <Scene key="talkVideo" component={TalkVideo} backTitle=" " />
-                <Scene key="talkScript" component={TalkScript} backTitle=" " />
-                <Scene key="talkDictList" component={TalkDictList} backTitle=" " />
-                <Scene key="talkDictSwiper" component={TalkDictSwiper} backTitle=" "
-                    onBack={() => { Actions.pop({ refresh: { test: Math.random() } }) }} />
-                <Scene key="talkDictItem" component={TalkDictItem} />
-
-
-            </Scene>
-        </Router>
-    );
+                </Router>
+            );
+        }
+    }
 };
 
 export default RouterComponent;

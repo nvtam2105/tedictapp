@@ -15,15 +15,15 @@ import store from './stores';
 
 class App extends Component {
 
-  componentWillMount() {
-    store.getItem('firstLaunch').then((value) => {
-      this.setState({
-        firstLaunch: value !== null || value === 'true'
-      })
-    });
+  // componentWillMount() {
+  //   store.getItem('firstLaunch').then((value) => {
+  //     this.setState({
+  //       firstLaunch: value !== null || value === 'true'
+  //     })
+  //   });
 
 
-  }
+  // }
 
   render() {
     const logger = (store) => (next) => (action) => {
@@ -40,7 +40,7 @@ class App extends Component {
 
     return (
       <Provider store={store}>
-        <Router firstLaunch={this.state.firstLaunch === null} />
+        <Router />
       </Provider >
     );
   }
