@@ -7,11 +7,11 @@ import thunk from 'redux-thunk';
 import Router from './Router';
 import reducers from './reducers';
 
-import FCM from "react-native-fcm";
-import PushController from "./firebase/PushController";
-import firebaseClient from "./firebase/FirebaseClient";
+// import FCM from "react-native-fcm";
+// import PushController from "./firebase/PushController";
+// import firebaseClient from "./firebase/FirebaseClient";
 
-import AndroidPay from "./AndroidPay";
+import PurchaseApp from "./PurchaseApp";
 
 import store from './stores';
 
@@ -36,7 +36,7 @@ class App extends Component {
     //   </Provider >
     // );
     return (
-      <AndroidPay />
+      <PurchaseApp />
     );
   }
 }

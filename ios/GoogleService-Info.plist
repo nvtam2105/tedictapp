@@ -7,21 +7,21 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>950613902586-c46osif4ubkjq71c872dieqs6tdik3qu.apps.googleusercontent.com</string>
+	<string>950574290181-4s6jqjcf0b4ge7ukc4u8qvkrm8emlcc1.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.950613902586-c46osif4ubkjq71c872dieqs6tdik3qu</string>
+	<string>com.googleusercontent.apps.950574290181-4s6jqjcf0b4ge7ukc4u8qvkrm8emlcc1</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCf2y0nW56CTkzm9Fs8OdqDGpoVHwBSBFA</string>
+	<string>AIzaSyDn2FR_k7FEWKR7rPmU4eJCvVXzzTUvHn8</string>
 	<key>GCM_SENDER_ID</key>
-	<string>950613902586</string>
+	<string>950574290181</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>org.react.native.tedictapp</string>
+	<string>com.tinyworld.tedictapp</string>
 	<key>PROJECT_ID</key>
-	<string>tedict-app</string>
+	<string>tinyworld-tedictapp</string>
 	<key>STORAGE_BUCKET</key>
-	<string>tedict-app.appspot.com</string>
+	<string>tinyworld-tedictapp.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<true/>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -33,8 +33,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:950613902586:ios:787bd33df352a461</string>
+	<string>1:950574290181:ios:5367a5f923b8fa13</string>
 	<key>DATABASE_URL</key>
-	<string>https://tedict-app.firebaseio.com</string>
+	<string>https://tinyworld-tedictapp.firebaseio.com</string>
 </dict>
 </plist>
