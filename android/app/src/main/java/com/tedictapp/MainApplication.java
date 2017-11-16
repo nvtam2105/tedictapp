@@ -3,6 +3,7 @@ package com.tedictapp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.idehub.Billing.InAppBillingBridgePackage;
 import com.evollu.react.fcm.FIRMessagingPackage;
 import com.reactnative.photoview.PhotoViewPackage;
 import cl.json.RNSharePackage;
@@ -34,6 +35,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new InAppBillingBridgePackage(),
             new FIRMessagingPackage(),
             new RNAdMobPackage(),
             new PhotoViewPackage(),

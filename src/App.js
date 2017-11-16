@@ -11,19 +11,11 @@ import FCM from "react-native-fcm";
 import PushController from "./firebase/PushController";
 import firebaseClient from "./firebase/FirebaseClient";
 
+import AndroidPay from "./AndroidPay";
+
 import store from './stores';
 
 class App extends Component {
-
-  // componentWillMount() {
-  //   store.getItem('firstLaunch').then((value) => {
-  //     this.setState({
-  //       firstLaunch: value !== null || value === 'true'
-  //     })
-  //   });
-
-
-  // }
 
   render() {
     const logger = (store) => (next) => (action) => {
@@ -36,12 +28,15 @@ class App extends Component {
       // )
     }
 
-    const store = createStore(reducers, {}, applyMiddleware(thunk, logger));
+    // const store = createStore(reducers, {}, applyMiddleware(thunk, logger));
 
+    // return (
+    //   <Provider store={store}>
+    //     <Router />
+    //   </Provider >
+    // );
     return (
-      <Provider store={store}>
-        <Router />
-      </Provider >
+      <AndroidPay />
     );
   }
 }
