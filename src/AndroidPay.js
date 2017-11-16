@@ -15,14 +15,14 @@ class AndroidPay extends Component {
    
 
 
-    componentDidMount() {
+    componentWillMount() {
         InAppBilling.open().
-        then(() => InAppBilling.purchase('android.test.canceled'))
+        then(() => InAppBilling.purchase('android.test.purchased'))
         .then((details) => {
           this.setState({
             purchaseText: details.productId
           });
-          return InAppBilling.getProductDetails('android.test.canceled');
+          return InAppBilling.getProductDetails('android.test.purchased');
         })
         .then((productDetails) => {
           this.setState({

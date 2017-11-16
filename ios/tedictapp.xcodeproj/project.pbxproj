@@ -55,6 +55,7 @@
 		8AE3025CC8CB4EEA8F9CD9A9 /* libRealmReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B87F16F35DDC43DD8850D414 /* libRealmReact.a */; };
 		8D53393FE4A34258A8B0F818 /* Rubik-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B3E280F29A004353AA874F72 /* Rubik-MediumItalic.ttf */; };
 		8DF1DE0BE74F4256B7D4BCBA /* libRCTVideo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C6622410563491A9405582A /* libRCTVideo.a */; };
+		8EC94DF2B08C4D5A86640CEA /* libInAppUtils.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 046A01095FE34D2B80A5C1C8 /* libInAppUtils.a */; };
 		95C598CBFE454E53B7C4E459 /* Rubik-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F8606CDD79BC474A97A34C12 /* Rubik-Italic.ttf */; };
 		9933018742AF4309982E7825 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F253761E9E284182BA1F3FE2 /* Feather.ttf */; };
 		AC1E832248924120A04C3A66 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C6A10E2EA5DD42E6A9589DA2 /* Ionicons.ttf */; };
@@ -78,7 +79,6 @@
 		F7D0897054204EE486AA4584 /* Rubik-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4CF1F1E0D651419C9848A23A /* Rubik-Regular.ttf */; };
 		FA8DCC0A17B14F11A4D6C492 /* Rubik-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F9C3B8AFB00A4EB2893084C1 /* Rubik-Medium.ttf */; };
 		FC4E3C346F2D47E1A06FE530 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04857CCF4E614ADE82DB517D /* Octicons.ttf */; };
-		8EC94DF2B08C4D5A86640CEA /* libInAppUtils.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 046A01095FE34D2B80A5C1C8 /* libInAppUtils.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -425,6 +425,20 @@
 			remoteGlobalIDString = 358F4ED71D1E81A9004DF814;
 			remoteInfo = RCTBlob;
 		};
+		F7C87BF81FBD39AC0006349C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BB744487F2D84A18822AB8E1 /* InAppUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 46E694321B289730000B634E;
+			remoteInfo = InAppUtils;
+		};
+		F7C87BFA1FBD39AC0006349C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BB744487F2D84A18822AB8E1 /* InAppUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 46E6943D1B289730000B634E;
+			remoteInfo = InAppUtilsTests;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -438,6 +452,7 @@
 		00E356EE1AD99517003FC87E /* tedictappTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = tedictappTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* tedictappTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = tedictappTests.m; sourceTree = "<group>"; };
+		046A01095FE34D2B80A5C1C8 /* libInAppUtils.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libInAppUtils.a; sourceTree = "<group>"; };
 		04857CCF4E614ADE82DB517D /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		05B3AB3B710B4DD4AEEC7371 /* libRNShare.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNShare.a; sourceTree = "<group>"; };
 		0EADE4A87E3E4E50956387D6 /* RealmReact.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RealmReact.xcodeproj; path = "../node_modules/realm/react-native/ios/RealmReact.xcodeproj"; sourceTree = "<group>"; };
@@ -488,6 +503,7 @@
 		B3638FA9554A46B28BDD98FF /* Rubik-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-Bold.ttf"; path = "../node_modules/@shoutem/ui/fonts/Rubik-Bold.ttf"; sourceTree = "<group>"; };
 		B3E280F29A004353AA874F72 /* Rubik-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-MediumItalic.ttf"; path = "../node_modules/@shoutem/ui/fonts/Rubik-MediumItalic.ttf"; sourceTree = "<group>"; };
 		B87F16F35DDC43DD8850D414 /* libRealmReact.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRealmReact.a; sourceTree = "<group>"; };
+		BB744487F2D84A18822AB8E1 /* InAppUtils.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = InAppUtils.xcodeproj; path = "../node_modules/react-native-in-app-utils/InAppUtils.xcodeproj"; sourceTree = "<group>"; };
 		C0956CD7AB6340A08B44BBED /* libBVLinearGradient.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libBVLinearGradient.a; sourceTree = "<group>"; };
 		C195174B2C174444B5B6C39E /* Rubik-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-BlackItalic.ttf"; path = "../node_modules/@shoutem/ui/fonts/Rubik-BlackItalic.ttf"; sourceTree = "<group>"; };
 		C34525D1AD0C46A0A9EAD628 /* libReactNativeConfig.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libReactNativeConfig.a; sourceTree = "<group>"; };
@@ -506,8 +522,6 @@
 		F8606CDD79BC474A97A34C12 /* Rubik-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-Italic.ttf"; path = "../node_modules/@shoutem/ui/fonts/Rubik-Italic.ttf"; sourceTree = "<group>"; };
 		F9C3B8AFB00A4EB2893084C1 /* Rubik-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-Medium.ttf"; path = "../node_modules/@shoutem/ui/fonts/Rubik-Medium.ttf"; sourceTree = "<group>"; };
 		FDA20F968FAC40C7BC579471 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
-		BB744487F2D84A18822AB8E1 /* InAppUtils.xcodeproj */ = {isa = PBXFileReference; name = "InAppUtils.xcodeproj"; path = "../node_modules/react-native-in-app-utils/InAppUtils.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		046A01095FE34D2B80A5C1C8 /* libInAppUtils.a */ = {isa = PBXFileReference; name = "libInAppUtils.a"; path = "libInAppUtils.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -730,6 +744,7 @@
 				DC995C5D7D09492086B1ACDA /* libRNPhotoView.a */,
 				D789050449DC46F484F92F10 /* libRNAdMobManager.a */,
 				A6A1618CF4CD447E955C438B /* libRNFIRMessaging.a */,
+				046A01095FE34D2B80A5C1C8 /* libInAppUtils.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -955,6 +970,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		F7C87BF41FBD39AC0006349C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F7C87BF91FBD39AC0006349C /* libInAppUtils.a */,
+				F7C87BFB1FBD39AC0006349C /* InAppUtilsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1049,7 +1073,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = 7T9Z23973T;
+						DevelopmentTeam = 6LXR55NVD3;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -1092,6 +1116,10 @@
 				{
 					ProductGroup = 23CC8D131F9CE8B0007098DA /* Products */;
 					ProjectRef = 84022A3FE4CB4FADB06F82D8 /* BVLinearGradient.xcodeproj */;
+				},
+				{
+					ProductGroup = F7C87BF41FBD39AC0006349C /* Products */;
+					ProjectRef = BB744487F2D84A18822AB8E1 /* InAppUtils.xcodeproj */;
 				},
 				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
@@ -1522,6 +1550,20 @@
 			remoteRef = ADBDB9261DFEBF0700ED6528 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		F7C87BF91FBD39AC0006349C /* libInAppUtils.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libInAppUtils.a;
+			remoteRef = F7C87BF81FBD39AC0006349C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F7C87BFB1FBD39AC0006349C /* InAppUtilsTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = InAppUtilsTests.xctest;
+			remoteRef = F7C87BFA1FBD39AC0006349C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -1831,12 +1873,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = tedictapp/tedictapp.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Tam Nguyen (H57G7QF5M7)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Tam Nguyen (H57G7QF5M7)";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = 7T9Z23973T;
+				DEVELOPMENT_TEAM = 6LXR55NVD3;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
@@ -1855,10 +1897,10 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.react.native.tedictapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tinyworld.tedictapp;
 				PRODUCT_NAME = tedictapp;
-				PROVISIONING_PROFILE = "c747c706-e854-4a70-89e3-fa4d55643d17";
-				PROVISIONING_PROFILE_SPECIFIER = org.react.native.tedictapp;
+				PROVISIONING_PROFILE = "511fed0e-4b67-4d3f-97b0-dc11358cfa03";
+				PROVISIONING_PROFILE_SPECIFIER = tedictapp.dev;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1870,11 +1912,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = tedictapp/tedictapp.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Tam Nguyen (H57G7QF5M7)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7T9Z23973T;
+				DEVELOPMENT_TEAM = 6LXR55NVD3;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
@@ -1893,10 +1935,10 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.react.native.tedictapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tinyworld.tedictapp;
 				PRODUCT_NAME = tedictapp;
-				PROVISIONING_PROFILE = "c747c706-e854-4a70-89e3-fa4d55643d17";
-				PROVISIONING_PROFILE_SPECIFIER = org.react.native.tedictapp;
+				PROVISIONING_PROFILE = "511fed0e-4b67-4d3f-97b0-dc11358cfa03";
+				PROVISIONING_PROFILE_SPECIFIER = tedictapp.dev;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -2091,8 +2133,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Tam Nguyen (H57G7QF5M7)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Tam Nguyen (H57G7QF5M7)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -2133,8 +2175,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Tam Nguyen (H57G7QF5M7)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Tam Nguyen (H57G7QF5M7)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
