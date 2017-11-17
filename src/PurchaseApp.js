@@ -54,6 +54,20 @@ class PurchaseApp extends Component {
 
     }
 
+    purchaseTest() {
+        var productIdentifiers = [
+            'com.tinyworld.tedictapp',
+        ];
+        InAppUtils.loadProducts(productIdentifiers, (error, products) => {
+            InAppUtils.purchaseProduct(productIdentifiers[0], (error, response) => {
+                if (response && response.productIdentifier) {
+                    console.log('Purchase Successful. Your Transaction ID is ' + response.transactionIdentifier);
+                }
+            });
+        });
+
+    }
+
     purchase(product) {
         buyProduct(product)
             .then((res) => {
@@ -95,7 +109,7 @@ class PurchaseApp extends Component {
         } else {
             return (
                 <View style={styles.container} >
-                    <TouchableOpacity onPress={() => this.purchase(productType)}
+                    <TouchableOpacity onPress={() => this.purchaseTest()}
                         style={styles.button}>
                         <Text style={styles.buttonText}>Purchase</Text>
                     </TouchableOpacity>
