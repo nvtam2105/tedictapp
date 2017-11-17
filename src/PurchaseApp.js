@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Platform, Alert, AlertIOS,TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Platform, Alert, AlertIOS, TouchableOpacity } from 'react-native';
 import InAppBilling from 'react-native-billing';
 import { NativeModules } from 'react-native';
 const { InAppUtils } = NativeModules;
+
+import { loadProducts, buyProduct, restorePurchases, productType } from './InAppPurchase'
 
 class PurchaseApp extends Component {
     constructor(props) {
@@ -10,61 +12,66 @@ class PurchaseApp extends Component {
         this.state = {
             purchaseText: "",
             productDetailsText: "",
-            error: ""
+            error: "",
+
+            productsLoaded: false,
         }
-        //this.purchase.bind(this);
+    }
+
+    componentDidMount() {
+        loadProducts().then((res) => {
+            this.setState({ productsLoaded: true })
+        }).catch(error => {
+            Alert.alert(error);
+        })
+
     }
 
     componentWillMount() {
         if (Platform.OS === 'android') {
-            InAppBilling.open().
-                then(() => InAppBilling.purchase('android.test.purchased'))
-                .then((details) => {
-                    this.setState({
-                        purchaseText: details.productId
-                    });
-                    return InAppBilling.getProductDetails('android.test.purchased');
-                })
-                .then((productDetails) => {
-                    this.setState({
-                        productDetailsText: productDetails.title
-                    });
-                    return InAppBilling.close();
-                })
-                .catch((error) => {
-                    this.setState({
-                        error: error
-                    });
-                });
+            // InAppBilling.open().
+            //     then(() => InAppBilling.purchase('android.test.purchased'))
+            //     .then((details) => {
+            //         this.setState({
+            //             purchaseText: details.productId
+            //         });
+            //         return InAppBilling.getProductDetails('android.test.purchased');
+            //     })
+            //     .then((productDetails) => {
+            //         this.setState({
+            //             productDetailsText: productDetails.title
+            //         });
+            //         return InAppBilling.close();
+            //     })
+            //     .catch((error) => {
+            //         this.setState({
+            //             error: error
+            //         });
+            //     });
         } else {
 
         }
 
     }
 
-    onPurchaseBtnPress_() {
-        var products = ['com.tinyworld.tedictapp'];
-        InAppUtils.loadProducts(products, (error, product) => {
-            InAppUtils.canMakePayments((canMakePayments) => {
-                if (!canMakePayments) {
-                    Alert.alert('Not Allowed', 'This device is not allowed to make purchases. Please check restrictions on device');
-                } else {
-                    InAppUtils.purchaseProduct(product.identifier, (error, response) => {
-                        console.log(product.productIdentifier);
-                        if (response && response.productIdentifier) {
-                            AlertIOS.alert('Purchase Successful', 'Your Transaction ID is ' + response.transactionIdentifier);
-                        }
-                        else if (error) {
-                            /* error occurs here  */
-                            AlertIOS.alert('Purchase Failed', error);
-                            /* this would fix */
-                            //AlertIOS.alert('Purchase Failed', 'Could not connect to itunes store.');
-                        }
-                    });
-                }
-            });
+    purchase(product) {
+        buyProduct(product)
+            .then((res) => {
+                console.log('Purchase OKIE' + res)
+            })
+            .catch((error) => {
+                Alert.alert(error);
+            })
+    }
 
-        });
+    restore() {
+        restorePurchases()
+            .then(() => {
+                console.log('Purchase RESTORE')
+            })
+            .catch(error => {
+                console.log(error)
+            })
     }
 
     render() {
@@ -88,7 +95,7 @@ class PurchaseApp extends Component {
         } else {
             return (
                 <View style={styles.container} >
-                    <TouchableOpacity onPress={() => this.onPurchaseBtnPress_()}
+                    <TouchableOpacity onPress={() => this.purchase(productType)}
                         style={styles.button}>
                         <Text style={styles.buttonText}>Purchase</Text>
                     </TouchableOpacity>

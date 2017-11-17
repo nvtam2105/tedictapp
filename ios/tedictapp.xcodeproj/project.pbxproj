@@ -29,7 +29,6 @@
 		23A12E9D1FBDFC7A007537D8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 23A12E9B1FBDFC73007537D8 /* GoogleService-Info.plist */; };
 		23A12E9E1FBDFC7A007537D8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 23A12E9B1FBDFC73007537D8 /* GoogleService-Info.plist */; };
 		23A12E9F1FBDFC7B007537D8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 23A12E9B1FBDFC73007537D8 /* GoogleService-Info.plist */; };
-		23AA76521FBE14AA00848392 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23AA76201FBE14AA00848392 /* StoreKit.framework */; };
 		23B47D661FA4EF7E005F3A9A /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 23B47D481FA4EF12005F3A9A /* libRCTPushNotification.a */; };
 		25DFB915C96740E4985D6897 /* libRNFIRMessaging.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A1618CF4CD447E955C438B /* libRNFIRMessaging.a */; };
 		2CF259D5ADF34504B1C6AB13 /* rubicon-icon-font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 391F4004D5944141BF88A341 /* rubicon-icon-font.ttf */; };
@@ -78,6 +77,7 @@
 		DA3851AE7E514A65A3E5D87A /* Rubik-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B3638FA9554A46B28BDD98FF /* Rubik-Bold.ttf */; };
 		E06FEE3D68D94FAB9B158692 /* Rubik-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 774B0C4B8EB64DB3AB071F70 /* Rubik-LightItalic.ttf */; };
 		E164C7AFDEED41E3A0433F5A /* Rubik-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C195174B2C174444B5B6C39E /* Rubik-BlackItalic.ttf */; };
+		F773CEEC1FBEB0B000F78D2E /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F773CEEB1FBEB0B000F78D2E /* StoreKit.framework */; };
 		F7D0897054204EE486AA4584 /* Rubik-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4CF1F1E0D651419C9848A23A /* Rubik-Regular.ttf */; };
 		FA8DCC0A17B14F11A4D6C492 /* Rubik-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F9C3B8AFB00A4EB2893084C1 /* Rubik-Medium.ttf */; };
 		FC4E3C346F2D47E1A06FE530 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04857CCF4E614ADE82DB517D /* Octicons.ttf */; };
@@ -478,7 +478,6 @@
 		233876CE1FB379050042650E /* tedictapp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = tedictapp.entitlements; path = tedictapp/tedictapp.entitlements; sourceTree = "<group>"; };
 		233A19081FA6172C00282DF3 /* ART.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ART.xcodeproj; path = "../node_modules/react-native/Libraries/ART/ART.xcodeproj"; sourceTree = "<group>"; };
 		23A12E9B1FBDFC73007537D8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		23AA76201FBE14AA00848392 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		23B47D341FA4EF12005F3A9A /* RCTPushNotification.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTPushNotification.xcodeproj; path = "../node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* tedictapp-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "tedictapp-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* tedictapp-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "tedictapp-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -522,6 +521,7 @@
 		E8194330C5CB4229917FB77F /* libc++.tbd */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		F253761E9E284182BA1F3FE2 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		F476CE36158B4128BC980282 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
+		F773CEEB1FBEB0B000F78D2E /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		F8606CDD79BC474A97A34C12 /* Rubik-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-Italic.ttf"; path = "../node_modules/@shoutem/ui/fonts/Rubik-Italic.ttf"; sourceTree = "<group>"; };
 		F9C3B8AFB00A4EB2893084C1 /* Rubik-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-Medium.ttf"; path = "../node_modules/@shoutem/ui/fonts/Rubik-Medium.ttf"; sourceTree = "<group>"; };
 		FDA20F968FAC40C7BC579471 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
@@ -540,7 +540,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				23AA76521FBE14AA00848392 /* StoreKit.framework in Frameworks */,
 				233A19111FA6179E00282DF3 /* libART.a in Frameworks */,
 				23B47D661FA4EF7E005F3A9A /* libRCTPushNotification.a in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
@@ -568,6 +567,7 @@
 				20B69E5C642844E5AFD441AF /* libRNPhotoView.a in Frameworks */,
 				4D593E5339E949D6BB1E9DFB /* libRNAdMobManager.a in Frameworks */,
 				C4C370CA2D7474F04890D59F /* Pods_tedictapp.framework in Frameworks */,
+				F773CEEC1FBEB0B000F78D2E /* StoreKit.framework in Frameworks */,
 				25DFB915C96740E4985D6897 /* libRNFIRMessaging.a in Frameworks */,
 				8EC94DF2B08C4D5A86640CEA /* libInAppUtils.a in Frameworks */,
 			);
@@ -879,7 +879,7 @@
 		82D1C940FD984BE5BA419734 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				23AA76201FBE14AA00848392 /* StoreKit.framework */,
+				F773CEEB1FBEB0B000F78D2E /* StoreKit.framework */,
 				E8194330C5CB4229917FB77F /* libc++.tbd */,
 				1DDCAA46A69B466C952CA329 /* libz.tbd */,
 				312ADFE14CA7C1AD4FEE6F24 /* Pods_tedictapp.framework */,
@@ -1082,6 +1082,9 @@
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.InAppPurchase = {
 								enabled = 1;
 							};
 							com.apple.Push = {
@@ -2141,7 +2144,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
