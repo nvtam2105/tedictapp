@@ -1,4 +1,4 @@
-import FirebaseConstants from "./FirebaseConstants";
+import Config from 'react-native-config';
 import { Platform, Alert } from "react-native";
 
 const API_URL = "https://fcm.googleapis.com/fcm/send";
@@ -75,13 +75,9 @@ class FirebaseClient {
   }
 
   async _send(body, type) {
-		// if(FirebaseClient.KEY === 'YOUR_API_KEY'){
-		// 	Alert.alert('Set your API_KEY in app/FirebaseConstants.js')
-		// 	return;
-		// }
   	let headers = new Headers({
   		"Content-Type": "application/json",
-      "Authorization": "key=" + FirebaseConstants.KEY
+      "Authorization": "key=" + Config.KEY_FIREBASE_PUSH_NOTIFICATION
   	});
 
 		try {

@@ -10,23 +10,14 @@ import { Actions } from 'react-native-router-flux';
 
 class AppIntro extends Component {
 
-  componentWillMount() {
+  componentDidMount() {
     store.setItem('firstLaunch', "false");
   }
 
-  onSkipBtnHandle = (index) => {
-    Actions.drawer();
-  }
   doneBtnHandle = () => {
     Actions.drawer();
   }
-  nextBtnHandle = (index) => {
-    Alert.alert('Next');
-    console.log(index);
-  }
-  onSlideChangeHandle = (index, total) => {
-    console.log(index, total);
-  }
+
   render() {
     const pageArray = [{
       title: 'Introduction',
@@ -77,36 +68,16 @@ class AppIntro extends Component {
       fontColor: '#fff',
       level: 10,
     }];
+
     return (
       <Intro
-        onNextBtnClick={this.nextBtnHandle}
+        customStyles={{ btnContainer: { flex: 1 } }}
+        showSkipButton={false}
         onDoneBtnClick={this.doneBtnHandle}
-        onSkipBtnClick={this.onSkipBtnHandle}
-        onSlideChange={this.onSlideChangeHandle}
         pageArray={pageArray}
       />
     );
   }
 }
-
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#ffffff',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
 
 export default AppIntro;

@@ -7,11 +7,8 @@ import thunk from 'redux-thunk';
 import Router from './Router';
 import reducers from './reducers';
 
-// import FCM from "react-native-fcm";
-// import PushController from "./firebase/PushController";
-// import firebaseClient from "./firebase/FirebaseClient";
-
-import PurchaseApp from "./PurchaseApp";
+import PushController from "./libs/PushController";
+import InAppPurchase from "./libs/InAppPurchase";
 
 import store from './stores';
 
@@ -28,15 +25,12 @@ class App extends Component {
       // )
     }
 
-    // const store = createStore(reducers, {}, applyMiddleware(thunk, logger));
+    const store = createStore(reducers, {}, applyMiddleware(thunk, logger));
 
-    // return (
-    //   <Provider store={store}>
-    //     <Router />
-    //   </Provider >
-    // );
     return (
-      <PurchaseApp />
+      <Provider store={store}>
+        <Router />
+      </Provider >
     );
   }
 }

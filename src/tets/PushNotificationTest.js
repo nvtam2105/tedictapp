@@ -8,8 +8,8 @@ import Router from './Router';
 import reducers from './reducers';
 
 import FCM from "react-native-fcm";
-import PushController from "./firebase/PushController";
-import firebaseClient from "./firebase/FirebaseClient";
+import PushController from "../libs/PushController";
+import firebaseClient from "./FirebaseClient";
 
 class App extends Component {
 
