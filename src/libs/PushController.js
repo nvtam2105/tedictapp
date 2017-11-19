@@ -1,10 +1,7 @@
 import React, { Component } from "react";
-
 import { Platform } from 'react-native';
-
 import FCM, {FCMEvent, RemoteNotificationResult, WillPresentNotificationResult, NotificationType} from "react-native-fcm";
 
-import firebaseClient from  "./FirebaseClient";
 
 export default class PushController extends Component {
   constructor(props) {
