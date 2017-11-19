@@ -171,8 +171,8 @@ class RouterComponent extends Component {
                                     //renderRightButton={rightButton}
                                     />
 
-                                    <Scene key="nofitications" hideNavBar title="Notifications" component={TalkSearch} icon={notificationIcon}
-                                        renderRightButton={rightButton} />
+                                    {/* <Scene key="nofitications" hideNavBar title="Notifications" component={TalkSearch} icon={notificationIcon}
+                                        renderRightButton={rightButton} /> */}
 
                                     {/* <Scene key="takSearch1" hideNavBar title="My Bookmark" component={TalkSearch} icon={bookmarkIcon}
                                 renderRightButton={rightButton} /> */}

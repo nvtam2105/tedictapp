@@ -73,6 +73,8 @@ export default class PushController extends Component {
         FCM.isDirectChannelEstablished().then(d => console.log(d));
       }, 1000);
     })
+
+    FCM.subscribeToTopic('/topics/newest');
   }
 
   componentWillUnmount() {
