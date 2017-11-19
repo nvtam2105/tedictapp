@@ -7,12 +7,14 @@ import thunk from 'redux-thunk';
 import Router from './Router';
 import reducers from './reducers';
 
-import PushController from "./libs/PushController";
-import InAppPurchase from "./libs/InAppPurchase";
+// import PushController from "./libs/PushController";
+//import InAppPurchase from "./libs/InAppPurchase";
 
 import store from './stores';
 
 class App extends Component {
+
+
 
   render() {
     const logger = (store) => (next) => (action) => {

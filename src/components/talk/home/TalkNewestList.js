@@ -10,6 +10,7 @@ import { View, Divider, Screen } from '@shoutem/ui';
 
 import { AdMobBanner } from 'react-native-admob';
 
+import PushController from "../../../libs/PushController";
 
 
 class TalkNewestList extends Component {
@@ -102,6 +103,7 @@ class TalkNewestList extends Component {
                     adUnitID="ca-app-pub-2762011960549047/5900347229"
                     testDeviceID="EMULATOR"
                     didFailToReceiveAdWithError={(err) => { console.log(err) }} />
+                <PushController />     
             </Screen>
         );
     }
