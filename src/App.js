@@ -27,7 +27,11 @@ class App extends Component {
       // )
     }
 
-    const store = createStore(reducers, {}, applyMiddleware(thunk, logger));
+    const middleware = [
+      __DEV__ && logger,
+    ].filter(Boolean);
+
+    const store = createStore(reducers, {}, applyMiddleware(thunk, ...middleware));
 
     return (
       <Provider store={store}>
