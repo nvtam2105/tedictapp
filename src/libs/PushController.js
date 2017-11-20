@@ -18,7 +18,7 @@ export default class PushController extends Component {
 
     FCM.getFCMToken().then(token => {
       console.log("TOKEN (getFCMToken)", token);
-      this.props.onChangeToken(token);
+      //this.props.onChangeToken(token);
     });
 
     if(Platform.OS === 'ios'){
@@ -60,7 +60,7 @@ export default class PushController extends Component {
 
       this.refreshTokenListener = FCM.on(FCMEvent.RefreshToken, token => {
         console.log("TOKEN (refreshUnsubscribe)", token);
-        this.props.onChangeToken(token);
+        //this.props.onChangeToken(token);
       });
 
       // direct channel related methods are ios only
