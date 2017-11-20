@@ -5,11 +5,11 @@ import InAppBilling from 'react-native-billing';
 
 
 export function buyProduct(product) {
-  return Platform.OS === 'android' ? this.buyProductAndroid(product) : this.buyProductiOS(product);
+  return Platform.OS === 'ios' ? this.buyProductiOS(product) : this.buyProductAndroid(product);
 }
 
 export function restorePurchases() {
-  return Platform.OS === 'android' ? this.restorePurchasesAndroid(product) : this.restorePurchasesiOS(product);
+  return Platform.OS === 'ios' ? this.restorePurchasesiOS(product) : this.restorePurchasesAndroid(product);
 }
 
 function buyProductiOS(product) {
