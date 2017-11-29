@@ -3,16 +3,15 @@ import { NativeModules } from 'react-native';
 const { InAppUtils } = NativeModules;
 import InAppBilling from 'react-native-billing';
 
-
-export function buyProduct(product) {
-  return Platform.OS === 'ios' ? this.buyProductiOS(product) : this.buyProductAndroid(product);
+export const buyProduct = (product) => {
+  return Platform.OS === 'ios' ? buyProductiOS(product) : buyProductAndroid(product);
 }
 
-export function restorePurchases() {
-  return Platform.OS === 'ios' ? this.restorePurchasesiOS(product) : this.restorePurchasesAndroid(product);
+export const restorePurchase = (product) => {
+  return Platform.OS === 'ios' ? restorePurchaseiOS(product) : restorePurchaseAndroid(product);
 }
 
-function buyProductiOS(product) {
+export function buyProductiOS(product) {
   return new Promise((resolve, reject) => {
     InAppUtils.loadProducts(productIdentifiers, (error, products) => {
       InAppUtils.canMakePayments((canMakePayments) => {
@@ -31,18 +30,7 @@ function buyProductiOS(product) {
   })
 }
 
-function restorePurchasesiOS() {
-  return new Promise((resolve, reject) => {
-    InAppUtils.restorePurchases((error, response) => {
-      if (error) {
-        reject(error);
-      }
-      resolve(response);
-    })
-  })
-}
-
-function buyProductAndroid(product) {
+export const buyProductAndroid = (product) => {
   return new Promise((resolve, reject) => {
     InAppBilling.open().
       then(() => InAppBilling.purchase(product))
@@ -61,5 +49,18 @@ function buyProductAndroid(product) {
   
 }
 
-function restorePurchasesAndroid() {
+export const restorePurchaseiOS = (product) => {
+  return new Promise((resolve, reject) => {
+    InAppUtils.restorePurchases((error, response) => {
+      if (error) {
+        reject(error);
+      }
+      resolve(response);
+    })
+  })
 }
+
+export const restorePurchaseAndroid = (product) => {
+}
+
+export default {buyProduct, restorePurchase}

@@ -25,6 +25,8 @@ import { Icon, Text, Image, View, Button, TouchableOpacity } from '@shoutem/ui';
 
 import store from './stores';
 
+import InAppPurchase from "./libs/InAppPurchase";
+
 
 const menuIcon = (<MaterialIcons name="menu" size={25} color={'#900'} />);
 
@@ -108,13 +110,16 @@ const styles = StyleSheet.create({
     },
 });
 
+const product = 'com.tinyworld.tedictapp';
+
 class RouterComponent extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
             firstLaunch: true,
-            loading: false,
+            purchased: false,
+            loading: true,
         };
     };
 
@@ -123,18 +128,38 @@ class RouterComponent extends Component {
             if (value && value === 'false') {
                 this.setState({
                     firstLaunch: false,
-                    loading: true,
+                    loading: false,
                 });
             } else {
                 this.setState({
-                    loading: true,
+                    loading: false,
+                });
+            }
+        });
+
+        InAppPurchase.restorePurchase(product).then(function (error, response) {
+            if (error) {
+                Alert.alert('itunes Error', 'Could not connect to itunes store.');
+            } else {
+                if (response.length === 0) {
+                    Alert.alert('No Purchases', "We didn't find any purchases to restore.");
+                    return;
+                }
+                response.forEach((purchase) => {
+                    if (purchase.productIdentifier === product) {
+                        // Handle purchased product.
+                        Alert.alert('Restore Successful', 'Successfully restores all your purchases.');
+                        this.setState({
+                            purchased: true,
+                        });
+                    }
                 });
             }
         });
 
     }
     render() {
-        if (!this.state.loading) {
+        if (this.state.loading) {
             return <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}><ActivityIndicator animating size="large" /></View>;;
         } else {
             return (
