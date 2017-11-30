@@ -7,8 +7,18 @@ import TalkMarkItem from './TalkMarkItem';
 import { Screen } from '@shoutem/ui';
 import { AdMobBanner } from 'react-native-admob';
 
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 class TalkMarkList extends Component {
+
+  static navigationOptions = {
+    title: 'Welcome',
+    tabBarLabel: 'My Talks',
+    tabBarIcon: ({ tintColor }) => (
+      <MaterialIcons name="star-border" size={25} style={{ color: tintColor }}/> 
+    )
+  }
+
 
   componentWillMount() {
     this.setState({

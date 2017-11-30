@@ -12,8 +12,17 @@ import { AdMobBanner } from 'react-native-admob';
 
 import PushController from "../../../libs/PushController";
 
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 class TalkNewestList extends Component {
+
+    static navigationOptions = {
+        title: 'Welcome',
+        tabBarLabel: 'Dicover',
+        tabBarIcon: ({ tintColor }) => (
+            <MaterialIcons name="format-list-bulleted" size={25} style={{ color: tintColor }}/>
+        )
+    }
 
     constructor(props) {
         super(props);
@@ -103,7 +112,7 @@ class TalkNewestList extends Component {
                     adUnitID="ca-app-pub-2762011960549047/5900347229"
                     testDeviceID="EMULATOR"
                     didFailToReceiveAdWithError={(err) => { console.log(err) }} />
-                <PushController />     
+                <PushController />
             </Screen>
         );
     }

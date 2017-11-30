@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import Router from './Router';
+import TabBarComponent from './TabBarComponent';
 import reducers from './reducers';
 
 // import PushController from "./libs/PushController";
@@ -35,7 +36,7 @@ class App extends Component {
 
     return (
       <Provider store={store}>
-        <Router />
+        <TabBarComponent />
       </Provider >
     );
   }
