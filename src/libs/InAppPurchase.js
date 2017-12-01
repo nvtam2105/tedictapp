@@ -11,7 +11,7 @@ export const restorePurchase = (product) => {
   return Platform.OS === 'ios' ? restorePurchaseiOS(product) : restorePurchaseAndroid(product);
 }
 
-export function buyProductiOS(product) {
+export const buyProductiOS = (product) => {
   return new Promise((resolve, reject) => {
     InAppUtils.loadProducts(productIdentifiers, (error, products) => {
       InAppUtils.canMakePayments((canMakePayments) => {
@@ -46,7 +46,7 @@ export const buyProductAndroid = (product) => {
       });
   })
 
-  
+
 }
 
 export const restorePurchaseiOS = (product) => {
@@ -63,4 +63,4 @@ export const restorePurchaseiOS = (product) => {
 export const restorePurchaseAndroid = (product) => {
 }
 
-export default {buyProduct, restorePurchase}
+export default { buyProduct, restorePurchase }
