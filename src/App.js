@@ -36,7 +36,8 @@ class App extends Component {
 
     return (
       <Provider store={store}>
-        <TabBarComponent />
+        {/* <TabBarComponent /> */}
+        <Router />
       </Provider >
     );
   }

@@ -163,7 +163,7 @@ class RouterComponent extends Component {
             return <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}><ActivityIndicator animating size="large" /></View>;;
         } else {
             return (
-                <Router>
+                <Router {...this.state}>
                     <Scene key="root">
                         <Scene key="appIntro" component={AppIntro} hideNavBar initial={this.state.firstLaunch} />
                         <Drawer hideNavBar key="drawer" contentComponent={SlideMenu} drawerIcon={menuIcon}

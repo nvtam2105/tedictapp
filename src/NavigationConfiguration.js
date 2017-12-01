@@ -25,7 +25,6 @@ export const TabBar = TabNavigator({
   TalkNewestList: { screen: TalkNewestList },
   TalkMarkList: { screen: TalkMarkList },
   TalkSearch: { screen: TalkSearch },
-  //TalkDetail: { screen: TalkDetail },
 }, {
   tabBarOptions: { 
     animationEnabled: true,
