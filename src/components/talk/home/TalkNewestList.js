@@ -16,14 +16,6 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 class TalkNewestList extends Component {
 
-    static navigationOptions = {
-        title: 'Welcome',
-        tabBarLabel: 'Dicover',
-        tabBarIcon: ({ tintColor }) => (
-            <MaterialIcons name="format-list-bulleted" size={25} style={{ color: tintColor }}/>
-        )
-    }
-
     constructor(props) {
         super(props);
         this.state = {

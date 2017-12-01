@@ -11,15 +11,6 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 class TalkMarkList extends Component {
 
-  static navigationOptions = {
-    title: 'Welcome',
-    tabBarLabel: 'My Talks',
-    tabBarIcon: ({ tintColor }) => (
-      <MaterialIcons name="star-border" size={25} style={{ color: tintColor }}/> 
-    )
-  }
-
-
   componentWillMount() {
     this.setState({
       talks: store.getTalks(),

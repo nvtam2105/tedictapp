@@ -11,15 +11,6 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 class TalkSearch extends Component {
 
-  static navigationOptions = {
-    title: '',
-    tabBarLabel: 'Search',
-    tabBarIcon: ({ tintColor }) => (
-      <MaterialIcons name="search" size={25} style={{ color: tintColor }}/>
-    )
-  }
-
-
   constructor(props) {
     super(props);
     this.state = {
