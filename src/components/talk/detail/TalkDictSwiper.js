@@ -25,8 +25,8 @@ class TalkDictSwiper extends Component {
                     loadMinimal loadMinimalSize={0}
                     showsButtons={false} showsPagination={false} autoplay={false}>
                     {this.props.talk.script.sens.map((item, key) => {
-                        console.log('TalkDictSwiper-selectedIndex=' + this.props.selectedIndex);
-                        console.log('TalkDictSwiper-key=' + key);
+                        //console.log('TalkDictSwiper-selectedIndex=' + this.props.selectedIndex);
+                        //console.log('TalkDictSwiper-key=' + key);
                         return (
                             <TalkDictItem
                                 isFillGap={this.props.isFillGap}

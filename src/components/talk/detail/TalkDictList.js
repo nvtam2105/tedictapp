@@ -20,6 +20,7 @@ class TalkDictList extends Component {
     componentWillMount() {
         this.setState({
             talk: this.props.talk,
+            purchased: this.props.purchased,
         });
     }
 
@@ -41,10 +42,15 @@ class TalkDictList extends Component {
                 <FlatList style={{ flex: 1 }}
                     data={this.state.talk.script.sens}
                     renderItem={({ item, index }) => (<View style={{ flex: 1 }}>
-                        <Button styleName="full-width" onPress={() => {
-                            console.log('TalkDictList=' + index);
+                        <Button styleName="full-width" onPress={() => {``
+                            //console.log('TalkDictList=' + index);
                             {
-                                this.props.isFillGap && (
+                                (!this.state.purchased && index >10) && (
+                                    Alert.alert('Please purchase this app')
+                                )
+                            }
+                            {
+                                (this.state.purchased || index <= 10) && this.props.isFillGap && (
                                     Actions.talkDictSwiper(
                                         {
                                             talk: this.state.talk,
@@ -55,7 +61,7 @@ class TalkDictList extends Component {
                                 )
                             }
                             {
-                                !this.props.isFillGap && (
+                                (this.state.purchased || index <= 10) && !this.props.isFillGap && (
                                     Actions.talkDictSwiper(
                                         {
                                             talk: this.state.talk,
@@ -67,12 +73,18 @@ class TalkDictList extends Component {
                             }
                         }} >
 
-                            {!this.props.isFillGap && (<Title style={{ color: item.completed_dict ? 'red' : 'black' }}>{item.completed_dict ? "OK" : `${++index}`}</Title>)}
-                            {this.props.isFillGap && (<Title style={{ color: item.completed_gap ? 'red' : 'black' }}>{item.completed_gap ? "OK" : `${++index}`}</Title>)}
+                            {!this.props.isFillGap 
+                                && (<Title style={{ color: item.completed_dict ? 'red' : 'black' }}>{item.completed_dict ? 
+                                                        (this.state.purchased || index < 10 ? "OK" : `${++index}-LOCK`): 
+                                                        (this.state.purchased || index < 10 ? `${++index}` : `${++index}-LOCK`)}</Title>)}
+                            {this.props.isFillGap 
+                                && (<Title style={{ color: item.completed_gap ? 'red' : 'black' }}>{item.completed_gap ? 
+                                                        (this.state.purchased || index < 10 ? "OK" : `${++index}-LOCK`): 
+                                                        (this.state.purchased || index < 10 ? `${++index}` : `${++index}-LOCK`)}</Title>)}
                         </Button>
                     </View>)}
                     keyExtractor={item => item._id}
-                    numColumns={3}
+                    numColumns={4}
                 />
             </StyleProvider>
         );
